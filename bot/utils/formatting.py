@@ -107,6 +107,83 @@ def split_choice_block(block: str, max_size: int = 3000) -> list[str]:
     return chunks
 
 
+def format_choice_item(choice: Choice, spoiler_level: int) -> str:
+    """Formats one option under a question with cost and consequences."""
+    text = (choice.text or "").strip()
+    if not text:
+        text = "Выбор без описания"
+
+    cost = choice.cost_diamonds
+    cost_str = f" (💎 {pluralize_diamonds(cost)})" if (cost and cost > 0 and str(cost) not in text) else ""
+
+    # Collect parameter and character effects
+    extras: list[str] = []
+    if choice.parameter_changes and choice.parameter_changes != "[]":
+        for p in parse_effects_list(choice.parameter_changes):
+            if p not in text:
+                extras.append(p)
+    if choice.character_effects and choice.character_effects != "[]":
+        for c in parse_effects_list(choice.character_effects):
+            if c not in text:
+                extras.append(f"❤️ {c}")
+    if choice.future_effects and choice.future_effects != "[]":
+        for f in parse_effects_list(choice.future_effects):
+            if f not in text:
+                extras.append(f"🔮 {f}")
+
+    is_hidden = choice.spoiler_level > spoiler_level
+    if is_hidden and extras:
+        extra_str = " [🔒 спойлер скрыт]"
+    elif extras:
+        extra_str = f" [{' | '.join(extras)}]"
+    else:
+        extra_str = ""
+
+    # Clean consequence if present and not placeholder
+    conseq = (choice.consequence or "").strip()
+    if conseq and not conseq.lower().startswith("краткий импортированный пункт") and conseq not in text:
+        if is_hidden:
+            extra_str += " — [🔒 спойлер скрыт]"
+        else:
+            extra_str += f" — {conseq}"
+
+    return f"  • {text}{cost_str}{extra_str}"
+
+
+def group_episode_choices(choices: list[Choice]) -> list[tuple[str, list[Choice]]]:
+    """Groups consecutive choices with the same question (scene_title)."""
+    groups: list[tuple[str, list[Choice]]] = []
+    current_title: str | None = None
+    current_choices: list[Choice] = []
+
+    for c in choices:
+        title = (c.scene_title or "").strip()
+        if title.lower().startswith("пункт гайда"):
+            title = ""
+
+        if title == current_title and current_choices and title:
+            current_choices.append(c)
+        else:
+            if current_choices:
+                groups.append((current_title or "", current_choices))
+            current_title = title
+            current_choices = [c]
+
+    if current_choices:
+        groups.append((current_title or "", current_choices))
+
+    return groups
+
+
+def format_choice_group(group_title: str, group_choices: list[Choice], index: int, spoiler_level: int) -> str:
+    """Formats a question block with all its options."""
+    title = group_title.strip() if group_title else "Выбор"
+    lines = [f"<b>{index}. {title}</b>"]
+    for c in group_choices:
+        lines.append(format_choice_item(c, spoiler_level))
+    return "\n".join(lines)
+
+
 def format_single_choice(choice: Choice, index: int, spoiler_level: int) -> str:
     """Formats a single choice with human-readable effects, choice.text, and diamond costs."""
     lines = []
@@ -178,11 +255,11 @@ def paginate_episode_guide(
     spoiler_level: int,
     filter_name: str = "all",
     page: int = 1,
-    max_per_page: int = 10,
+    max_per_page: int = 8,
     max_chars: int = 3800,
 ) -> tuple[str, int, int]:
     """
-    Paginates choices for an episode, guaranteeing no message exceeds max_chars.
+    Paginates choices for an episode, grouped by questions, guaranteeing no message exceeds max_chars.
     Returns (page_text, current_page, total_pages).
     """
     story = episode.season.story if episode.season else None
@@ -192,28 +269,21 @@ def paginate_episode_guide(
     season_label = season_title if "том" in season_title.lower() else f"Сезон {season_num}"
     title = episode.title or "Без названия"
 
-    intro = episode.guide_intro or episode.summary or "Гайд для серии пока заполняется."
-    header_lines = [
-        f"📖 История: {story_title}",
-        f"{season_label} • Серия {episode.number}: {title}",
-        "",
-        intro,
-    ]
-    if episode.guide_source_name:
-        header_lines.extend(["", f"Источник: {episode.guide_source_name}"])
-    if episode.guide_source_url:
-        header_lines.append("Подробное прохождение доступно по кнопке под сообщением.")
-    header_lines.extend(["", "Гайд:"])
-    base_header = "\n".join(header_lines)
+    base_header = (
+        f"📖 <b>{story_title}</b>\n"
+        f"🎬 {season_label} • Серия {episode.number}: {title}"
+    )
 
     if not choices:
         empty_text = f"{base_header}\n\nПока нет выборов для выбранного фильтра."
         return empty_text, 1, 1
 
+    # Group choices by question
+    groups = group_episode_choices(choices)
     blocks: list[str] = []
-    for index, choice in enumerate(choices, start=1):
-        block = format_single_choice(choice, index, spoiler_level)
-        sub_blocks = split_choice_block(block, max_size=max_chars - 600)
+    for index, (q_title, group_chs) in enumerate(groups, start=1):
+        block = format_choice_group(q_title, group_chs, index, spoiler_level)
+        sub_blocks = split_choice_block(block, max_size=max_chars - 400)
         blocks.extend(sub_blocks)
 
     pages_blocks: list[list[str]] = []
@@ -239,15 +309,9 @@ def paginate_episode_guide(
     selected_blocks = pages_blocks[current_page - 1]
     if total_pages > 1:
         page_header = (
-            f"📖 История: {story_title}\n"
-            f"{season_label} • Серия {episode.number}: {title} (Страница {current_page}/{total_pages})\n\n"
-            f"{intro}"
+            f"📖 <b>{story_title}</b>\n"
+            f"🎬 {season_label} • Серия {episode.number}: {title} (Страница {current_page}/{total_pages})"
         )
-        if episode.guide_source_name:
-            page_header += f"\n\nИсточник: {episode.guide_source_name}"
-        if episode.guide_source_url:
-            page_header += "\nПодробное прохождение доступно по кнопке под сообщением."
-        page_header += "\n\nГайд:"
     else:
         page_header = base_header
 
