@@ -1,0 +1,39 @@
+# Git & VCS
+.git/
+.gitignore
+
+# Python Cache & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment files with sensitive credentials
+.env
+.env.*
+!.env.example
+
+# Temporary database backups & dumps
+*.db
+!club_romance.db
+club_romance_before_*.db
+staging.db
+
+# Documentation & Scratch Files
+docs/
+scratch/
+zip/
+*.zip
+
+# Node / Frontend Artifacts
+.pnpm-store/
+node_modules/
+
+# Logs
+logs/*.log
+*.log

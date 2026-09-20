@@ -1,0 +1,33 @@
+[Unit]
+Description=Club Romance Telegram Bot
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/club-romance-bot
+EnvironmentFile=/opt/club-romance-bot/.env
+ExecStart=/opt/club-romance-bot/.venv/bin/python -m bot.main
+
+# Restart configuration
+Restart=always
+RestartSec=5s
+StartLimitIntervalSec=60s
+StartLimitBurst=5
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/club-romance-bot/club_romance.db /opt/club-romance-bot/logs /opt/club-romance-bot/backups
+PrivateTmp=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=club-romance-bot
+
+[Install]
+WantedBy=multi-user.target

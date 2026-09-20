@@ -1,0 +1,557 @@
+{
+  "source": "gamesisart",
+  "catalog_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie.html",
+  "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+  "sources": [
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_pirate",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Pirate.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Pirate.html",
+      "source_title": "Паруса в тумане",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_holly",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Holly.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Holly.html",
+      "source_title": "Моя Голливудская История",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_queen",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Queen.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Queen.html",
+      "source_title": "Королева за 30 дней",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_water",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Water.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Water.html",
+      "source_title": "Высокий прибой",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_shadow",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Shadow.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Shadow.html",
+      "source_title": "Тени Сентфора",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_dance",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Dance.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Dance.html",
+      "source_title": "В ритме страсти",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_hunt",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Hunt.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Hunt.html",
+      "source_title": "Я Охочусь на Тебя",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_heaven",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Heaven.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Heaven.html",
+      "source_title": "Секрет Небес",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_legend",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Legend.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Legend.html",
+      "source_title": "Легенда Ивы",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_dracula",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Dracula.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Dracula.html",
+      "source_title": "Дракула. История Любви",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_stars",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Stars.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Stars.html",
+      "source_title": "Любовь со Звезд",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_valkyrie",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Valkyrie.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Valkyrie.html",
+      "source_title": "Путь Валькирии",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_titan",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Titan.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Titan.html",
+      "source_title": "Ярость Титанов",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_sophie",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Sophie.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Sophie.html",
+      "source_title": "Десять Желаний Софи",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_london",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_London.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_London.html",
+      "source_title": "Грешный Лондон",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_ice",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Ice.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Ice.html",
+      "source_title": "По тонкому льду",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_arcanum",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Arcanum.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Arcanum.html",
+      "source_title": "Арканум",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_gladiators",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Gladiators.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Gladiators.html",
+      "source_title": "Хроники Гладиаторов",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_trespia",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Trespia.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Trespia.html",
+      "source_title": "Сердце Треспии",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_cali",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Cali.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Cali.html",
+      "source_title": "Кали: Зов Тьмы",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_flower",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Flower.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Flower.html",
+      "source_title": "Цветок из Огня Тиамат",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_teodora",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Teodora.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Teodora.html",
+      "source_title": "Теодора",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_post",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Post.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Post.html",
+      "source_title": "Сквозь бурю и пламя",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_ideal",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Ideal.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Ideal.html",
+      "source_title": "Идеал",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_psi",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Psi.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Psi.html",
+      "source_title": "Пси",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_versailles",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Versailles.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Versailles.html",
+      "source_title": "Покоряя Версаль",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_rose",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Rose.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Rose.html",
+      "source_title": "Роза пустыни",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_heaven2",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Heaven2.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Heaven2.html",
+      "source_title": "Секрет Небес 2",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_teg",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_TEG.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_TEG.html",
+      "source_title": "Игра в ТЭГ",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_nile",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Nile.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Nile.html",
+      "source_title": "Песнь о Красном Ниле",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_hunt2",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Hunt2.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Hunt2.html",
+      "source_title": "Я Охочусь на Тебя 2",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_evil",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Evil.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Evil.html",
+      "source_title": "Любовь, Грех и Зло",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_time",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Time.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Time.html",
+      "source_title": "Ловчая Времени",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_cali2",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Cali2.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Cali2.html",
+      "source_title": "Кали: Пламя Сансары",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_edem",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Edem.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Edem.html",
+      "source_title": "Эдемов сад",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_soulless",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Soulless.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Soulless.html",
+      "source_title": "Бездушная",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_ideal_2",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Ideal_2.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Ideal_2.html",
+      "source_title": "Идеал. Том 2",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_astra",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Astra.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Astra.html",
+      "source_title": "Разбитое сердце Астреи",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_heaven3",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Heaven3.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Heaven3.html",
+      "source_title": "Секрет Небес: Реквием",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_seven",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Seven.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Seven.html",
+      "source_title": "7 братьев",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_morok",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Morok.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Morok.html",
+      "source_title": "И поглотит нас морок",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_saga",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Saga.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Saga.html",
+      "source_title": "Сага о грозах",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_code",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Code.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Code.html",
+      "source_title": "Шифр Шекспира",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_bureau",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Bureau.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Bureau.html",
+      "source_title": "Бюро параллельных миров",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_lost",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Lost.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Lost.html",
+      "source_title": "Пропавшие",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_three",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Three.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Three.html",
+      "source_title": "Пришествие Номер Три",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_te_amo",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Te_Amo.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Te_Amo.html",
+      "source_title": "Te Amo. Том 1: Залив надежды",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_blue",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Blue.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Blue.html",
+      "source_title": "Код синий",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_tam",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Tam.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Tam.html",
+      "source_title": "Там, Где Любовь Горит Вечно",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_heaven_3_1",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Heaven_3_1.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Heaven_3_1.html",
+      "source_title": "Секрет Небес 3",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_bureau_2",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Bureau_2.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Bureau_2.html",
+      "source_title": "Бюро параллельных миров (2)",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_te_amo_2",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Te_Amo_2.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Te_Amo_2.html",
+      "source_title": "Te Amo. Том 2: Хрустальная мечта",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_averris",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Averris.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Averris.html",
+      "source_title": "Аверрис: Дитя Разлома",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_sins",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Sins.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Sins.html",
+      "source_title": "Грехи, просящие возмездия",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_shadow2",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Shadow2.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Shadow2.html",
+      "source_title": "Тени Сентфора 2",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_lily",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Lily.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Lily.html",
+      "source_title": "Водяная Лилия",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_sun",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Sun.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Sun.html",
+      "source_title": "Рождённая Солнцем",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_rt",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_RT.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_RT.html",
+      "source_title": "Рождённый Тенью",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    },
+    {
+      "source": "gamesisart",
+      "source_key": "gamesisart:romance_club_prohozhdenie_red",
+      "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Red.html",
+      "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Red.html",
+      "source_title": "О красном и безмолвном море",
+      "discovered_at": "2026-08-16T22:47:18.284210+00:00",
+      "discovery_method": "catalog_link"
+    }
+  ],
+  "warnings": [],
+  "conflicts": [],
+  "stats": {
+    "total_links": 928,
+    "filtered_links": 796,
+    "duplicate_urls": 73,
+    "catalog_links": 619,
+    "catalog_pages": 5,
+    "unique_source_urls": 59,
+    "without_title": 0,
+    "without_canonical": 0,
+    "suspicious": 0,
+    "sources": 59,
+    "source_keys": 59,
+    "canonical_urls": 59,
+    "conflicts": 0,
+    "existing_db_matches": 42,
+    "potential_duplicates": 1
+  }
+}

@@ -1,0 +1,3574 @@
+{
+  "parser_version": "1.2.0",
+  "source": "gamesisart",
+  "source_key": "gamesisart:romance_club_prohozhdenie_rt",
+  "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_RT.html",
+  "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_RT.html",
+  "source_title": "Рождённый Тенью",
+  "seasons": [
+    {
+      "number": 1,
+      "title": "Рождённый Тенью. Сезон 1",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Приглашение",
+          "blocks": [
+            {
+              "order": 1,
+              "type": "heading",
+              "text": "1.1. Приглашение",
+              "metadata": {
+                "tag": "h3",
+                "classes": [
+                  "TextH2"
+                ]
+              },
+              "choice": null
+            },
+            {
+              "order": 2,
+              "type": "text",
+              "text": "Лондон. XXI век. Вначале увидим сцену с укусом женщины вампира. Играем за хозяйку особняка, которой уже двести лет. Выбираем внешность:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 3,
+              "type": "text",
+              "text": "— Северная Европа (роскошная), (изящная), Западная Африка, Южная Америка, Восточная Азия.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 4,
+              "type": "text",
+              "text": "— Чёрные, Русые, Золотистые, Каштановые, Белые, Рыжие.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 5,
+              "type": "text",
+              "text": "Имя по умолчанию: Натали. Можем ввести своё имя.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 6,
+              "type": "text",
+              "text": "Интерес вызывают…",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 7,
+              "type": "choice",
+              "text": "И мужчины, и женщины. — доступны все романы.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "И мужчины, и женщины. — доступны все романы.",
+                "text_items": [
+                  "И мужчины, и женщины."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 7,
+                "text": "И мужчины, и женщины.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 8,
+              "type": "choice",
+              "text": "Только мужчины. — доступны фавориты мужчины.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Только мужчины. — доступны фавориты мужчины.",
+                "text_items": [
+                  "Только мужчины."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 8,
+                "text": "Только мужчины.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 9,
+              "type": "choice",
+              "text": "Только женщины. — доступны фавориты женщины.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Только женщины. — доступны фавориты женщины.",
+                "text_items": [
+                  "Только женщины."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 9,
+                "text": "Только женщины.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 10,
+              "type": "text",
+              "text": "Вы можете включить \"подсказки\".",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 11,
+              "type": "choice",
+              "text": "Включить подсказки. — значки рядом с выборами.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Включить подсказки. — значки рядом с выборами.",
+                "text_items": [
+                  "Включить подсказки."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 11,
+                "text": "Включить подсказки.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 12,
+              "type": "choice",
+              "text": "Не включать подсказки. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Не включать подсказки. — ничего.",
+                "text_items": [
+                  "Не включать подсказки."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 12,
+                "text": "Не включать подсказки.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 13,
+              "type": "text",
+              "text": "Можем вернуться к настройкам:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 14,
+              "type": "choice",
+              "text": "(Начать историю.) — продолжим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Начать историю.) — продолжим.",
+                "text_items": [
+                  "(Начать историю.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 14,
+                "text": "(Начать историю.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 15,
+              "type": "choice",
+              "text": "(Изменить настройки.) — вернёмся к началу.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Изменить настройки.) — вернёмся к началу.",
+                "text_items": [
+                  "(Изменить настройки.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 15,
+                "text": "(Изменить настройки.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 16,
+              "type": "text",
+              "text": "Нам позвонит Эндрю из Ордена, Страж Сумерек. Он попросит остановить группу людей, которые подобрались к надгробиям. Подумаем: \"Страж Сумерек в должниках…\" \"Это того стоит\".",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 17,
+              "type": "choice",
+              "text": "Только из уважения к вам. + дружба / отношения с Эндрю.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Только из уважения к вам. + дружба / отношения с Эндрю.",
+                "text_items": [
+                  "Только из уважения к вам."
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 17,
+                "text": "Только из уважения к вам.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "+ дружба / отношения с Эндрю"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 18,
+              "type": "choice",
+              "text": "Надеюсь, Орден потом не забудет. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Надеюсь, Орден потом не забудет. — ничего.",
+                "text_items": [
+                  "Надеюсь, Орден потом не забудет."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 18,
+                "text": "Надеюсь, Орден потом не забудет.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 19,
+              "type": "text",
+              "text": "Отправимся на кладбище Хайгейта. Увидим, что отряд людей уже в крипте. Снаружи бойцы с автоматами, незаметно устраним их. 2-ой парень заметит нас, попросит пощадить его. Ответим:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 20,
+              "type": "choice",
+              "text": "Раньше надо было думать. +1 затмение.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Раньше надо было думать. +1 затмение.",
+                "text_items": [
+                  "Раньше надо было думать."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 20,
+                "text": "Раньше надо было думать.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 затмение"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 21,
+              "type": "choice",
+              "text": "Исчезни. +1 рассвет.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Исчезни. +1 рассвет.",
+                "text_items": [
+                  "Исчезни."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 21,
+                "text": "Исчезни.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 рассвет"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 22,
+              "type": "text",
+              "text": "Сделаем фотографии нашивок на форме этих людей. \"Надо…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 23,
+              "type": "choice",
+              "text": "\"Отправить в облако клана\". (11) — утром получим информацию.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Отправить в облако клана\". (11) — утром получим информацию.",
+                "text_items": [
+                  "\"Отправить в облако клана\". (11)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 23,
+                "text": "\"Отправить в облако клана\". (11)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 24,
+              "type": "choice",
+              "text": "\"Поторопиться\". — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Поторопиться\". — ничего.",
+                "text_items": [
+                  "\"Поторопиться\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 24,
+                "text": "\"Поторопиться\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 25,
+              "type": "text",
+              "text": "На входе в крипту прочитаем надпись \"Восточное крыло. Захоронения XIX века\". Вспомним Прагу, XIX век. Дом в трауре, на нас платье, вуаль, перчатки:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 26,
+              "type": "choice",
+              "text": "— Тихая скорбь, Вечная полночь (подписка), Чёрная лилия (33), Всё (46).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 26,
+                "text": "— Тихая скорбь, Вечная полночь (подписка), Чёрная лилия (33), Всё (46).",
+                "cost_diamonds": 46,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 27,
+              "type": "choice",
+              "text": "— Чёрный шёлк – чёрные, русые (0), золотистые, каштановые (11), белые, рыжие (18), Тёмный Венец – чёрные (подписка), русые, золотистые, каштановые, белые, рыжие (33), Все (204).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 27,
+                "text": "— Чёрный шёлк – чёрные, русые (0), золотистые, каштановые (11), белые, рыжие (18), Тёмный Венец – чёрные (подписка), русые, золотистые, каштановые, белые, рыжие (33), Все (204).",
+                "cost_diamonds": 204,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 28,
+              "type": "choice",
+              "text": "— Чёрная скромность (0), Чёрное кружево (подписка), Купить всё (18).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 28,
+                "text": "— Чёрная скромность (0), Чёрное кружево (подписка), Купить всё (18).",
+                "cost_diamonds": 18,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 29,
+              "type": "text",
+              "text": "Слуга Томаш подал нам карету, назвал \"мисс Эшфорд\". \"Все уже ждут убитую горем племянницу. Постарайся не улыбаться на похоронах\".",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 30,
+              "type": "choice",
+              "text": "Постараюсь. + дружба / отношения с Томашом.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Постараюсь. + дружба / отношения с Томашом.",
+                "text_items": [
+                  "Постараюсь."
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 30,
+                "text": "Постараюсь.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "+ дружба / отношения с Томашом"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 31,
+              "type": "choice",
+              "text": "Ты ворчишь хуже старика. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Ты ворчишь хуже старика. — ничего.",
+                "text_items": [
+                  "Ты ворчишь хуже старика."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 31,
+                "text": "Ты ворчишь хуже старика.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 32,
+              "type": "text",
+              "text": "Во время похорон выслушаем гостей, увидим, что начнут опускать гроб.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 33,
+              "type": "choice",
+              "text": "\"Не хочу смотреть\". — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Не хочу смотреть\". — ничего.",
+                "text_items": [
+                  "\"Не хочу смотреть\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 33,
+                "text": "\"Не хочу смотреть\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 34,
+              "type": "choice",
+              "text": "\"Я должна держать лицо\". — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Я должна держать лицо\". — ничего.",
+                "text_items": [
+                  "\"Я должна держать лицо\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 34,
+                "text": "\"Я должна держать лицо\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 35,
+              "type": "text",
+              "text": "Ночью вернёмся на кладбище, чтобы откопать дядю Уилфорда. Он жив, и лишь инсценировал свою смерть. Вместе вернёмся домой на карете. Уилфред сообщит, что мы переезжаем в Лондон. Спросим:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 36,
+              "type": "choice",
+              "text": "В Лондон? Настоящий? — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "В Лондон? Настоящий? — ничего.",
+                "text_items": [
+                  "В Лондон? Настоящий?"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 36,
+                "text": "В Лондон? Настоящий?",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 37,
+              "type": "choice",
+              "text": "Это приглашение? — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Это приглашение? — ничего.",
+                "text_items": [
+                  "Это приглашение?"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 37,
+                "text": "Это приглашение?",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 38,
+              "type": "text",
+              "text": "Лондон. XXI век. Спустимся в крипту. Слева услышим шорох.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 39,
+              "type": "choice",
+              "text": "(Свернуть налево.) — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Свернуть налево.) — ничего.",
+                "text_items": [
+                  "(Свернуть налево.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 39,
+                "text": "(Свернуть налево.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 40,
+              "type": "choice",
+              "text": "(Свернуть направо.) — устраним 2 стрелков.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Свернуть направо.) — устраним 2 стрелков.",
+                "text_items": [
+                  "(Свернуть направо.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 40,
+                "text": "(Свернуть направо.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 41,
+              "type": "text",
+              "text": "Враги вооружены серебряными пулями. В конце придём в зал, где одна женщина вскрывает саркофаг, а её охраняет автоматчик. Он заметит нас, выпустит очередь, будет ждать нападения. \"Надо…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 42,
+              "type": "choice",
+              "text": "\"Рискнуть напролом\". — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Рискнуть напролом\". — ничего.",
+                "text_items": [
+                  "\"Рискнуть напролом\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 42,
+                "text": "\"Рискнуть напролом\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 43,
+              "type": "choice",
+              "text": "\"Чем-то отвлечь\". — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Чем-то отвлечь\". — ничего.",
+                "text_items": [
+                  "\"Чем-то отвлечь\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 43,
+                "text": "\"Чем-то отвлечь\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 44,
+              "type": "text",
+              "text": "В любом случае автоматчик подстрелит нас. Женщина откроет саркофаг.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 45,
+              "type": "text",
+              "text": "Северное море. XIX век. Во время путешествия, на корабле встретим другую вампиршу Каталину. Она предложит нам показать настоящий Лондон.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 46,
+              "type": "choice",
+              "text": "Если будет время. + дружба / отношения с Каталиной.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Если будет время. + дружба / отношения с Каталиной.",
+                "text_items": [
+                  "Если будет время."
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 46,
+                "text": "Если будет время.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "+ дружба / отношения с Каталиной"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 47,
+              "type": "choice",
+              "text": "Не думаю, что получится. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Не думаю, что получится. — ничего.",
+                "text_items": [
+                  "Не думаю, что получится."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 47,
+                "text": "Не думаю, что получится.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 48,
+              "type": "text",
+              "text": "Приехав в Лондон, подойдём к нужному заброшенному особняку. На насс начнут смотреть из окон и с разных сторон. \"Чувствую себя как на витрине…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 49,
+              "type": "choice",
+              "text": "\"Помахаю-ка мальчишкам\". — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Помахаю-ка мальчишкам\". — ничего.",
+                "text_items": [
+                  "\"Помахаю-ка мальчишкам\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 49,
+                "text": "\"Помахаю-ка мальчишкам\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 50,
+              "type": "choice",
+              "text": "\"Посмотрю-ка на служанку\". — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Посмотрю-ка на служанку\". — ничего.",
+                "text_items": [
+                  "\"Посмотрю-ка на служанку\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 50,
+                "text": "\"Посмотрю-ка на служанку\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 51,
+              "type": "choice",
+              "text": "\"Лучше игнорировать новых соседей\". — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Лучше игнорировать новых соседей\". — ничего.",
+                "text_items": [
+                  "\"Лучше игнорировать новых соседей\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 51,
+                "text": "\"Лучше игнорировать новых соседей\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 52,
+              "type": "text",
+              "text": "Уилфорд уйдёт в город, а нас с Томашом оставит приводить в порядок запылившийся дом. Потратим день на уборку. Вечером переоденемся:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 53,
+              "type": "choice",
+              "text": "— Серый Хайгейт, Туманный Сент-Джеймс (подписка), Тихий Вестминстер (55), Купить всё (80).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 53,
+                "text": "— Серый Хайгейт, Туманный Сент-Джеймс (подписка), Тихий Вестминстер (55), Купить всё (80).",
+                "cost_diamonds": 80,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 54,
+              "type": "note",
+              "text": "Выбираем свою комнату:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 55,
+              "type": "choice",
+              "text": "— Тихая скромность (бесплатно), Уютное благочестие (подписка), Вечное благородие (55).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 55,
+                "text": "— Тихая скромность (бесплатно), Уютное благочестие (подписка), Вечное благородие (55).",
+                "cost_diamonds": 55,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 56,
+              "type": "note",
+              "text": "Выйдем на улицу, чтобы найти \"пищу\". Около паба увидим, как разойдутся мужчина и женщина. Выбираем: \"Хочу…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 57,
+              "type": "choice",
+              "text": "\"Проследить за мужчиной\". — укусим мужчину.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Проследить за мужчиной\". — укусим мужчину.",
+                "text_items": [
+                  "\"Проследить за мужчиной\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 57,
+                "text": "\"Проследить за мужчиной\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 58,
+              "type": "choice",
+              "text": "\"Проследить за женщиной\". — укусим женщину.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Проследить за женщиной\". — укусим женщину.",
+                "text_items": [
+                  "\"Проследить за женщиной\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 58,
+                "text": "\"Проследить за женщиной\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 59,
+              "type": "text",
+              "text": "Человеческое сердце стало сбиваться с ритма. А голод так и не утих.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 60,
+              "type": "choice",
+              "text": "\"Надо остановиться\". +1 рассвет.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Надо остановиться\". +1 рассвет.",
+                "text_items": [
+                  "\"Надо остановиться\"."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 60,
+                "text": "\"Надо остановиться\".",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 рассвет"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 61,
+              "type": "choice",
+              "text": "\"Ещё чуть-чуть\". +1 затмение, выбираем дальше.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Ещё чуть-чуть\". +1 затмение, выбираем дальше.",
+                "text_items": [
+                  "\"Ещё чуть-чуть\"."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 61,
+                "text": "\"Ещё чуть-чуть\".",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 затмение"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 62,
+              "type": "requirement",
+              "text": "Если не смогли остановиться пить кровь, нас остановит Уилфорд.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 63,
+              "type": "choice",
+              "text": "Простите. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Простите. — ничего.",
+                "text_items": [
+                  "Простите."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 63,
+                "text": "Простите.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 64,
+              "type": "choice",
+              "text": "Я бы остановилась. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Я бы остановилась. — ничего.",
+                "text_items": [
+                  "Я бы остановилась."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 64,
+                "text": "Я бы остановилась.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 65,
+              "type": "text",
+              "text": "Томаш в это время вышел из паба, нашел в переулке жертву другого вампира, решил помочь. Незнакомый вампир оставил ему деньги, чтобы он позаботился о жертвах.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 66,
+              "type": "text",
+              "text": "Лондон. XXI век. Женщина открыла саркофаг, оттуда вырвался пепел. Из темноты саркофага выбрался А-Лулим.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 67,
+              "type": "text",
+              "text": "\"Поблагодарить разработчиков\".",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 68,
+              "type": "choice",
+              "text": "Примите благодарность. (5) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Примите благодарность. (5) — поблагодарим.",
+                "text_items": [
+                  "Примите благодарность. (5)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 68,
+                "text": "Примите благодарность. (5)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 69,
+              "type": "choice",
+              "text": "Выражаю признательность. (11) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Выражаю признательность. (11) — поблагодарим.",
+                "text_items": [
+                  "Выражаю признательность. (11)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 69,
+                "text": "Выражаю признательность. (11)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 70,
+              "type": "choice",
+              "text": "Сердечно благодарю. (33) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Сердечно благодарю. (33) — поблагодарим.",
+                "text_items": [
+                  "Сердечно благодарю. (33)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 70,
+                "text": "Сердечно благодарю. (33)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 71,
+              "type": "choice",
+              "text": "Премного благодарю. (55) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Премного благодарю. (55) — поблагодарим.",
+                "text_items": [
+                  "Премного благодарю. (55)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 71,
+                "text": "Премного благодарю. (55)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 72,
+              "type": "choice",
+              "text": "Вечная благодарность. (157) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Вечная благодарность. (157) — поблагодарим.",
+                "text_items": [
+                  "Вечная благодарность. (157)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 72,
+                "text": "Вечная благодарность. (157)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 73,
+              "type": "choice",
+              "text": "Благодарю за труд. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Благодарю за труд. — ничего.",
+                "text_items": [
+                  "Благодарю за труд."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 73,
+                "text": "Благодарю за труд.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Знакомство",
+          "blocks": [
+            {
+              "order": 74,
+              "type": "heading",
+              "text": "1.2. Знакомство",
+              "metadata": {
+                "tag": "h3",
+                "classes": [
+                  "TextH2"
+                ]
+              },
+              "choice": null
+            },
+            {
+              "order": 75,
+              "type": "text",
+              "text": "Старый знакомый А-Лулим начнёт нам угрожать. \"Я…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 76,
+              "type": "choice",
+              "text": "Слушаю. + дружба с А-Лулимом.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Слушаю. + дружба с А-Лулимом.",
+                "text_items": [
+                  "Слушаю."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 76,
+                "text": "Слушаю.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 77,
+              "type": "choice",
+              "text": "Не собираюсь с тобой разговаривать. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Не собираюсь с тобой разговаривать. — ничего.",
+                "text_items": [
+                  "Не собираюсь с тобой разговаривать."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 77,
+                "text": "Не собираюсь с тобой разговаривать.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 78,
+              "type": "text",
+              "text": "А-Лулим окружил нас своей тьмой, и отпустит, только если пообещаем ему не мешать. Придётся согласиться, чтобы выжить.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 79,
+              "type": "text",
+              "text": "Лондон. XIX век. Томаш привёл в особняк пострадавшего парня и девушку Энни. Вампир Эйдан Маккензи тоже придёт сюда и представится. Эйдан спросит, почему Томаш понял, что он вампир, но не сбежал. Томаш ответит:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 80,
+              "type": "choice",
+              "text": "(Уйти от ответа.) — Томаш подвергнется гипнозу.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Уйти от ответа.) — Томаш подвергнется гипнозу.",
+                "text_items": [
+                  "(Уйти от ответа.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 80,
+                "text": "(Уйти от ответа.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 81,
+              "type": "choice",
+              "text": "(Рассказать.) — Эйдан будет рад.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Рассказать.) — Эйдан будет рад.",
+                "text_items": [
+                  "(Рассказать.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 81,
+                "text": "(Рассказать.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 82,
+              "type": "text",
+              "text": "Уилфред собирается в клуб вампиров. Он возьмёт нас с собой, в карете объяснит все правила поведения. Запоминаем.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 83,
+              "type": "choice",
+              "text": "Повторите ещё раз. (8) — прослушаем инструкцию ещё раз.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Повторите ещё раз. (8) — прослушаем инструкцию ещё раз.",
+                "text_items": [
+                  "Повторите ещё раз. (8)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 83,
+                "text": "Повторите ещё раз. (8)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 84,
+              "type": "choice",
+              "text": "Да. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Да. — ничего.",
+                "text_items": [
+                  "Да."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 84,
+                "text": "Да.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 85,
+              "type": "text",
+              "text": "Когда придём в клуб, выполняем правила. \"Нужно…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 86,
+              "type": "choice",
+              "text": "\"Идти в трёх шагах позади\". — нет.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Идти в трёх шагах позади\". — нет.",
+                "text_items": [
+                  "\"Идти в трёх шагах позади\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 86,
+                "text": "\"Идти в трёх шагах позади\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 87,
+              "type": "choice",
+              "text": "\"Идти в двух шагах позади\". — правильно.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Идти в двух шагах позади\". — правильно.",
+                "text_items": [
+                  "\"Идти в двух шагах позади\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 87,
+                "text": "\"Идти в двух шагах позади\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 88,
+              "type": "choice",
+              "text": "\"Стоять на месте\". — нет.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Стоять на месте\". — нет.",
+                "text_items": [
+                  "\"Стоять на месте\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 88,
+                "text": "\"Стоять на месте\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 89,
+              "type": "text",
+              "text": "Уилфред встретит вампира по имени Август. \"Теперь пора…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 90,
+              "type": "choice",
+              "text": "\"Поклониться\". — нет.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Поклониться\". — нет.",
+                "text_items": [
+                  "\"Поклониться\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 90,
+                "text": "\"Поклониться\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 91,
+              "type": "choice",
+              "text": "\"Склонить голову\". — правильно.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Склонить голову\". — правильно.",
+                "text_items": [
+                  "\"Склонить голову\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 91,
+                "text": "\"Склонить голову\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 92,
+              "type": "choice",
+              "text": "\"Сделать реверанс\". — нет.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Сделать реверанс\". — нет.",
+                "text_items": [
+                  "\"Сделать реверанс\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 92,
+                "text": "\"Сделать реверанс\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 93,
+              "type": "requirement",
+              "text": "Если выполнили оба действия правильно, то (+1 наследие).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 94,
+              "type": "text",
+              "text": "Подойдёт Ровена, она оценит наши манеры. Позже Уилфред встретит знакомого вампира Олдрика, пойдёт к нему, а нас оставит с гостями.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 95,
+              "type": "text",
+              "text": "Начнутся танцы. \"Кого пригласить?\" (можно выбрать всех)",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 96,
+              "type": "choice",
+              "text": "Каталину. (26) — танец с Каталиной, сцена, дальше.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Каталину. (26) — танец с Каталиной, сцена, дальше.",
+                "text_items": [
+                  "Каталину. (26)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 96,
+                "text": "Каталину. (26)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "танец с Каталиной, сцена"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 97,
+              "type": "choice",
+              "text": "Вампира. (Корвин) (26) — танец с Корвином, сцена.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Вампира. (Корвин) (26) — танец с Корвином, сцена.",
+                "text_items": [
+                  "Вампира. (Корвин) (26)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 97,
+                "text": "Вампира. (Корвин) (26)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "танец с Корвином, сцена"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 98,
+              "type": "choice",
+              "text": "Вампира. (Эйдан) (26) — танец с Эйданом, сцена.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Вампира. (Эйдан) (26) — танец с Эйданом, сцена.",
+                "text_items": [
+                  "Вампира. (Эйдан) (26)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 98,
+                "text": "Вампира. (Эйдан) (26)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "танец с Эйданом, сцена"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 99,
+              "type": "choice",
+              "text": "Августа. (26) — танец с Августом, сцена.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Августа. (26) — танец с Августом, сцена.",
+                "text_items": [
+                  "Августа. (26)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 99,
+                "text": "Августа. (26)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "танец с Августом, сцена"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 100,
+              "type": "choice",
+              "text": "Дождаться Уилфреда. — завершим выбор.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Дождаться Уилфреда. — завершим выбор.",
+                "text_items": [
+                  "Дождаться Уилфреда."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 100,
+                "text": "Дождаться Уилфреда.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 101,
+              "type": "requirement",
+              "text": "Если выбрали \"Каталину\":",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 102,
+              "type": "choice",
+              "text": "Мне нравится ваш подход к этому. (8) + отношения с Каталиной.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Мне нравится ваш подход к этому. (8) + отношения с Каталиной.",
+                "text_items": [
+                  "Мне нравится ваш подход к этому. (8)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 102,
+                "text": "Мне нравится ваш подход к этому. (8)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "+ отношения с Каталиной"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 103,
+              "type": "choice",
+              "text": "Довольно смелое суждение. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Довольно смелое суждение. — ничего.",
+                "text_items": [
+                  "Довольно смелое суждение."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 103,
+                "text": "Довольно смелое суждение.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 104,
+              "type": "text",
+              "text": "Лондон. XXI век. А-Лулим отпустил нас из тьмы, но очнувшись в реальном мире, окажемся связаны цепью. К нам подойдёт человек, начнёт допрашивать. А-Лулима он не видит. Человек введёт нам что-то через шприц. А-Лулим попросит нас тянуть время, чтобы он помог.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 105,
+              "type": "choice",
+              "text": "(Вывести человека из себя.) +1 охота.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Вывести человека из себя.) +1 охота.",
+                "text_items": [
+                  "(Вывести человека из себя.)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 105,
+                "text": "(Вывести человека из себя.)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 охота"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 106,
+              "type": "choice",
+              "text": "(Запутать человека.) +1 засада.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Запутать человека.) +1 засада.",
+                "text_items": [
+                  "(Запутать человека.)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 106,
+                "text": "(Запутать человека.)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 засада"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 107,
+              "type": "text",
+              "text": "Лондон. XIX век. Неизвестный вампир решил выпить кровь Томаша, не поняв, что он слуга, а не еда. Уилфред вовремя заступился и решил научить юного вампира манерам. Август скомандует своему помощнику Нико, чтобы он прекратил. Нико послушается, но уйдёт не извинившись.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 108,
+              "type": "text",
+              "text": "Позже в зал войдёт экзекутор. Вампира Эйдан Маккензи задержат по подозрению в убийстве своего создателя Киарана О'Салливана.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 109,
+              "type": "text",
+              "text": "Лондон. XXI век. Разобравшись с отрядом людей, сожжем их внутри склада. А-Лулим подойдёт к нам, спросим его, как он вернулся.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 110,
+              "type": "text",
+              "text": "\"Поблагодарить разработчиков\" (даже во время алмазной лихорадки).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 111,
+              "type": "choice",
+              "text": "Примите благодарность. (6) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Примите благодарность. (6) — поблагодарим.",
+                "text_items": [
+                  "Примите благодарность. (6)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 111,
+                "text": "Примите благодарность. (6)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 112,
+              "type": "choice",
+              "text": "Выражаю признательность. (8) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Выражаю признательность. (8) — поблагодарим.",
+                "text_items": [
+                  "Выражаю признательность. (8)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 112,
+                "text": "Выражаю признательность. (8)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 113,
+              "type": "choice",
+              "text": "Сердечно благодарю. (26) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Сердечно благодарю. (26) — поблагодарим.",
+                "text_items": [
+                  "Сердечно благодарю. (26)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 113,
+                "text": "Сердечно благодарю. (26)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 114,
+              "type": "choice",
+              "text": "Премного благодарю. (44) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Премного благодарю. (44) — поблагодарим.",
+                "text_items": [
+                  "Премного благодарю. (44)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 114,
+                "text": "Премного благодарю. (44)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 115,
+              "type": "choice",
+              "text": "Вечная благодарность. (142) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Вечная благодарность. (142) — поблагодарим.",
+                "text_items": [
+                  "Вечная благодарность. (142)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 115,
+                "text": "Вечная благодарность. (142)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 116,
+              "type": "choice",
+              "text": "Благодарю за труд. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Благодарю за труд. — ничего.",
+                "text_items": [
+                  "Благодарю за труд."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 116,
+                "text": "Благодарю за труд.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Справедливость",
+          "blocks": [
+            {
+              "order": 117,
+              "type": "heading",
+              "text": "1.3. Справедливость",
+              "metadata": {
+                "tag": "h3",
+                "classes": [
+                  "TextH2"
+                ]
+              },
+              "choice": null
+            },
+            {
+              "order": 118,
+              "type": "text",
+              "text": "Лондон. XXI век. Дома выбираем наряд, причёску:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 119,
+              "type": "choice",
+              "text": "— Тёплый вечер (бесплатно), Мягкий шёлк (подписка), Уютный бархат (50), Купить всё (72).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 119,
+                "text": "— Тёплый вечер (бесплатно), Мягкий шёлк (подписка), Уютный бархат (50), Купить всё (72).",
+                "cost_diamonds": 72,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 120,
+              "type": "choice",
+              "text": "— Оставить текущую, Утренний бриз чёрные / русые (0), золотистые / каштановые / белые / рыжие / Полуночная тень чёрные (10), русые (подписка), золотистые / каштановые / белые / рыжие (20), Всё (135).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 120,
+                "text": "— Оставить текущую, Утренний бриз чёрные / русые (0), золотистые / каштановые / белые / рыжие / Полуночная тень чёрные (10), русые (подписка), золотистые / каштановые / белые / рыжие (20), Всё (135).",
+                "cost_diamonds": 135,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 121,
+              "type": "text",
+              "text": "А-Лулим рядом с нами. \"Стоит ли его поблагодарить?\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 122,
+              "type": "choice",
+              "text": "\"Да. Он спас мне жизнь\". (10) — поблагодарим А-Лулима.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Да. Он спас мне жизнь\". (10) — поблагодарим А-Лулима.",
+                "text_items": [
+                  "\"Да. Он спас мне жизнь\". (10)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 122,
+                "text": "\"Да. Он спас мне жизнь\". (10)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "поблагодарим А-Лулима"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 123,
+              "type": "choice",
+              "text": "\"Потешить его самолюбие? Нет\". — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Потешить его самолюбие? Нет\". — ничего.",
+                "text_items": [
+                  "\"Потешить его самолюбие? Нет\"."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 123,
+                "text": "\"Потешить его самолюбие? Нет\".",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 124,
+              "type": "text",
+              "text": "К нам в гости придёт Эндрю, со словами: \"Как я рад, что вы живы\".",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 125,
+              "type": "text",
+              "text": "Лондон. XIX век. Корвин — вампир, открывший в Лондоне своё охранное агентство. К нему пришел другой вампир, и за большую сумму заказал убийство.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 126,
+              "type": "text",
+              "text": "В это время Уилфред спросит, что у нас за книга. \"Читала про…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 127,
+              "type": "choice",
+              "text": "Войну Алой и Белой розы. +1 охота.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Войну Алой и Белой розы. +1 охота.",
+                "text_items": [
+                  "Войну Алой и Белой розы."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 127,
+                "text": "Войну Алой и Белой розы.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 охота"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 128,
+              "type": "choice",
+              "text": "Томаса Кромвеля. +1 засада.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Томаса Кромвеля. +1 засада.",
+                "text_items": [
+                  "Томаса Кромвеля."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 128,
+                "text": "Томаса Кромвеля.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 засада"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 129,
+              "type": "choice",
+              "text": "Друидов. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Друидов. — ничего.",
+                "text_items": [
+                  "Друидов."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 129,
+                "text": "Друидов.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 130,
+              "type": "text",
+              "text": "Уилфред прочитает письма, узнает о смерти управляющего его домом, и поручит Томашу заняться этим делом. \"Том…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 131,
+              "type": "choice",
+              "text": "Ты справишься. (10) — поддержим Томаша.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Ты справишься. (10) — поддержим Томаша.",
+                "text_items": [
+                  "Ты справишься. (10)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 131,
+                "text": "Ты справишься. (10)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "поддержим Томаша"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 132,
+              "type": "choice",
+              "text": "Думаешь, адвокаты страшнее вампиров? — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Думаешь, адвокаты страшнее вампиров? — ничего.",
+                "text_items": [
+                  "Думаешь, адвокаты страшнее вампиров?"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 132,
+                "text": "Думаешь, адвокаты страшнее вампиров?",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 133,
+              "type": "text",
+              "text": "Во 2-ом письме Уилфреда приглашают стать присяжным на слушании по делу Маккензи, где будут судить вампира, задержанного в клубе.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 134,
+              "type": "text",
+              "text": "Томаш навестит спасённых людей. Юноша Артур очнётся. Узнаем, что девушка Энни — сестра Эйдана, а Артур — её жених. Эйдан защитил сестру от другого вампира. Расскажем, что его будут судить.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 135,
+              "type": "choice",
+              "text": "(Поддержать Артура.) — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Поддержать Артура.) — ничего.",
+                "text_items": [
+                  "(Поддержать Артура.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 135,
+                "text": "(Поддержать Артура.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 136,
+              "type": "choice",
+              "text": "(Промолчать.) — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Промолчать.) — ничего.",
+                "text_items": [
+                  "(Промолчать.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 136,
+                "text": "(Промолчать.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 137,
+              "type": "text",
+              "text": "Позже Томаш передаст нам всё, что он узнал от людей. \"Нужно…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 138,
+              "type": "choice",
+              "text": "Рассказать Уилфреду. — повлияет на сюжет.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Рассказать Уилфреду. — повлияет на сюжет.",
+                "text_items": [
+                  "Рассказать Уилфреду."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 138,
+                "text": "Рассказать Уилфреду.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 139,
+              "type": "choice",
+              "text": "Пока не рассказывать Уилфреду. — повлияет на сюжет.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Пока не рассказывать Уилфреду. — повлияет на сюжет.",
+                "text_items": [
+                  "Пока не рассказывать Уилфреду."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 139,
+                "text": "Пока не рассказывать Уилфреду.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 140,
+              "type": "text",
+              "text": "Придём в судебную комнату в подвале \"Алой Розы\". Эйден заперт в клетке в центре зала. Незаметно подойдём и расскажем о его сестре. Экзекутор отгонит нас от клетки. Отвечаем (быстро):",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 141,
+              "type": "choice",
+              "text": "Я уже ухожу. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Я уже ухожу. — ничего.",
+                "text_items": [
+                  "Я уже ухожу."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 141,
+                "text": "Я уже ухожу.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 142,
+              "type": "choice",
+              "text": "Мне стало интересно. +1 охота.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Мне стало интересно. +1 охота.",
+                "text_items": [
+                  "Мне стало интересно."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 142,
+                "text": "Мне стало интересно.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 охота"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 143,
+              "type": "choice",
+              "text": "Простите. +1 засада.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Простите. +1 засада.",
+                "text_items": [
+                  "Простите."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 143,
+                "text": "Простите.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 засада"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 144,
+              "type": "note",
+              "text": "Выбираем, где сесть. \"Натали увидела свободное место рядом…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 145,
+              "type": "choice",
+              "text": "С Каталиной. (20) + дружба / отношения с Каталиной.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "С Каталиной. (20) + дружба / отношения с Каталиной.",
+                "text_items": [
+                  "С Каталиной. (20)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 145,
+                "text": "С Каталиной. (20)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "+ дружба / отношения с Каталиной"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 146,
+              "type": "choice",
+              "text": "С Августом. (20) + дружба / отношения с Августом.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "С Августом. (20) + дружба / отношения с Августом.",
+                "text_items": [
+                  "С Августом. (20)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 146,
+                "text": "С Августом. (20)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "+ дружба / отношения с Августом"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 147,
+              "type": "choice",
+              "text": "С выходом. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "С выходом. — ничего.",
+                "text_items": [
+                  "С выходом."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 147,
+                "text": "С выходом.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 148,
+              "type": "text",
+              "text": "Начнётся суд. Эйдан признает, что убил своего вампира создателя. Он расскажет о его нарушениях закона. И он защищался. Представим себя на его месте. Смогли бы мы убить Уилфреда. \"Смогла бы я?\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 149,
+              "type": "choice",
+              "text": "\"Да\". +1 затмение.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Да\". +1 затмение.",
+                "text_items": [
+                  "\"Да\"."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 149,
+                "text": "\"Да\".",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 затмение"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 150,
+              "type": "choice",
+              "text": "\"Нет\". +1 рассвет.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "\"Нет\". +1 рассвет.",
+                "text_items": [
+                  "\"Нет\"."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 150,
+                "text": "\"Нет\".",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 рассвет"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 151,
+              "type": "text",
+              "text": "Эйдана оставят под стражей до выяснения всех подробностей. Уилфред познакомит нас с Олдриком. Он пригласит нас обоих на свою выставку.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 152,
+              "type": "text",
+              "text": "Лондон. XXI век. Назовём пришедшего Эндрю \"Рождённым Луной\". Спросим у него о нападавших в крипте. Информации у него меньше, чем у нас. После Эндрю спросит: \"Натали…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 153,
+              "type": "choice",
+              "text": "У вас всё хорошо? (20) + дружба / отношения с Эндрю.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "У вас всё хорошо? (20) + дружба / отношения с Эндрю.",
+                "text_items": [
+                  "У вас всё хорошо? (20)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 153,
+                "text": "У вас всё хорошо? (20)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "+ дружба / отношения с Эндрю"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 154,
+              "type": "choice",
+              "text": "Покажите мне патрон и шприц. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Покажите мне патрон и шприц. — ничего.",
+                "text_items": [
+                  "Покажите мне патрон и шприц."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 154,
+                "text": "Покажите мне патрон и шприц.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 155,
+              "type": "text",
+              "text": "Передадим ему улики: патрон и щприц. Если ранее сохранили фотографии в облаке, то теперь покажем их. Эндрю не видел раньше ни этот странный металл, ни нашивки нападавших.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 156,
+              "type": "text",
+              "text": "Лондон. XIX век. Отправимся на выставку. Выбираем наряд:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 157,
+              "type": "choice",
+              "text": "— Оставить текущий наряд (бесплатно), Урукский бархат (подписка), Вавилонский шёлк (50), Купить всё (72).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 157,
+                "text": "— Оставить текущий наряд (бесплатно), Урукский бархат (подписка), Вавилонский шёлк (50), Купить всё (72).",
+                "cost_diamonds": 72,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 158,
+              "type": "text",
+              "text": "Приедем к Олдрику, но не услышим шума гостей. Внутри окажется, что все убиты. Среди тел лежит вампир Нико, сам Олдрик, и Каталина с воткнутым клинком в груди.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 159,
+              "type": "text",
+              "text": "\"Хотите воспользоваться шансом, чтобы получить уникальный образ?\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 160,
+              "type": "choice",
+              "text": "Да, хочу рискнуть! (20) — выбираем дальше.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Да, хочу рискнуть! (20) — выбираем дальше.",
+                "text_items": [
+                  "Да, хочу рискнуть! (20)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 160,
+                "text": "Да, хочу рискнуть! (20)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 161,
+              "type": "choice",
+              "text": "Может, в другой раз. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Может, в другой раз. — ничего.",
+                "text_items": [
+                  "Может, в другой раз."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 161,
+                "text": "Может, в другой раз.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 162,
+              "type": "text",
+              "text": "\"Выберите шкатулку\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 163,
+              "type": "choice",
+              "text": "1 / 2 / 3 / 4 / 5 / 6 / 7 / 8 / 9 — смотрим результат.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "1 / 2 / 3 / 4 / 5 / 6 / 7 / 8 / 9 — смотрим результат.",
+                "text_items": [
+                  "1 / 2 / 3 / 4 / 5 / 6 / 7 / 8 / 9"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 163,
+                "text": "1 / 2 / 3 / 4 / 5 / 6 / 7 / 8 / 9",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 164,
+              "type": "requirement",
+              "text": "Если выиграли в лотерее: \"Ваша награда\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 165,
+              "type": "choice",
+              "text": "(Добавить в гардероб.) — наряд \"Покой\" и причёска \"Безмятежность\".",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Добавить в гардероб.) — наряд \"Покой\" и причёска \"Безмятежность\".",
+                "text_items": [
+                  "(Добавить в гардероб.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 165,
+                "text": "(Добавить в гардероб.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 166,
+              "type": "choice",
+              "text": "(Не добавлять.) — откажемся от образа.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Не добавлять.) — откажемся от образа.",
+                "text_items": [
+                  "(Не добавлять.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 166,
+                "text": "(Не добавлять.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 167,
+              "type": "requirement",
+              "text": "Если проиграли в лотерее: \"Хотите попробовать еще раз?\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 168,
+              "type": "choice",
+              "text": "Да. (подписка) — выбираем шкатулку ещё раз.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Да. (подписка) — выбираем шкатулку ещё раз.",
+                "text_items": [
+                  "Да. (подписка)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 168,
+                "text": "Да. (подписка)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 169,
+              "type": "choice",
+              "text": "Нет. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Нет. — ничего.",
+                "text_items": [
+                  "Нет."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 169,
+                "text": "Нет.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 170,
+              "type": "text",
+              "text": "\"Поблагодарить разработчиков\" (даже во время алмазной лихорадки).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 171,
+              "type": "choice",
+              "text": "Примите благодарность. (5) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Примите благодарность. (5) — поблагодарим.",
+                "text_items": [
+                  "Примите благодарность. (5)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 171,
+                "text": "Примите благодарность. (5)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 172,
+              "type": "choice",
+              "text": "Выражаю признательность. (10) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Выражаю признательность. (10) — поблагодарим.",
+                "text_items": [
+                  "Выражаю признательность. (10)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 172,
+                "text": "Выражаю признательность. (10)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 173,
+              "type": "choice",
+              "text": "Сердечно благодарю. (30) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Сердечно благодарю. (30) — поблагодарим.",
+                "text_items": [
+                  "Сердечно благодарю. (30)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 173,
+                "text": "Сердечно благодарю. (30)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 174,
+              "type": "choice",
+              "text": "Премного благодарю. (50) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Премного благодарю. (50) — поблагодарим.",
+                "text_items": [
+                  "Премного благодарю. (50)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 174,
+                "text": "Премного благодарю. (50)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 175,
+              "type": "choice",
+              "text": "Вечная благодарность. (150) — поблагодарим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Вечная благодарность. (150) — поблагодарим.",
+                "text_items": [
+                  "Вечная благодарность. (150)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 175,
+                "text": "Вечная благодарность. (150)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 176,
+              "type": "choice",
+              "text": "Благодарю за труд. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Благодарю за труд. — ничего.",
+                "text_items": [
+                  "Благодарю за труд."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 176,
+                "text": "Благодарю за труд.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 177,
+              "type": "effect",
+              "text": "Следующее обновление игры: сентябрь–октябрь 2026 года.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "parameter_changes": [
+                  "Следующее обновление игры: сентябрь–октябрь 2026 года."
+                ],
+                "character_effects": []
+              },
+              "choice": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "metadata": {
+    "page_urls": [
+      "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_RT.html"
+    ]
+  }
+}

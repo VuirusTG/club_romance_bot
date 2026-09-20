@@ -1,0 +1,10 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+club_romance.db
+*.sqlite
+logs/
+backups/
+.pytest_cache/
+

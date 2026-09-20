@@ -1,0 +1,3361 @@
+{
+  "parser_version": "1.2.0",
+  "source": "gamesisart",
+  "source_key": "gamesisart:romance_club_prohozhdenie_red",
+  "source_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Red.html",
+  "canonical_url": "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Red.html",
+  "source_title": "О красном и безмолвном море",
+  "seasons": [
+    {
+      "number": 1,
+      "title": "О красном и безмолвном море. Сезон 1",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Белая Магнолия",
+          "blocks": [
+            {
+              "order": 1,
+              "type": "heading",
+              "text": "1.1. Белая Магнолия",
+              "metadata": {
+                "tag": "h3",
+                "classes": [
+                  "TextH2"
+                ]
+              },
+              "choice": null
+            },
+            {
+              "order": 2,
+              "type": "text",
+              "text": "Имя девушки по умолчанию: Айша. В этой истории вам предстоит играть за троих персонажей, главным из которых является Айша.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 3,
+              "type": "note",
+              "text": "Выбираем для Айши внешность, цвет волос, причёску:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 4,
+              "type": "text",
+              "text": "— Цзыйские корни, Юласийские корни, Эохвинские корни, Кредийские корни, Икрийские корни.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 5,
+              "type": "text",
+              "text": "— Базовая причёска – Чёрные, Каштановые, Красные (бесплатно).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 6,
+              "type": "choice",
+              "text": "— Без выпущенных прядей (бесплатно), Базовые выпущенные пряди (55), Выпущенные пряди (Растрёпанные ветром) (подписка), Взять всё (107).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 6,
+                "text": "— Без выпущенных прядей (бесплатно), Базовые выпущенные пряди (55), Выпущенные пряди (Растрёпанные ветром) (подписка), Взять всё (107).",
+                "cost_diamonds": 107,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 7,
+              "type": "note",
+              "text": "Выбираем внешность, причёску Фэй-Фэй:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 8,
+              "type": "text",
+              "text": "— Преобладающие цзыйские корни, треспийские корни.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 9,
+              "type": "text",
+              "text": "— Базовая причёска – Натуральные, Выпрямленные (бесплатно).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 10,
+              "type": "text",
+              "text": "\"Я предпочитаю…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 11,
+              "type": "choice",
+              "text": "Мужские любовные линии. — доступны романы с мужчинами.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Мужские любовные линии. — доступны романы с мужчинами.",
+                "text_items": [
+                  "Мужские любовные линии."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 11,
+                "text": "Мужские любовные линии.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 12,
+              "type": "choice",
+              "text": "Женские любовные линии. — доступны романы с женщинами.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Женские любовные линии. — доступны романы с женщинами.",
+                "text_items": [
+                  "Женские любовные линии."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 12,
+                "text": "Женские любовные линии.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 13,
+              "type": "choice",
+              "text": "И мужские, и женские любовные линии. — доступны все романы.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "И мужские, и женские любовные линии. — доступны все романы.",
+                "text_items": [
+                  "И мужские, и женские любовные линии."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 13,
+                "text": "И мужские, и женские любовные линии.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 14,
+              "type": "text",
+              "text": "\"Установите предпочтение для подсказок\".",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 15,
+              "type": "choice",
+              "text": "(Включить подсказки.) — рядом с выборами будет появляться иконка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Включить подсказки.) — рядом с выборами будет появляться иконка.",
+                "text_items": [
+                  "(Включить подсказки.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 15,
+                "text": "(Включить подсказки.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 16,
+              "type": "choice",
+              "text": "(Отключить подсказки.) — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Отключить подсказки.) — ничего.",
+                "text_items": [
+                  "(Отключить подсказки.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 16,
+                "text": "(Отключить подсказки.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 17,
+              "type": "text",
+              "text": "\"Ваши предпочтения сохранены. Вы готовы продолжить?\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 18,
+              "type": "choice",
+              "text": "Да. Начать историю. — продолжим.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Да. Начать историю. — продолжим.",
+                "text_items": [
+                  "Да. Начать историю."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 18,
+                "text": "Да. Начать историю.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 19,
+              "type": "choice",
+              "text": "Нет. Я хочу изменить предпочтения. — вернёмся к настройкам.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Нет. Я хочу изменить предпочтения. — вернёмся к настройкам.",
+                "text_items": [
+                  "Нет. Я хочу изменить предпочтения."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 19,
+                "text": "Нет. Я хочу изменить предпочтения.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 20,
+              "type": "text",
+              "text": "Начнём выступление на судне \"Позолоченный лотос\" для богатых гостей. Мы сыграем на арфе, Ии и Фэй-Фэй станцуют. К выступлению нас готовила Ай-Лин. Гость лорд Суэнь высоко оценит наш талант, а лорд Чан назовёт выступление сносным. Лорд Цзинь расскажет сплетни об артистках. \"Надо сделать так, чтобы этот грубиян замолчал…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 21,
+              "type": "choice",
+              "text": "(Прервать выступление.) +1 идеалистка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Прервать выступление.) +1 идеалистка.",
+                "text_items": [
+                  "(Прервать выступление.)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 21,
+                "text": "(Прервать выступление.)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 идеалистка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 22,
+              "type": "choice",
+              "text": "(Порвать струну.) +1 интриганка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Порвать струну.) +1 интриганка.",
+                "text_items": [
+                  "(Порвать струну.)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 22,
+                "text": "(Порвать струну.)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 интриганка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 23,
+              "type": "text",
+              "text": "Цзинь не успокоится, и продолжит обсуждать девушек. Используем коготь для гучжэна, незаметно метнём в гостя. Но коготь поймает Первый из Треспии, владелец \"Позолоченного лотоса\". Позже лорд Чан сделает нам подарок. \"Как он может запросто отдавать такую вещь, будто она ничего не стоит?\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 24,
+              "type": "choice",
+              "text": "(Принять.) (18) + дружба с Фэном, нефритовая подвеска, последствия.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Принять.) (18) + дружба с Фэном, нефритовая подвеска, последствия.",
+                "text_items": [
+                  "(Принять.) (18)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 24,
+                "text": "(Принять.) (18)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "+ дружба с Фэном"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 25,
+              "type": "choice",
+              "text": "Возьми, Фэй-Фэй. — последствия в 1.2 серии.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Возьми, Фэй-Фэй. — последствия в 1.2 серии.",
+                "text_items": [
+                  "Возьми, Фэй-Фэй."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 25,
+                "text": "Возьми, Фэй-Фэй.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 26,
+              "type": "choice",
+              "text": "Она твоя, Ии. — последствия в 1.2 серии.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Она твоя, Ии. — последствия в 1.2 серии.",
+                "text_items": [
+                  "Она твоя, Ии."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 26,
+                "text": "Она твоя, Ии.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 27,
+              "type": "choice",
+              "text": "Она нам не нужна. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Она нам не нужна. — ничего.",
+                "text_items": [
+                  "Она нам не нужна."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 27,
+                "text": "Она нам не нужна.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 28,
+              "type": "text",
+              "text": "Цзинь продолжит вести себя неприлично, и мы прогоним трёх братьев. Аристократка, которая была с ними, молча подарит нам ароматическое саше. Позже старушка Гавана спросит, почему ушли гости. Фэй-Фэй скажет:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 29,
+              "type": "choice",
+              "text": "(Рассказать всю правду.) (11) +1 альтруизм, +1 осторожность.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Рассказать всю правду.) (11) +1 альтруизм, +1 осторожность.",
+                "text_items": [
+                  "(Рассказать всю правду.) (11)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 29,
+                "text": "(Рассказать всю правду.) (11)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 альтруизм, +1 осторожность"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 30,
+              "type": "choice",
+              "text": "Айша правда ничего не делала. +1 альтруизм.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Айша правда ничего не делала. +1 альтруизм.",
+                "text_items": [
+                  "Айша правда ничего не делала."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 30,
+                "text": "Айша правда ничего не делала.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 альтруизм"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 31,
+              "type": "choice",
+              "text": "Айша ничего не могла с собой поделать. +1 осторожность.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Айша ничего не могла с собой поделать. +1 осторожность.",
+                "text_items": [
+                  "Айша ничего не могла с собой поделать."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 31,
+                "text": "Айша ничего не могла с собой поделать.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 осторожность"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 32,
+              "type": "text",
+              "text": "Вспомним, как раньше дядя Первый наказывал нас в погребе, заставляя держать над собой большую чашу. Первый тогда спросит: \"Когда ты попросила меня тебя тренировать, согласилась с тремя правилами. Не забыла их?\" Айша: \"Не забыла…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 33,
+              "type": "choice",
+              "text": "(Повторить правила.) +1 идеалистка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Повторить правила.) +1 идеалистка.",
+                "text_items": [
+                  "(Повторить правила.)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 33,
+                "text": "(Повторить правила.)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 идеалистка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 34,
+              "type": "choice",
+              "text": "Но, дядя… ты и вправду сам по ним живёшь? +1 интриганка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Но, дядя… ты и вправду сам по ним живёшь? +1 интриганка.",
+                "text_items": [
+                  "Но, дядя… ты и вправду сам по ним живёшь?"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 34,
+                "text": "Но, дядя… ты и вправду сам по ним живёшь?",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 интриганка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 35,
+              "type": "text",
+              "text": "В погребе Первый предложит нам напиток:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 36,
+              "type": "text",
+              "text": "— Сливовое вино, Красное для дочери.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 37,
+              "type": "text",
+              "text": "Сядем за стол со всеми родными. Выбираем блюдо:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 38,
+              "type": "text",
+              "text": "— Розочке с яичным желтком, Шарики из крахмала корня лотоса, Дамплинги \"Четыре радости\".",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 39,
+              "type": "text",
+              "text": "Фэй-Фэй пошутит, что Ии \"положила глаз\" на одного из гостей. \"Хе-хе…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 40,
+              "type": "choice",
+              "text": "Он вернётся. +1 альтруизм.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Он вернётся. +1 альтруизм.",
+                "text_items": [
+                  "Он вернётся."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 40,
+                "text": "Он вернётся.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 альтруизм"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 41,
+              "type": "choice",
+              "text": "Ладно. +1 осторожность.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Ладно. +1 осторожность.",
+                "text_items": [
+                  "Ладно."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 41,
+                "text": "Ладно.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 осторожность"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 42,
+              "type": "text",
+              "text": "Айша: \"Оттенки…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 43,
+              "type": "choice",
+              "text": "Его. — у Айши был брат.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Его. — у Айши был брат.",
+                "text_items": [
+                  "Его."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 43,
+                "text": "Его.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 44,
+              "type": "choice",
+              "text": "Её. — у Айши была сестра.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Её. — у Айши была сестра.",
+                "text_items": [
+                  "Её."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 44,
+                "text": "Её.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 45,
+              "type": "text",
+              "text": "Вечером отправимся гулять на лодке. Вспомним событие из детства, о встрече с мальчиком Аяз. Он подарил нам белую магнолию. А потом Аяза подстрелили стрелой. Сыграем на флейте с память о нём. На этот же берег придёт лорд Суэнь с аристократкой. Попросим их оставить нас. \"Стоит её холодному требованию только прозвучать, и она слышит…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 46,
+              "type": "choice",
+              "text": "Как затихают мягкие шаги одного человека. (55) — Айша и Фэн.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Как затихают мягкие шаги одного человека. (55) — Айша и Фэн.",
+                "text_items": [
+                  "Как затихают мягкие шаги одного человека. (55)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 46,
+                "text": "Как затихают мягкие шаги одного человека. (55)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "Айша и Фэн"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 47,
+              "type": "choice",
+              "text": "Как затихают тяжёлые шаги одного человека. (55) — Айша и Эленара.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Как затихают тяжёлые шаги одного человека. (55) — Айша и Эленара.",
+                "text_items": [
+                  "Как затихают тяжёлые шаги одного человека. (55)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 47,
+                "text": "Как затихают тяжёлые шаги одного человека. (55)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "Айша и Эленара"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 48,
+              "type": "choice",
+              "text": "Как затихают шаги двух человек. — последствия в 1.2 серии.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Как затихают шаги двух человек. — последствия в 1.2 серии.",
+                "text_items": [
+                  "Как затихают шаги двух человек."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 48,
+                "text": "Как затихают шаги двух человек.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 49,
+              "type": "text",
+              "text": "Лорд Суэнь извинится за своего брата, и назовёт своё имя — Фэн. Сыграем музыку до конца. Фэй назовёт нас творческим псевдонимом \"Белая Магнолия\". Раскроем ему своё настоящее имя.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 50,
+              "type": "text",
+              "text": "На следующий день к кораблю прибыл человек из дворца. Он зачитал императорский указ. Всем незамужним дочерям из благородных семей надлежит явиться на императорский отбор.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Отбор",
+          "blocks": [
+            {
+              "order": 51,
+              "type": "heading",
+              "text": "1.2. Отбор",
+              "metadata": {
+                "tag": "h3",
+                "classes": [
+                  "TextH2"
+                ]
+              },
+              "choice": null
+            },
+            {
+              "order": 52,
+              "type": "text",
+              "text": "Ай-Лин откажется отдавать своих дочерей во дворец. Посланник из дворца странно посмотрит на Фэй-Фэй. Она подумает: \"Неважно. Мне нужно сделать так, чтобы он не стал доносить на маму…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 53,
+              "type": "choice",
+              "text": "(Подкупить его нефритовой подвеской.) (23) +1 альтруизм, осторожность.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Подкупить его нефритовой подвеской.) (23) +1 альтруизм, осторожность.",
+                "text_items": [
+                  "(Подкупить его нефритовой подвеской.) (23)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 53,
+                "text": "(Подкупить его нефритовой подвеской.) (23)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 альтруизм, осторожность"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 54,
+              "type": "choice",
+              "text": "Пожалуйста, будьте благоразумны. +1 альтруизм.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Пожалуйста, будьте благоразумны. +1 альтруизм.",
+                "text_items": [
+                  "Пожалуйста, будьте благоразумны."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 54,
+                "text": "Пожалуйста, будьте благоразумны.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 альтруизм"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 55,
+              "type": "choice",
+              "text": "Моя мать не хотела выказать неуважение к указу. +1 осторожность.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Моя мать не хотела выказать неуважение к указу. +1 осторожность.",
+                "text_items": [
+                  "Моя мать не хотела выказать неуважение к указу."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 55,
+                "text": "Моя мать не хотела выказать неуважение к указу.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 осторожность"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 56,
+              "type": "text",
+              "text": "На корабле подумаем, что можем явиться во дворец, там нарушим правила, и нас прогонят. Старушка и мать скажут, что тогда будет хуже. Смерть страшнее участи наложницы. Ответим: \"Хмф…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 57,
+              "type": "choice",
+              "text": "И всё же. Их могут не выбрать. +1 идеалистка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "И всё же. Их могут не выбрать. +1 идеалистка.",
+                "text_items": [
+                  "И всё же. Их могут не выбрать."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 57,
+                "text": "И всё же. Их могут не выбрать.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 идеалистка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 58,
+              "type": "choice",
+              "text": "Мы могли бы сжульничать. +1 интриганка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Мы могли бы сжульничать. +1 интриганка.",
+                "text_items": [
+                  "Мы могли бы сжульничать."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 58,
+                "text": "Мы могли бы сжульничать.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 интриганка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 59,
+              "type": "text",
+              "text": "Фэй-Фэй добавит: \"Я очень надеюсь, что мы с этим разберёмся…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 60,
+              "type": "choice",
+              "text": "Не хочу, чтобы ма снова пришлось иметь дело с этим. +1 альтруизм.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Не хочу, чтобы ма снова пришлось иметь дело с этим. +1 альтруизм.",
+                "text_items": [
+                  "Не хочу, чтобы ма снова пришлось иметь дело с этим."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 60,
+                "text": "Не хочу, чтобы ма снова пришлось иметь дело с этим.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 альтруизм"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 61,
+              "type": "choice",
+              "text": "Мне не по себе от того, как этот евнух на меня смотрел. +1 осторожность.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Мне не по себе от того, как этот евнух на меня смотрел. +1 осторожность.",
+                "text_items": [
+                  "Мне не по себе от того, как этот евнух на меня смотрел."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 61,
+                "text": "Мне не по себе от того, как этот евнух на меня смотрел.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 осторожность"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 62,
+              "type": "text",
+              "text": "Император Жуй — третий игровой персонаж. Выбираем наряд, причёску:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 63,
+              "type": "choice",
+              "text": "— Стартовый наряд (бесплатно), Императорское одеяние (бордовое) (26), Императорское одеяние (золотое) (подписка), Взять всё (62).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 63,
+                "text": "— Стартовый наряд (бесплатно), Императорское одеяние (бордовое) (26), Императорское одеяние (золотое) (подписка), Взять всё (62).",
+                "cost_diamonds": 62,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 64,
+              "type": "choice",
+              "text": "— Базовая причёска (бесплатно), Пучок на макушке (23), Наполовину собранные (подписка), Взять всё (44).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 64,
+                "text": "— Базовая причёска (бесплатно), Пучок на макушке (23), Наполовину собранные (подписка), Взять всё (44).",
+                "cost_diamonds": 44,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 65,
+              "type": "text",
+              "text": "Рядом с нами супруга императора, Облачное перо. Слуга скажет, что пришел младший брат императора. И супруга поспешит удалиться. От лица Жуя скажем ей:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 66,
+              "type": "choice",
+              "text": "Возьми паланкин. +1 умеренность.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Возьми паланкин. +1 умеренность.",
+                "text_items": [
+                  "Возьми паланкин."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 66,
+                "text": "Возьми паланкин.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 умеренность"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 67,
+              "type": "choice",
+              "text": "Можешь идти. +1 железный кулак.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Можешь идти. +1 железный кулак.",
+                "text_items": [
+                  "Можешь идти."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 67,
+                "text": "Можешь идти.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 железный кулак"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 68,
+              "type": "text",
+              "text": "Братом Жуя окажется Фэн, который представлялся нам как \"лорд Суэнь\". Он нарисовал рисунок девушки на лодке. Осмотрим рисунок: \"Хмф…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 69,
+              "type": "choice",
+              "text": "Это?.. (26) (если выбрали \"Как затихают мягкие…\") + отношения с Жуй.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Это?.. (26) (если выбрали \"Как затихают мягкие…\") + отношения с Жуй.",
+                "text_items": [
+                  "Это?.. (26) (если выбрали \"Как затихают мягкие…\")"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 69,
+                "text": "Это?.. (26) (если выбрали \"Как затихают мягкие…\")",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "+ отношения с Жуй"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 70,
+              "type": "choice",
+              "text": "Те исполнительницы из \"Позолоченного лотоса\"? (23) + дружба с Жуй.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Те исполнительницы из \"Позолоченного лотоса\"? (23) + дружба с Жуй.",
+                "text_items": [
+                  "Те исполнительницы из \"Позолоченного лотоса\"? (23)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 70,
+                "text": "Те исполнительницы из \"Позолоченного лотоса\"? (23)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 71,
+              "type": "choice",
+              "text": "Неплохо. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Неплохо. — ничего.",
+                "text_items": [
+                  "Неплохо."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 71,
+                "text": "Неплохо.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 72,
+              "type": "note",
+              "text": "Выбираем еду (последствия в 1.3 серии):",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 73,
+              "type": "text",
+              "text": "— Сладкий суп из семян лотоса и луковиц лилий (готовила сама императрица), Утка \"Восемь сокровищ\" (готовил повар супруги Ци).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 74,
+              "type": "text",
+              "text": "В Зале Почестей главный цензор Вэй попросит смягчить императорский указ о наложницах, чтобы не забирали единственных дочерей. Ответим: \"Меньше всего я хочу, чтобы…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 75,
+              "type": "choice",
+              "text": "Моё правление строилось на обидах народа. +1 умеренность.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Моё правление строилось на обидах народа. +1 умеренность.",
+                "text_items": [
+                  "Моё правление строилось на обидах народа."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 75,
+                "text": "Моё правление строилось на обидах народа.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 умеренность"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 76,
+              "type": "choice",
+              "text": "Мои подданные приняли новое начало… +1 железный кулак.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Мои подданные приняли новое начало… +1 железный кулак.",
+                "text_items": [
+                  "Мои подданные приняли новое начало…"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 76,
+                "text": "Мои подданные приняли новое начало…",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 железный кулак"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 77,
+              "type": "text",
+              "text": "Путь умеренности. Указ: \"Следующие двадцать лет отборов не будет\".",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 78,
+              "type": "text",
+              "text": "Дочь Ии отказывается есть, ожидая своей участи во дворце.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 79,
+              "type": "text",
+              "text": "Путь интриганки. Скажем: \"Я ношу привилегированную фамилию\".",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 80,
+              "type": "text",
+              "text": "Со старушкой обсудим, чему учит нас Первый. Ответим: \"Няня…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 81,
+              "type": "choice",
+              "text": "Я могу быть лучше. +1 идеалистка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Я могу быть лучше. +1 идеалистка.",
+                "text_items": [
+                  "Я могу быть лучше."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 81,
+                "text": "Я могу быть лучше.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 идеалистка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 82,
+              "type": "choice",
+              "text": "Мы можем использовать это как способ проникнуть внутрь. +1 интриганка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Мы можем использовать это как способ проникнуть внутрь. +1 интриганка.",
+                "text_items": [
+                  "Мы можем использовать это как способ проникнуть внутрь."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 82,
+                "text": "Мы можем использовать это как способ проникнуть внутрь.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 интриганка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 83,
+              "type": "text",
+              "text": "Первый даст напутствие, и понадеется, что мы вернёмся домой. Скажем, что нам это не составит труда, в отличие от Фэй-Фэй. Она ответит: \"О, Ии…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 84,
+              "type": "choice",
+              "text": "Но ты ведь очень особенная. +1 альтруизм.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Но ты ведь очень особенная. +1 альтруизм.",
+                "text_items": [
+                  "Но ты ведь очень особенная."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 84,
+                "text": "Но ты ведь очень особенная.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 альтруизм"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 85,
+              "type": "choice",
+              "text": "Это потому, что ты сама стараешься не быть особенной. +1 осторожность.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Это потому, что ты сама стараешься не быть особенной. +1 осторожность.",
+                "text_items": [
+                  "Это потому, что ты сама стараешься не быть особенной."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 85,
+                "text": "Это потому, что ты сама стараешься не быть особенной.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 осторожность"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 86,
+              "type": "note",
+              "text": "Выбираем наряд, причёску Фэй-Фэй:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 87,
+              "type": "choice",
+              "text": "— Одеяние для отбора (Высохшая кора) (0), Одеяние для отбора (Пепел ивы) (26), Одеяние для отбора (Пыльная слива) (подписка), Взять всё (62).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 87,
+                "text": "— Одеяние для отбора (Высохшая кора) (0), Одеяние для отбора (Пепел ивы) (26), Одеяние для отбора (Пыльная слива) (подписка), Взять всё (62).",
+                "cost_diamonds": 62,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 88,
+              "type": "choice",
+              "text": "— Базовая причёска (бесплатно), Укладка с заколками (23), Наполовину собранные (подписка), Взять всё (44).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 88,
+                "text": "— Базовая причёска (бесплатно), Укладка с заколками (23), Наполовину собранные (подписка), Взять всё (44).",
+                "cost_diamonds": 44,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 89,
+              "type": "text",
+              "text": "Прибудем ко дворцу. Здесь собрались девушки со всей страны.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 90,
+              "type": "text",
+              "text": "Путь альтруизма. Фэй-Фэй скажет: \"Они так стараются выделиться…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 91,
+              "type": "text",
+              "text": "Девушка Жо-Лань оценит красоту Фэй-Фэй, и признается, что она тоже из отрёкшегося от титула рода. А потом эта девушка незаметно поставит подножку перед Фэй-Фэй. \"Эй!\" (выбираем быстро)",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 92,
+              "type": "choice",
+              "text": "(Остановить Фэй-Фэй.) +1 идеалистка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Остановить Фэй-Фэй.) +1 идеалистка.",
+                "text_items": [
+                  "(Остановить Фэй-Фэй.)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 92,
+                "text": "(Остановить Фэй-Фэй.)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 идеалистка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 93,
+              "type": "choice",
+              "text": "(Толкнуть Жо-Лань.) — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Толкнуть Жо-Лань.) — ничего.",
+                "text_items": [
+                  "(Толкнуть Жо-Лань.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 93,
+                "text": "(Толкнуть Жо-Лань.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 94,
+              "type": "choice",
+              "text": "(Наступить на подол Жо-Лань.) +1 интриганка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Наступить на подол Жо-Лань.) +1 интриганка.",
+                "text_items": [
+                  "(Наступить на подол Жо-Лань.)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 94,
+                "text": "(Наступить на подол Жо-Лань.)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 интриганка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 95,
+              "type": "choice",
+              "text": "(Закричать.) — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Закричать.) — ничего.",
+                "text_items": [
+                  "(Закричать.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 95,
+                "text": "(Закричать.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 96,
+              "type": "text",
+              "text": "Нас вызовут к императору Жуй. Он поймёт кто мы, и попытается угадать, кого из нас брат Фэн нарисовал на лодке.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Судьбы",
+          "blocks": [
+            {
+              "order": 97,
+              "type": "heading",
+              "text": "1.3. Судьбы",
+              "metadata": {
+                "tag": "h3",
+                "classes": [
+                  "TextH2"
+                ]
+              },
+              "choice": null
+            },
+            {
+              "order": 98,
+              "type": "text",
+              "text": "Фэй-Фэй от испуга заговорит с императором без разрешения. Император Жуй усмехнётся, и обратится к ней: \"Итак…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 99,
+              "type": "choice",
+              "text": "Сяо-Лин, значит? +1 умеренность.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Сяо-Лин, значит? +1 умеренность.",
+                "text_items": [
+                  "Сяо-Лин, значит?"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 99,
+                "text": "Сяо-Лин, значит?",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 умеренность"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 100,
+              "type": "choice",
+              "text": "Вы из привилегированной семьи… +1 железный кулак.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Вы из привилегированной семьи… +1 железный кулак.",
+                "text_items": [
+                  "Вы из привилегированной семьи…"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 100,
+                "text": "Вы из привилегированной семьи…",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 железный кулак"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 101,
+              "type": "text",
+              "text": "Жуй заинтересуется необычной девушкой, спросит её новое имя после отречения. \"Нет, нет, нет… Всё должно было пойти совсем по-другому…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 102,
+              "type": "choice",
+              "text": "(Изящно уклониться от ответа.) (10) +1 альтруизм, +1 осторожность.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Изящно уклониться от ответа.) (10) +1 альтруизм, +1 осторожность.",
+                "text_items": [
+                  "(Изящно уклониться от ответа.) (10)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 102,
+                "text": "(Изящно уклониться от ответа.) (10)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 альтруизм, +1 осторожность"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 103,
+              "type": "choice",
+              "text": "(Ответить императору.) +1 альтруизм.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Ответить императору.) +1 альтруизм.",
+                "text_items": [
+                  "(Ответить императору.)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 103,
+                "text": "(Ответить императору.)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 альтруизм"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 104,
+              "type": "choice",
+              "text": "(Позволить Ии ответить.) +1 осторожность.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Позволить Ии ответить.) +1 осторожность.",
+                "text_items": [
+                  "(Позволить Ии ответить.)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 104,
+                "text": "(Позволить Ии ответить.)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 осторожность"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 105,
+              "type": "text",
+              "text": "Жуй выберет Ии и Фэй-Фэй своими наложницами. В это время мы проберёмся мимо стражника. Следующий стражник нас заметит. \"Нужно…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 106,
+              "type": "choice",
+              "text": "Залезть на другую стену. +1 идеалистка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Залезть на другую стену. +1 идеалистка.",
+                "text_items": [
+                  "Залезть на другую стену."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 106,
+                "text": "Залезть на другую стену.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 идеалистка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 107,
+              "type": "choice",
+              "text": "Пойти вперёд. +1 интриганка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Пойти вперёд. +1 интриганка.",
+                "text_items": [
+                  "Пойти вперёд."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 107,
+                "text": "Пойти вперёд.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 интриганка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 108,
+              "type": "text",
+              "text": "Два стражника начнут искать нас в саду. Перелезем небольшую стену, за ней окажемся на камне внутри пруда. \"Айша…\" (быстро)",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 109,
+              "type": "choice",
+              "text": "Удерживает равновесие. — если быстро (+1 идеалистка / интриганка).",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Удерживает равновесие. — если быстро (+1 идеалистка / интриганка).",
+                "text_items": [
+                  "Удерживает равновесие."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 109,
+                "text": "Удерживает равновесие.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 идеалистка / интриганка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 110,
+              "type": "text",
+              "text": "Около пруда на нас нападёт слепой воин Алестрио, вооружённый бамбуковой палкой. Осмотрим его и скажем:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 111,
+              "type": "choice",
+              "text": "Вы не видите… +1 идеалистка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Вы не видите… +1 идеалистка.",
+                "text_items": [
+                  "Вы не видите…"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 111,
+                "text": "Вы не видите…",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 идеалистка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 112,
+              "type": "choice",
+              "text": "(Молчать.) +1 интриганка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Молчать.) +1 интриганка.",
+                "text_items": [
+                  "(Молчать.)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 112,
+                "text": "(Молчать.)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 интриганка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 113,
+              "type": "text",
+              "text": "Подумаем, сможем ли одолеть слепого воина. \"Итак…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 114,
+              "type": "choice",
+              "text": "Как насчёт дуэли? (50) (мужчины) + отношения с Алестрио.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Как насчёт дуэли? (50) (мужчины) + отношения с Алестрио.",
+                "text_items": [
+                  "Как насчёт дуэли? (50)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 114,
+                "text": "Как насчёт дуэли? (50)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "+ отношения с Алестрио"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 115,
+              "type": "choice",
+              "text": "Как насчёт дуэли? (30) + дружба с Алестрио.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Как насчёт дуэли? (30) + дружба с Алестрио.",
+                "text_items": [
+                  "Как насчёт дуэли? (30)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 115,
+                "text": "Как насчёт дуэли? (30)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 116,
+              "type": "choice",
+              "text": "Я не обязана отвечать. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Я не обязана отвечать. — ничего.",
+                "text_items": [
+                  "Я не обязана отвечать."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 116,
+                "text": "Я не обязана отвечать.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 117,
+              "type": "text",
+              "text": "Появится знакомая аристократка, которая была с тремя \"лордами\". Алестрио назовёт её Эленарой. Узнаем, что это его немая сестра. Алестрио всё узнает о нас, и спросит: \"Тогда что привело вас сюда сегодня?\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 118,
+              "type": "choice",
+              "text": "Поворот судьбы. +1 идеалистка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Поворот судьбы. +1 идеалистка.",
+                "text_items": [
+                  "Поворот судьбы."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 118,
+                "text": "Поворот судьбы.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 идеалистка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 119,
+              "type": "choice",
+              "text": "Вынужденная необходимость. +1 интриганка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Вынужденная необходимость. +1 интриганка.",
+                "text_items": [
+                  "Вынужденная необходимость."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 119,
+                "text": "Вынужденная необходимость.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 интриганка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 120,
+              "type": "text",
+              "text": "Когда вернёмся к сёстрам, узнаем, что их выбрал император, и им придётся остаться во дворце. Скажем, что должен быть другой выход. Фэй-Фэй отвтеит: \"Его нет…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 121,
+              "type": "choice",
+              "text": "Может, всё будет не так ужасно… +1 альтруизм.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Может, всё будет не так ужасно… +1 альтруизм.",
+                "text_items": [
+                  "Может, всё будет не так ужасно…"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 121,
+                "text": "Может, всё будет не так ужасно…",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 альтруизм"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 122,
+              "type": "choice",
+              "text": "Мы уже знаем, какими будут последствия. +1 осторожность.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Мы уже знаем, какими будут последствия. +1 осторожность.",
+                "text_items": [
+                  "Мы уже знаем, какими будут последствия."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 122,
+                "text": "Мы уже знаем, какими будут последствия.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 осторожность"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 123,
+              "type": "requirement",
+              "text": "Если в 1.2 серии выбрали \"Утка\", Жуй: \"Благородная супруга Ци…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 124,
+              "type": "choice",
+              "text": "Вы сегодня чудесно пахнете… (30) + Жуй и Ци, интимная сцена.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Вы сегодня чудесно пахнете… (30) + Жуй и Ци, интимная сцена.",
+                "text_items": [
+                  "Вы сегодня чудесно пахнете… (30)"
+                ],
+                "parameter_classes": [],
+                "character_classes": [
+                  "TextLove"
+                ]
+              },
+              "choice": {
+                "order": 124,
+                "text": "Вы сегодня чудесно пахнете… (30)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "romance"
+                ],
+                "parameter_changes": [],
+                "character_effects": [
+                  "+ Жуй и Ци, интимная сцена"
+                ],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 125,
+              "type": "choice",
+              "text": "Я всё равно собирался провести ночь с вами. (20) + дружба Жуй и Ци.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Я всё равно собирался провести ночь с вами. (20) + дружба Жуй и Ци.",
+                "text_items": [
+                  "Я всё равно собирался провести ночь с вами. (20)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 125,
+                "text": "Я всё равно собирался провести ночь с вами. (20)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 126,
+              "type": "choice",
+              "text": "Я устал. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Я устал. — ничего.",
+                "text_items": [
+                  "Я устал."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 126,
+                "text": "Я устал.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 127,
+              "type": "requirement",
+              "text": "Если в 1.2 серии выбрали \"Сладкий суп\", придём к императрице:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 128,
+              "type": "choice",
+              "text": "(Обнять её.) (30) + дружба Жуй и Хань.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Обнять её.) (30) + дружба Жуй и Хань.",
+                "text_items": [
+                  "(Обнять её.) (30)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 128,
+                "text": "(Обнять её.) (30)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 129,
+              "type": "choice",
+              "text": "(Уснуть.) — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Уснуть.) — ничего.",
+                "text_items": [
+                  "(Уснуть.)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 129,
+                "text": "(Уснуть.)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 130,
+              "type": "text",
+              "text": "Сестры вернутся домой, чтобы подготовиться к переезду во дворец. Старушка Гавана подскажет, что мы можем отправиться с сестрами, если назовёмся служанкой наложницы.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 131,
+              "type": "text",
+              "text": "Путь интриганки. Поймём, что старушка специально выбрала Фэй-Фэй.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 132,
+              "type": "text",
+              "text": "Старушка расскажет: \"Перед смертью твоя мать доверила мне две вещи. Я выполнила первую просьбу. Защитила тебя ценой своей жизни\". \"А теперь…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 133,
+              "type": "choice",
+              "text": "Я должна отомстить за нашу кровь. +1 идеалистка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Я должна отомстить за нашу кровь. +1 идеалистка.",
+                "text_items": [
+                  "Я должна отомстить за нашу кровь."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 133,
+                "text": "Я должна отомстить за нашу кровь.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 идеалистка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 134,
+              "type": "choice",
+              "text": "Я должна сделать всё, чтобы исполнить её второе желание. +1 интриганка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Я должна сделать всё, чтобы исполнить её второе желание. +1 интриганка.",
+                "text_items": [
+                  "Я должна сделать всё, чтобы исполнить её второе желание."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 134,
+                "text": "Я должна сделать всё, чтобы исполнить её второе желание.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 интриганка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 135,
+              "type": "text",
+              "text": "Нам нужно отомстить человеку Сюй Чжэнь, за наш потерянный род.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 136,
+              "type": "text",
+              "text": "Вскоре посланник из дворца снова прибудет к кораблю, чтобы зачитать указ, что Ии и Фэй-Фэй становятся придворными дамами. Фэй-Фэй подумает про свиток с указом: \"Теперь этот свиток будет храниться в нашей семье…\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 137,
+              "type": "choice",
+              "text": "(Взять свиток.) +1 альтруизм.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Взять свиток.) +1 альтруизм.",
+                "text_items": [
+                  "(Взять свиток.)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 137,
+                "text": "(Взять свиток.)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 альтруизм"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 138,
+              "type": "choice",
+              "text": "(Не двигаться.) +1 осторожность.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "(Не двигаться.) +1 осторожность.",
+                "text_items": [
+                  "(Не двигаться.)"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 138,
+                "text": "(Не двигаться.)",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 осторожность"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 139,
+              "type": "text",
+              "text": "К девушкам приехала смотрительница Цинь. За 2 месяца она должна научить девушек манерам, и только потом они отправятся во дворец. Цинь заявит, что если мы будем служанкой, то тоже должны пройти обучение. \"Я?\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 140,
+              "type": "choice",
+              "text": "Зачем? +1 идеалистка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Зачем? +1 идеалистка.",
+                "text_items": [
+                  "Зачем?"
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 140,
+                "text": "Зачем?",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 идеалистка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 141,
+              "type": "choice",
+              "text": "Я поняла. +1 интриганка.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Я поняла. +1 интриганка.",
+                "text_items": [
+                  "Я поняла."
+                ],
+                "parameter_classes": [
+                  "TextUp"
+                ],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 141,
+                "text": "Я поняла.",
+                "cost_diamonds": 0,
+                "tags": [
+                  "parameter"
+                ],
+                "parameter_changes": [
+                  "+1 интриганка"
+                ],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 142,
+              "type": "note",
+              "text": "Выбираем наряд, причёску Фэй-Фэй:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 143,
+              "type": "text",
+              "text": "— Одеяние для отбора (0), Одеяние младшей придворной дамы.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 144,
+              "type": "text",
+              "text": "(розовое) (30), Одеяние младшей придворной дамы (голубое) (подписка), Всё (72).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 145,
+              "type": "choice",
+              "text": "— Оставить текущую причёску (бесплатно), Укладка с заколками (20), Наполовину собранные (подписка), Взять всё. (45).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 145,
+                "text": "— Оставить текущую причёску (бесплатно), Укладка с заколками (20), Наполовину собранные (подписка), Взять всё. (45).",
+                "cost_diamonds": 45,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 146,
+              "type": "text",
+              "text": "Для себя выбираем наряд служанки, тип волос, причёску:",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 147,
+              "type": "choice",
+              "text": "— Обычные одеяния служанки (бесплатно), Одеяния служанки (белое) (30), Одеяния служанки (розовое) (подписка), Взять всё (72).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 147,
+                "text": "— Обычные одеяния служанки (бесплатно), Одеяния служанки (белое) (30), Одеяния служанки (розовое) (подписка), Взять всё (72).",
+                "cost_diamonds": 72,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 148,
+              "type": "text",
+              "text": "— Собранные волосы / Наполовину собранные волосы (другие причёски).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 149,
+              "type": "choice",
+              "text": "— Оставить текущую причёску (бесплатно), Служанка: Собранные / Наполовину собранные (без чёлки) (20), Служанка: Пучок сбоку / Служанка: Наполовину собранные (с чёлкой) (подписка), Взять всё. (45).",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": {
+                "order": 149,
+                "text": "— Оставить текущую причёску (бесплатно), Служанка: Собранные / Наполовину собранные (без чёлки) (20), Служанка: Пучок сбоку / Служанка: Наполовину собранные (с чёлкой) (подписка), Взять всё. (45).",
+                "cost_diamonds": 45,
+                "tags": [
+                  "diamond"
+                ],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 150,
+              "type": "text",
+              "text": "Когда обучение закончится, дядя Первый позовёт нас в погреб, там он подарит нам флейту. Сыграв на ней особую мелодию, выстрелим отравленной стрелой. В конце он упомянет королеву Тайлию. Обратимся к нему: \"Королева Треспии, о которой говорила тётя Ай-Лин?\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 151,
+              "type": "choice",
+              "text": "Расскажи мне о ней. (20) — узнаем о королеве Треспии.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Расскажи мне о ней. (20) — узнаем о королеве Треспии.",
+                "text_items": [
+                  "Расскажи мне о ней. (20)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 151,
+                "text": "Расскажи мне о ней. (20)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 152,
+              "type": "choice",
+              "text": "Она тоже умела хорошо сражаться? — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Она тоже умела хорошо сражаться? — ничего.",
+                "text_items": [
+                  "Она тоже умела хорошо сражаться?"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 152,
+                "text": "Она тоже умела хорошо сражаться?",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 153,
+              "type": "text",
+              "text": "Приедем во дворец. Смотрительница У отправит нас во Дворец Пионов, где живёт императрица. Увидим, что Жо-Лань тоже выбрали наложницей.",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 154,
+              "type": "text",
+              "text": "\"Хотите принять участие в лотерее, чтобы получить шанс выиграть уникальный предмет гардероба?\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 155,
+              "type": "choice",
+              "text": "Да. Хочу выбрать счастливое число! (5 / реклама) — дальше.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Да. Хочу выбрать счастливое число! (5 / реклама) — дальше.",
+                "text_items": [
+                  "Да. Хочу выбрать счастливое число! (5 / реклама)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 155,
+                "text": "Да. Хочу выбрать счастливое число! (5 / реклама)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 156,
+              "type": "choice",
+              "text": "Может, в следующий раз. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Может, в следующий раз. — ничего.",
+                "text_items": [
+                  "Может, в следующий раз."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 156,
+                "text": "Может, в следующий раз.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 157,
+              "type": "requirement",
+              "text": "Если решили сыграть: \"Выберите счастливое число\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 158,
+              "type": "choice",
+              "text": "1 / 2 / 3 / 4 / 5 / 6 / 7 — смотрим результат.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "1 / 2 / 3 / 4 / 5 / 6 / 7 — смотрим результат.",
+                "text_items": [
+                  "1 / 2 / 3 / 4 / 5 / 6 / 7"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 158,
+                "text": "1 / 2 / 3 / 4 / 5 / 6 / 7",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 159,
+              "type": "requirement",
+              "text": "Если выиграли в лотерее: \"Ваша награда\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 160,
+              "type": "choice",
+              "text": "Добавить в гардероб. — наряд \"Пламя мести\".",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Добавить в гардероб. — наряд \"Пламя мести\".",
+                "text_items": [
+                  "Добавить в гардероб."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 160,
+                "text": "Добавить в гардероб.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 161,
+              "type": "choice",
+              "text": "Не добавлять. — откажемся от наряда.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Не добавлять. — откажемся от наряда.",
+                "text_items": [
+                  "Не добавлять."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 161,
+                "text": "Не добавлять.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 162,
+              "type": "requirement",
+              "text": "Если проиграли в лотерее: \"Хотите попробовать ещё раз?\"",
+              "metadata": {
+                "tag": "p",
+                "classes": []
+              },
+              "choice": null
+            },
+            {
+              "order": 163,
+              "type": "choice",
+              "text": "Да. (подписка) — выбираем число ещё раз.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Да. (подписка) — выбираем число ещё раз.",
+                "text_items": [
+                  "Да. (подписка)"
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 163,
+                "text": "Да. (подписка)",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 164,
+              "type": "choice",
+              "text": "Нет. — ничего.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "raw_text": "Нет. — ничего.",
+                "text_items": [
+                  "Нет."
+                ],
+                "parameter_classes": [],
+                "character_classes": []
+              },
+              "choice": {
+                "order": 164,
+                "text": "Нет.",
+                "cost_diamonds": 0,
+                "tags": [],
+                "parameter_changes": [],
+                "character_effects": [],
+                "future_effects": [],
+                "is_critical": false
+              }
+            },
+            {
+              "order": 165,
+              "type": "effect",
+              "text": "Следующее обновление игры: сентябрь–октябрь 2026 года.",
+              "metadata": {
+                "tag": "p",
+                "classes": [],
+                "parameter_changes": [
+                  "Следующее обновление игры: сентябрь–октябрь 2026 года."
+                ],
+                "character_effects": []
+              },
+              "choice": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "metadata": {
+    "page_urls": [
+      "https://gamesisart.ru/guide/Romance_Club_Prohozhdenie_Red.html"
+    ]
+  }
+}

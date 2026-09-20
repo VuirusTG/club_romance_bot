@@ -1,0 +1,24 @@
+services:
+  club-romance-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: club_romance_bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      # Mount production database file for persistence
+      - ./club_romance.db:/app/club_romance.db
+      # Mount application logs directory
+      - ./logs:/app/logs
+    ports:
+      - "7860:7860"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DATABASE_URL=sqlite+aiosqlite:///club_romance.db
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
