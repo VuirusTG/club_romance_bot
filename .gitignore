@@ -2,9 +2,13 @@
 .venv/
 __pycache__/
 *.py[cod]
-club_romance.db
+!club_romance.db
+club_romance_before_*.db
 *.sqlite
 logs/
 backups/
 .pytest_cache/
+.pnpm-store/
+*.zip
+zip/
 
