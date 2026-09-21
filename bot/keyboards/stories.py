@@ -25,16 +25,16 @@ def story_card(story_id: int) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [
-                InlineKeyboardButton(text="▶️ Гайд", callback_data=f"seasons:{story_id}"),
+                InlineKeyboardButton(text="▶️ Прохождение", callback_data=f"seasons:{story_id}"),
                 InlineKeyboardButton(text="👥 Персонажи", callback_data=f"chars:{story_id}"),
             ],
             [
-                InlineKeyboardButton(text="📚 Сезоны", callback_data=f"seasons:{story_id}"),
                 InlineKeyboardButton(text="⭐ В избранное", callback_data=f"fav:story:{story_id}"),
+                InlineKeyboardButton(text="🔔 Подписка", callback_data=f"sub:{story_id}"),
             ],
             [
-                InlineKeyboardButton(text="🔔 Подписка", callback_data=f"sub:{story_id}"),
                 InlineKeyboardButton(text="🔙 Назад", callback_data="stories:p:1"),
+                InlineKeyboardButton(text="🏠 Меню", callback_data="main"),
             ],
         ]
     )
@@ -67,7 +67,7 @@ def episodes_list(
         [
             InlineKeyboardButton(
                 text=f"🎬 Серия {episode.number}: {episode.title or 'Без названия'}",
-                callback_data=f"guide:{episode.id}:all:1",
+                callback_data=f"guide:{episode.id}:1",
             )
         ]
         for episode in episodes

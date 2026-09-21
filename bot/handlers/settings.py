@@ -10,14 +10,11 @@ from bot.handlers.common import ensure_user_from_callback, ensure_user_from_mess
 router = Router(name="settings")
 
 
-def _settings_keyboard(notifications_enabled: bool) -> InlineKeyboardMarkup:
+def _settings_keyboard(notifications_enabled: bool, spoiler_level: int = 1) -> InlineKeyboardMarkup:
     notification_label = "🔕 Отключить уведомления" if notifications_enabled else "🔔 Включить уведомления"
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton(text=notification_label, callback_data="settings:notifications")],
-            [InlineKeyboardButton(text="🟢 Без спойлеров", callback_data="settings:spoiler:0")],
-            [InlineKeyboardButton(text="🟡 Небольшие спойлеры", callback_data="settings:spoiler:1")],
-            [InlineKeyboardButton(text="🔴 Все спойлеры", callback_data="settings:spoiler:2")],
             [InlineKeyboardButton(text="🏠 Меню", callback_data="main")],
         ]
     )
@@ -27,14 +24,20 @@ def _settings_keyboard(notifications_enabled: bool) -> InlineKeyboardMarkup:
 async def settings_command(message: Message) -> None:
     user = await ensure_user_from_message(message)
     if user:
-        await message.answer("⚙️ Настройки", reply_markup=_settings_keyboard(user.notifications_enabled))
+        await message.answer(
+            "⚙️ Настройки",
+            reply_markup=_settings_keyboard(user.notifications_enabled),
+        )
 
 
 @router.callback_query(F.data == "settings")
 async def settings_callback(callback: CallbackQuery) -> None:
     user = await ensure_user_from_callback(callback)
     if callback.message and user:
-        await callback.message.edit_text("⚙️ Настройки", reply_markup=_settings_keyboard(user.notifications_enabled))
+        await callback.message.edit_text(
+            "⚙️ Настройки",
+            reply_markup=_settings_keyboard(user.notifications_enabled),
+        )
     await callback.answer()
 
 
@@ -47,16 +50,14 @@ async def notifications_callback(callback: CallbackQuery) -> None:
     async with AsyncSessionFactory() as session:
         enabled = await content.toggle_notifications(session, user.id)
     if callback.message:
-        await callback.message.edit_text("⚙️ Настройки", reply_markup=_settings_keyboard(enabled))
+        await callback.message.edit_text(
+            "⚙️ Настройки",
+            reply_markup=_settings_keyboard(enabled),
+        )
     await callback.answer("Уведомления включены." if enabled else "Уведомления отключены.")
 
 
 @router.callback_query(F.data.startswith("settings:spoiler:"))
 async def spoiler_callback(callback: CallbackQuery) -> None:
-    user = await ensure_user_from_callback(callback)
-    level = int(callback.data.rsplit(":", 1)[1])
-    if user:
-        async with AsyncSessionFactory() as session:
-            await content.set_spoiler_level(session, user.id, level)
-    await callback.answer("Настройки спойлеров обновлены.")
+    await callback.answer("Все гайды и последствия уже открыты без ограничений.")
 

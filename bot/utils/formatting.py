@@ -1,4 +1,5 @@
 import json
+import re
 
 from bot.database.models import Character, Choice, Episode, Story
 
@@ -107,47 +108,113 @@ def split_choice_block(block: str, max_size: int = 3000) -> list[str]:
     return chunks
 
 
-def format_choice_item(choice: Choice, spoiler_level: int) -> str:
-    """Formats one option under a question with cost and consequences."""
-    text = (choice.text or "").strip()
-    if not text:
-        text = "Выбор без описания"
+def classify_choice(choice: Choice) -> tuple[str, str]:
+    """
+    Returns (emoji_icon, category_name) for visual differentiation:
+    - 💔: Ухудшение отношений (разбитое сердце)
+    - ❤️: Улучшение отношений / романтика (красное сердце)
+    - 🔻: Потеря статов / славы
+    - 🟡: Влияние на сюжет / важный выбор / будущее (жёлтый круг)
+    - 🟢: Репутация / слава / авторитет (зелёный круг)
+    - 🟣: Альтернативный путь / мистика / страсть / тьма (фиолетовый круг)
+    - 🔹: Основной путь / логика / дипломатия / свет (синий ромб)
+    - 💎: Платный выбор за алмазы
+    - ▫️: Нейтральный выбор
+    """
+    text_all = f"{choice.text or ''} {choice.consequence or ''} {choice.character_effects or ''} {choice.parameter_changes or ''} {choice.future_effects or ''} {choice.tags or ''}".lower()
+
+    # 1. Negative relationship (💔)
+    if any(k in text_all for k in [
+        "ухудшение отнош", "-отнош", "минус отнош", "затаит обиду", "затаила обиду",
+        "разозлит", "оттолкн", "обидит", "конфронтаци", "разочарован", "расстроит",
+        "оттолкнете", "охладеет"
+    ]):
+        return "💔", "rel_neg"
+
+    # 2. Positive relationship / Romance (❤️)
+    has_chars = bool(parse_effects_list(choice.character_effects))
+    if has_chars or any(k in text_all for k in [
+        "улучшение отнош", "+отнош", "+ отношения", "плюс отнош", "любовная сцена",
+        "постельная сцена", "поцелу", "поцеловат", "сблизил", "симпати", "интим",
+        "ветка", "фаворит", "романт", "понравил", "впечатлил", "сердц"
+    ]):
+        return "❤️", "rel_pos"
+
+    # 3. Negative stat / Loss of reputation (🔻)
+    if any(k in text_all for k in ["минус 1", "минус 2", "минус 3", "-1 слава", "-2 слава", "-1 репутац", "минус слава"]):
+        return "🔻", "stat_loss"
+
+    # 4. Story critical / Plot impact (🟡)
+    has_futures = bool(parse_effects_list(choice.future_effects))
+    if choice.is_critical or has_futures or any(k in text_all for k in [
+        "повлияет на", "отразится", "в будущем", "табличка", "важный выбор",
+        "развилка", "пригодится", "спасти", "погибн", "выживет", "концовка",
+        "финал", "выбор скажется", "выбор требует", "стоит вам", "стоило вам",
+        "будет знать", "запомнит", "узнает", "секрет", "жизнь", "смерть"
+    ]):
+        return "🟡", "story"
+
+    # 5. Parameters / Stats (🟢, 🟣, 🔹)
+    has_params = bool(parse_effects_list(choice.parameter_changes))
+    has_stat_text = bool(re.search(r"(?:[\+\-]\d+|минус\s+\d+|плюс\s+\d+)\s+[а-яА-Яa-zA-Z]", text_all))
+    if has_params or has_stat_text:
+        # Reputation / Fame / Respect
+        if any(k in text_all for k in ["слава", "репутац", "авторитет", "уважен", "известност", "статус"]):
+            return "🟢", "reputation"
+        # Alt / Mystical / Emotional stats
+        if any(k in text_all for k in [
+            "интуиц", "страст", "тьма", "чувств", "магия", "морок", "безумие",
+            "хаос", "демон", "анархия", "кровь", "буря", "луна", "тень",
+            "цветок", "огонь", "грех", "зло", "шезму"
+        ]):
+            return "🟣", "stat_alt"
+        # Main / Rational / Physical stats
+        return "🔹", "stat_main"
+
+    # 6. Paid choices with diamonds (💎)
+    if choice.cost_diamonds and choice.cost_diamonds > 0:
+        return "💎", "diamond"
+
+    # 7. Neutral choice (▫️)
+    return "▫️", "neutral"
+
+
+def format_choice_item(choice: Choice, spoiler_level: int = 2) -> str:
+    """Formats one option under a question with visual emoji badge, bold text, cost, and consequences."""
+    icon, _ = classify_choice(choice)
+
+    raw_text = (choice.text or "").strip()
+    if not raw_text:
+        raw_text = "Выбор без описания"
+
+    clean_text = re.sub(r"^[\s\-\•\—\–]+\s*", "", raw_text)
 
     cost = choice.cost_diamonds
-    cost_str = f" (💎 {pluralize_diamonds(cost)})" if (cost and cost > 0 and str(cost) not in text) else ""
+    cost_str = f" <i>(💎 {pluralize_diamonds(cost)})</i>" if (cost and cost > 0 and str(cost) not in clean_text) else ""
 
     # Collect parameter and character effects
     extras: list[str] = []
     if choice.parameter_changes and choice.parameter_changes != "[]":
         for p in parse_effects_list(choice.parameter_changes):
-            if p not in text:
+            if p not in clean_text:
                 extras.append(p)
     if choice.character_effects and choice.character_effects != "[]":
         for c in parse_effects_list(choice.character_effects):
-            if c not in text:
+            if c not in clean_text:
                 extras.append(f"❤️ {c}")
     if choice.future_effects and choice.future_effects != "[]":
         for f in parse_effects_list(choice.future_effects):
-            if f not in text:
-                extras.append(f"🔮 {f}")
+            if f not in clean_text:
+                extras.append(f"⚡ {f}")
 
-    is_hidden = choice.spoiler_level > spoiler_level
-    if is_hidden and extras:
-        extra_str = " [🔒 спойлер скрыт]"
-    elif extras:
-        extra_str = f" [{' | '.join(extras)}]"
-    else:
-        extra_str = ""
+    extra_str = f" <b>[{' | '.join(extras)}]</b>" if extras else ""
 
     # Clean consequence if present and not placeholder
     conseq = (choice.consequence or "").strip()
-    if conseq and not conseq.lower().startswith("краткий импортированный пункт") and conseq not in text:
-        if is_hidden:
-            extra_str += " — [🔒 спойлер скрыт]"
-        else:
-            extra_str += f" — {conseq}"
+    if conseq and not conseq.lower().startswith("краткий импортированный пункт") and conseq not in clean_text:
+        extra_str += f" — <i>{conseq}</i>"
 
-    return f"  • {text}{cost_str}{extra_str}"
+    return f"  {icon} <b>{clean_text}</b>{cost_str}{extra_str}"
 
 
 def group_episode_choices(choices: list[Choice]) -> list[tuple[str, list[Choice]]]:
@@ -175,7 +242,7 @@ def group_episode_choices(choices: list[Choice]) -> list[tuple[str, list[Choice]
     return groups
 
 
-def format_choice_group(group_title: str, group_choices: list[Choice], index: int, spoiler_level: int) -> str:
+def format_choice_group(group_title: str, group_choices: list[Choice], index: int, spoiler_level: int = 2) -> str:
     """Formats a question block with all its options."""
     title = group_title.strip() if group_title else "Выбор"
     lines = [f"<b>{index}. {title}</b>"]
@@ -184,15 +251,16 @@ def format_choice_group(group_title: str, group_choices: list[Choice], index: in
     return "\n".join(lines)
 
 
-def format_single_choice(choice: Choice, index: int, spoiler_level: int) -> str:
+def format_single_choice(choice: Choice, index: int, spoiler_level: int = 2) -> str:
     """Formats a single choice with human-readable effects, choice.text, and diamond costs."""
+    icon, _ = classify_choice(choice)
     lines = []
     title = choice.scene_title or "Выбор"
     lines.append(f"{index}. {title}")
 
     choice_text = (choice.text or "").strip()
     if choice_text:
-        lines.append(choice_text)
+        lines.append(f"{icon} {choice_text}")
 
     rec = (choice.recommended_option or "").strip()
     if rec and rec.lower() != choice_text.lower():
@@ -202,38 +270,34 @@ def format_single_choice(choice: Choice, index: int, spoiler_level: int) -> str:
         lines.append("💎 Стоимость:")
         lines.append(f"• {pluralize_diamonds(choice.cost_diamonds)}")
 
-    is_hidden = choice.spoiler_level > spoiler_level
-    if is_hidden:
-        lines.append("🔒 Последствие скрыто настройками спойлеров.")
-    else:
-        if choice.consequence and choice.consequence.strip():
-            conseq_items = parse_effects_list(choice.consequence)
-            if len(conseq_items) > 1:
-                lines.append("🎯 Последствия:")
-                for item in conseq_items:
-                    lines.append(f"• {item}")
-            elif conseq_items:
-                lines.append(f"🎯 Последствие: {conseq_items[0]}")
-            else:
-                lines.append(f"🎯 Последствие: {choice.consequence.strip()}")
+    if choice.consequence and choice.consequence.strip():
+        conseq_items = parse_effects_list(choice.consequence)
+        if len(conseq_items) > 1:
+            lines.append("🎯 Последствия:")
+            for item in conseq_items:
+                lines.append(f"• {item}")
+        elif conseq_items:
+            lines.append(f"🎯 Последствие: {conseq_items[0]}")
+        else:
+            lines.append(f"🎯 Последствие: {choice.consequence.strip()}")
 
-        param_items = parse_effects_list(choice.parameter_changes)
-        if param_items:
-            lines.append("📊 Параметры:")
-            for p in param_items:
-                lines.append(f"• {p}")
+    param_items = parse_effects_list(choice.parameter_changes)
+    if param_items:
+        lines.append("📊 Параметры:")
+        for p in param_items:
+            lines.append(f"• {p}")
 
-        char_items = parse_effects_list(choice.character_effects)
-        if char_items:
-            lines.append("❤️ Отношения:")
-            for c in char_items:
-                lines.append(f"• {c}")
+    char_items = parse_effects_list(choice.character_effects)
+    if char_items:
+        lines.append("❤️ Отношения:")
+        for c in char_items:
+            lines.append(f"• {c}")
 
-        fut_items = parse_effects_list(choice.future_effects)
-        if fut_items:
-            lines.append("🔮 В будущем:")
-            for f in fut_items:
-                lines.append(f"• {f}")
+    fut_items = parse_effects_list(choice.future_effects)
+    if fut_items:
+        lines.append("🔮 В будущем:")
+        for f in fut_items:
+            lines.append(f"• {f}")
 
     if choice.requirements and choice.requirements.strip():
         req_items = parse_effects_list(choice.requirements)
@@ -330,18 +394,16 @@ def episode_guide_text(
     return text
 
 
-def character_text(character: Character, spoiler_level: int) -> str:
-    is_hidden = character.spoiler_level > spoiler_level
+def character_text(character: Character, spoiler_level: int = 2) -> str:
     text = (
         f"👤 {character.name}\n\n"
         f"Описание:\n{character.description}\n\n"
         f"Статус: {character.status}\n"
         f"❤️ Романтическая ветка: {'Да' if character.is_love_interest else 'Нет'}\n"
-        f"📖 История: {character.story.title}\n"
-        f"Уровень спойлеров: {SPOILER_LABELS.get(character.spoiler_level, 'не указан')}"
+        f"📖 История: {character.story.title}"
     )
     if character.facts:
-        text += "\n\n" + ("🔒 Дополнительная информация скрыта." if is_hidden else character.facts)
+        text += f"\n\n💡 Факты и особенности:\n{character.facts}"
     return text
 
 

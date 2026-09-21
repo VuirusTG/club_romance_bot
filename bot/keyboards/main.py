@@ -5,7 +5,6 @@ def main_menu(is_admin: bool = False) -> InlineKeyboardMarkup:
     rows = [
         [
             InlineKeyboardButton(text="📖 Истории", callback_data="stories:p:1"),
-            InlineKeyboardButton(text="🧭 Гайды", callback_data="stories:p:1"),
         ],
         [
             InlineKeyboardButton(text="👤 Персонажи", callback_data="char_stories"),

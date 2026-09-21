@@ -142,7 +142,7 @@ def test_effects_formatting_json_parameters_and_relationships():
     assert "🔮 В будущем:\n• Поможет в битве за замок" in formatted
 
 
-def test_spoiler_level_hiding():
+def test_spoiler_level_always_open():
     c = Choice(
         id=1,
         episode_id=1,
@@ -154,19 +154,13 @@ def test_spoiler_level_hiding():
         parameter_changes='["+1 интрига"]',
         character_effects='["Предатель раскрыт"]',
         consequence="Мы узнаём главную тайну",
-        spoiler_level=2,  # Serious spoilers
+        spoiler_level=2,
     )
-    # With user spoiler_level=0, details must be hidden
-    hidden_formatted = format_single_choice(c, 1, spoiler_level=0)
-    assert "🔒 Последствие скрыто настройками спойлеров." in hidden_formatted
-    assert "главную тайну" not in hidden_formatted
-    assert "+1 интрига" not in hidden_formatted
-
-    # With user spoiler_level=2, details must be shown
-    revealed_formatted = format_single_choice(c, 1, spoiler_level=2)
-    assert "🔒 Последствие скрыто" not in revealed_formatted
-    assert "главную тайну" in revealed_formatted
-    assert "+1 интрига" in revealed_formatted
+    # Consequences must always be shown without censorship
+    formatted = format_single_choice(c, 1, spoiler_level=0)
+    assert "🔒 Последствие скрыто" not in formatted
+    assert "главную тайну" in formatted
+    assert "+1 интрига" in formatted
 
 
 def test_single_page_choices():
@@ -234,26 +228,26 @@ def test_huge_single_choice_splitting():
 
 def test_guide_filters_pagination_buttons():
     # Page 1 of 3
-    kb1 = guide_filters(100, 10, source_url="https://example.com", current_page=1, total_pages=3, filter_name="all")
+    kb1 = guide_filters(100, 10, current_page=1, total_pages=3)
     first_row = kb1.inline_keyboard[0]
     assert first_row[0].text == "⬅️ Назад"
     assert first_row[0].callback_data == "noop"  # Disabled on page 1
     assert first_row[1].text == "1/3"
     assert first_row[1].callback_data == "noop"
     assert first_row[2].text == "Вперёд ➡️"
-    assert first_row[2].callback_data == "guide:100:all:2"
+    assert first_row[2].callback_data == "guide:100:2"
 
     # Page 2 of 3
-    kb2 = guide_filters(100, 10, source_url="https://example.com", current_page=2, total_pages=3, filter_name="all")
+    kb2 = guide_filters(100, 10, current_page=2, total_pages=3)
     first_row_2 = kb2.inline_keyboard[0]
-    assert first_row_2[0].callback_data == "guide:100:all:1"
+    assert first_row_2[0].callback_data == "guide:100:1"
     assert first_row_2[1].text == "2/3"
-    assert first_row_2[2].callback_data == "guide:100:all:3"
+    assert first_row_2[2].callback_data == "guide:100:3"
 
     # Page 3 of 3
-    kb3 = guide_filters(100, 10, source_url="https://example.com", current_page=3, total_pages=3, filter_name="all")
+    kb3 = guide_filters(100, 10, current_page=3, total_pages=3)
     first_row_3 = kb3.inline_keyboard[0]
-    assert first_row_3[0].callback_data == "guide:100:all:2"
+    assert first_row_3[0].callback_data == "guide:100:2"
     assert first_row_3[1].text == "3/3"
     assert first_row_3[2].callback_data == "noop"  # Disabled on last page
 
