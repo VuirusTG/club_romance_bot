@@ -111,10 +111,14 @@ async def guide_callback(callback: CallbackQuery) -> None:
     else:
         page = 1
 
+    next_episode_id: int | None = None
     async with AsyncSessionFactory() as session:
         episode = await content.get_episode_with_choices(session, episode_id)
         if episode and user:
             await content.save_progress(session, user.id, episode.season.story_id, episode.season_id, episode.id)
+            next_episode = await content.get_next_episode(session, episode)
+            if next_episode:
+                next_episode_id = next_episode.id
     if not episode or not user:
         await callback.answer("Серия не найдена.", show_alert=True)
         return
@@ -128,6 +132,7 @@ async def guide_callback(callback: CallbackQuery) -> None:
         episode.season_id,
         current_page=current_page,
         total_pages=total_pages,
+        next_episode_id=next_episode_id,
     )
     if callback.message:
         try:

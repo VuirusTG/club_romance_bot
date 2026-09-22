@@ -115,6 +115,49 @@ async def get_episode_with_choices(session: AsyncSession, episode_id: int) -> Ep
     )
 
 
+async def get_next_episode(session: AsyncSession, episode: Episode) -> Episode | None:
+    """Finds the next published episode in the same season, or first episode of the next season."""
+    # 1. Try to find the next episode in the same season
+    next_in_season = await session.scalar(
+        select(Episode)
+        .where(
+            Episode.season_id == episode.season_id,
+            Episode.number > episode.number,
+            Episode.is_published.is_(True),
+        )
+        .order_by(Episode.number)
+        .limit(1)
+    )
+    if next_in_season:
+        return next_in_season
+
+    # 2. If this is the last episode of the season, try next season
+    if episode.season:
+        next_season = await session.scalar(
+            select(Season)
+            .where(
+                Season.story_id == episode.season.story_id,
+                Season.number > episode.season.number,
+            )
+            .order_by(Season.number)
+            .limit(1)
+        )
+        if next_season:
+            next_in_next_season = await session.scalar(
+                select(Episode)
+                .where(
+                    Episode.season_id == next_season.id,
+                    Episode.is_published.is_(True),
+                )
+                .order_by(Episode.number)
+                .limit(1)
+            )
+            if next_in_next_season:
+                return next_in_next_season
+
+    return None
+
+
 async def list_characters(session: AsyncSession, story_id: int) -> list[Character]:
     return list((await session.scalars(select(Character).where(Character.story_id == story_id).order_by(Character.name))).all())
 

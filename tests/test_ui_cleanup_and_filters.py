@@ -82,20 +82,30 @@ def test_database_characters_populated():
     cur = con.cursor()
     cur.execute("SELECT count(*) FROM characters;")
     total_chars = cur.fetchone()[0]
-    assert total_chars >= 50, f"Expected >= 50 characters, found {total_chars}"
+    assert total_chars >= 250, f"Expected >= 250 characters, found {total_chars}"
+
+    # Verify all 58 stories have characters
+    cur.execute("SELECT count(DISTINCT story_id) FROM characters;")
+    stories_with_chars = cur.fetchone()[0]
+    cur.execute("SELECT count(*) FROM stories;")
+    total_stories = cur.fetchone()[0]
+    assert stories_with_chars == total_stories == 58
 
     # Verify love interests
     cur.execute("SELECT count(*) FROM characters WHERE is_love_interest = 1;")
     love_interests = cur.fetchone()[0]
-    assert love_interests >= 30, f"Expected >= 30 love interests, found {love_interests}"
+    assert love_interests >= 100, f"Expected >= 100 love interests, found {love_interests}"
 
-    # Check key characters exist
-    cur.execute("SELECT name FROM characters WHERE name IN ('Люцифер', 'Амен', 'Кадзу', 'Виктор Ван Арт');")
+    # Check key characters exist across different stories
+    cur.execute("SELECT name FROM characters WHERE name IN ('Люцифер', 'Амен', 'Кадзу', 'Виктор Ван Арт', 'Аделаида', 'Рене де Л’Опиталь', 'Никкаль');")
     found_names = [r[0] for r in cur.fetchall()]
     assert "Люцифер" in found_names
     assert "Амен" in found_names
     assert "Кадзу" in found_names
     assert "Виктор Ван Арт" in found_names
+    assert "Аделаида" in found_names
+    assert "Рене де Л’Опиталь" in found_names
+    assert "Никкаль" in found_names
 
     con.close()
 
@@ -158,3 +168,90 @@ def test_format_choice_item_renders_badge_and_bold():
     assert "💎 25 алмазов" in formatted
     # Checks that parameter change is rendered
     assert "+1 Ниндзюцу" in formatted
+
+
+def test_guide_legend_displayed_at_top():
+    from bot.utils.formatting import paginate_episode_guide
+
+    story = Story(id=1, title="Тестовая История")
+    season = Season(id=10, story_id=1, number=1, story=story)
+    episode = Episode(id=100, season_id=10, number=1, title="Тестовая Серия", season=season)
+    choice = Choice(id=1, episode_id=100, scene_title="Сцена", text="Выбор", order_index=1, episode=episode)
+
+    text, cur_p, total_p = paginate_episode_guide(episode, [choice], spoiler_level=0, page=1)
+    assert "💡 <b>Обозначения:</b>" in text
+    assert "🟡 Сюжет" in text
+    assert "❤️ Отношения" in text
+    assert "💔 Ухудшение" in text
+    assert "🔹/🟣 Статы" in text
+    assert "🟢 Репутация" in text
+    assert "💎 Алмазы" in text
+    # Verify legend is at the top (before choice question)
+    assert text.index("💡 <b>Обозначения:</b>") < text.index("<b>1. Сцена</b>")
+
+
+def test_story_genre_formatting_and_database():
+    # 1. Formatting with genre
+    s_with_genre = Story(id=1, title="Секрет Небес", description="Тест", genre="Городское фэнтези, Мистика")
+    formatted_with = story_text(s_with_genre)
+    assert "🏷 Жанр: Городское фэнтези, Мистика" in formatted_with
+
+    # 2. Formatting without genre or with placeholder
+    s_without_genre = Story(id=2, title="Без жанра", description="Тест", genre=None)
+    formatted_without = story_text(s_without_genre)
+    assert "🏷 Жанр" not in formatted_without
+    assert "не указан" not in formatted_without
+
+    s_with_placeholder = Story(id=3, title="Плейсхолдер", description="Тест", genre="не указан")
+    formatted_placeholder = story_text(s_with_placeholder)
+    assert "🏷 Жанр" not in formatted_placeholder
+
+    # 3. Verify all stories in the database have a populated genre
+    con = sqlite3.connect("club_romance.db")
+    cur = con.cursor()
+    cur.execute("SELECT count(*) FROM stories WHERE genre IS NULL OR genre = '' OR genre = 'не указан' OR genre = 'Визуальная новелла';")
+    invalid_genres = cur.fetchone()[0]
+    assert invalid_genres == 0, f"Found {invalid_genres} stories with unpopulated or invalid genres"
+
+    cur.execute("SELECT count(*) FROM stories;")
+    total_stories = cur.fetchone()[0]
+    assert total_stories >= 50
+    con.close()
+
+
+def test_guide_keyboard_next_episode_button():
+    from bot.keyboards.guides import guide_filters
+
+    # 1. With next_episode_id provided
+    kb_with_next = guide_filters(episode_id=1, season_id=10, next_episode_id=2)
+    last_row = kb_with_next.inline_keyboard[-1]
+    # Check that there are 3 buttons in the row: 🔙 Серии, 🏠 Меню, Следующая серия ➡️
+    assert len(last_row) == 3
+    assert "🔙 Серии" in last_row[0].text
+    assert "🏠 Меню" in last_row[1].text
+    assert "Следующая серия" in last_row[2].text
+    assert last_row[2].callback_data == "guide:2:1"
+
+    # 2. Without next_episode_id
+    kb_without_next = guide_filters(episode_id=1, season_id=10, next_episode_id=None)
+    last_row_no = kb_without_next.inline_keyboard[-1]
+    assert len(last_row_no) == 2
+    assert "🔙 Серии" in last_row_no[0].text
+    assert "🏠 Меню" in last_row_no[1].text
+    assert not any("следующая серия" in btn.text.lower() for btn in last_row_no)
+
+
+def test_get_next_episode_repository():
+    import asyncio
+    from bot.database.database import AsyncSessionFactory
+    from bot.database.repositories.content import get_episode_with_choices, get_next_episode
+
+    async def _test():
+        async with AsyncSessionFactory() as session:
+            ep1 = await get_episode_with_choices(session, 1)
+            if ep1:
+                next_ep = await get_next_episode(session, ep1)
+                assert next_ep is not None
+                assert next_ep.number > ep1.number or (ep1.season and next_ep.season and next_ep.season.number > ep1.season.number)
+
+    asyncio.run(_test())

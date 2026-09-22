@@ -8,6 +8,7 @@ def guide_filters(
     current_page: int = 1,
     total_pages: int = 1,
     filter_name: str = "all",
+    next_episode_id: int | None = None,
 ) -> InlineKeyboardMarkup:
     rows = []
     if total_pages > 1:
@@ -21,12 +22,14 @@ def guide_filters(
             ]
         )
 
-    rows.append(
-        [
-            InlineKeyboardButton(text="🔙 Серии", callback_data=f"episodes:{season_id}"),
-            InlineKeyboardButton(text="🏠 Меню", callback_data="main"),
-        ]
-    )
+    nav_row = [
+        InlineKeyboardButton(text="🔙 Серии", callback_data=f"episodes:{season_id}"),
+        InlineKeyboardButton(text="🏠 Меню", callback_data="main"),
+    ]
+    if next_episode_id:
+        nav_row.append(InlineKeyboardButton(text="Следующая серия ➡️", callback_data=f"guide:{next_episode_id}:1"))
+
+    rows.append(nav_row)
     return InlineKeyboardMarkup(inline_keyboard=rows)
 
 

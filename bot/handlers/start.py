@@ -34,6 +34,9 @@ async def _open_deep_link(message: Message, payload: str) -> bool:
                 from bot.keyboards.guides import guide_filters
                 from bot.utils.formatting import paginate_episode_guide
 
+                next_episode = await content.get_next_episode(session, episode)
+                next_episode_id = next_episode.id if next_episode else None
+
                 choices = sorted(episode.choices, key=lambda item: item.order_index)
                 guide_text, current_page, total_pages = paginate_episode_guide(
                     episode, choices, user.spoiler_level, filter_name="all", page=1
@@ -47,6 +50,7 @@ async def _open_deep_link(message: Message, payload: str) -> bool:
                         current_page=current_page,
                         total_pages=total_pages,
                         filter_name="all",
+                        next_episode_id=next_episode_id,
                     ),
                 )
                 return True

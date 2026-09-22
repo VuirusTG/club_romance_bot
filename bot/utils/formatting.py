@@ -15,14 +15,17 @@ def story_text(story: Story) -> str:
     seasons_count = len(story.seasons)
     episodes_count = sum(len(season.episodes) for season in story.seasons)
     romance_count = sum(1 for character in story.characters if character.is_love_interest)
-    return (
+    text = (
         f"📖 {story.title}\n\n"
         f"Описание:\n{story.description or 'Описание пока не добавлено.'}\n\n"
         f"📚 Сезонов: {seasons_count}\n"
         f"🎬 Серий: {episodes_count}\n"
-        f"❤️ Романтические линии: {romance_count}\n"
-        f"🏷 Жанр: {story.genre or 'не указан'}"
+        f"❤️ Романтические линии: {romance_count}"
     )
+    genre = (story.genre or "").strip()
+    if genre and genre.lower() not in ("не указан", "визуальная новелла"):
+        text += f"\n🏷 Жанр: {genre}"
+    return text
 
 
 def pluralize_diamonds(n: int) -> str:
@@ -313,6 +316,13 @@ def format_single_choice(choice: Choice, index: int, spoiler_level: int = 2) -> 
     return "\n".join(lines)
 
 
+GUIDE_LEGEND = (
+    "💡 <b>Обозначения:</b>\n"
+    "🟡 Сюжет • ❤️ Отношения (💔 Ухудшение)\n"
+    "🔹/🟣 Статы • 🟢 Репутация • 💎 Алмазы"
+)
+
+
 def paginate_episode_guide(
     episode: Episode,
     choices: list[Choice],
@@ -333,13 +343,15 @@ def paginate_episode_guide(
     season_label = season_title if "том" in season_title.lower() else f"Сезон {season_num}"
     title = episode.title or "Без названия"
 
+    legend = f"\n\n{GUIDE_LEGEND}"
     base_header = (
         f"📖 <b>{story_title}</b>\n"
         f"🎬 {season_label} • Серия {episode.number}: {title}"
+        f"{legend}"
     )
 
     if not choices:
-        empty_text = f"{base_header}\n\nПока нет выборов для выбранного фильтра."
+        empty_text = f"{base_header}\n\nПока нет выборов для этой серии."
         return empty_text, 1, 1
 
     # Group choices by question
@@ -375,6 +387,7 @@ def paginate_episode_guide(
         page_header = (
             f"📖 <b>{story_title}</b>\n"
             f"🎬 {season_label} • Серия {episode.number}: {title} (Страница {current_page}/{total_pages})"
+            f"{legend}"
         )
     else:
         page_header = base_header
