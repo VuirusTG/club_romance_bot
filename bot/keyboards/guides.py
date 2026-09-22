@@ -22,14 +22,17 @@ def guide_filters(
             ]
         )
 
-    nav_row = [
-        InlineKeyboardButton(text="🔙 Серии", callback_data=f"episodes:{season_id}"),
-        InlineKeyboardButton(text="🏠 Меню", callback_data="main"),
-    ]
     if next_episode_id:
-        nav_row.append(InlineKeyboardButton(text="Следующая серия ➡️", callback_data=f"guide:{next_episode_id}:1"))
+        rows.append(
+            [InlineKeyboardButton(text="Следующая серия ➡️", callback_data=f"guide:{next_episode_id}:1")]
+        )
 
-    rows.append(nav_row)
+    rows.append(
+        [
+            InlineKeyboardButton(text="🔙 Серии", callback_data=f"episodes:{season_id}"),
+            InlineKeyboardButton(text="🏠 Меню", callback_data="main"),
+        ]
+    )
     return InlineKeyboardMarkup(inline_keyboard=rows)
 
 

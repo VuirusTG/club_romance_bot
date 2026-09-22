@@ -224,13 +224,16 @@ def test_guide_keyboard_next_episode_button():
 
     # 1. With next_episode_id provided
     kb_with_next = guide_filters(episode_id=1, season_id=10, next_episode_id=2)
+    # Check that Следующая серия ➡️ is on its own full-width row above navigation
+    next_ep_row = kb_with_next.inline_keyboard[-2]
+    assert len(next_ep_row) == 1
+    assert "Следующая серия" in next_ep_row[0].text
+    assert next_ep_row[0].callback_data == "guide:2:1"
+
     last_row = kb_with_next.inline_keyboard[-1]
-    # Check that there are 3 buttons in the row: 🔙 Серии, 🏠 Меню, Следующая серия ➡️
-    assert len(last_row) == 3
+    assert len(last_row) == 2
     assert "🔙 Серии" in last_row[0].text
     assert "🏠 Меню" in last_row[1].text
-    assert "Следующая серия" in last_row[2].text
-    assert last_row[2].callback_data == "guide:2:1"
 
     # 2. Without next_episode_id
     kb_without_next = guide_filters(episode_id=1, season_id=10, next_episode_id=None)
@@ -238,7 +241,8 @@ def test_guide_keyboard_next_episode_button():
     assert len(last_row_no) == 2
     assert "🔙 Серии" in last_row_no[0].text
     assert "🏠 Меню" in last_row_no[1].text
-    assert not any("следующая серия" in btn.text.lower() for btn in last_row_no)
+    all_texts = [btn.text.lower() for row in kb_without_next.inline_keyboard for btn in row]
+    assert not any("следующая серия" in t for t in all_texts)
 
 
 def test_get_next_episode_repository():
