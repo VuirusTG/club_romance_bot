@@ -1,6 +1,6 @@
 from aiogram import Dispatcher
 
-from bot.handlers import admin, characters, favorites, search, settings, start, stories, updates
+from bot.handlers import admin, admin_content, characters, favorites, search, settings, start, stories, updates
 
 
 def register_handlers(dispatcher: Dispatcher) -> None:
@@ -11,5 +11,6 @@ def register_handlers(dispatcher: Dispatcher) -> None:
     dispatcher.include_router(updates.router)
     dispatcher.include_router(settings.router)
     dispatcher.include_router(admin.router)
+    dispatcher.include_router(admin_content.router)
     dispatcher.include_router(search.router)
 

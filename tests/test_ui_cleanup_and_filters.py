@@ -259,3 +259,35 @@ def test_get_next_episode_repository():
                 assert next_ep.number > ep1.number or (ep1.season and next_ep.season and next_ep.season.number > ep1.season.number)
 
     asyncio.run(_test())
+
+
+def test_admin_home_keyboard_has_main_menu():
+    from bot.handlers.admin import _admin_home_keyboard
+
+    kb = _admin_home_keyboard()
+    all_buttons = [(btn.text, btn.callback_data) for row in kb.inline_keyboard for btn in row]
+    texts = [b[0] for b in all_buttons]
+    callbacks = [b[1] for b in all_buttons]
+    assert "🏠 Главное меню" in texts
+    assert "main" in callbacks
+
+
+def test_favorites_and_subscriptions_payloads():
+    import asyncio
+    from bot.handlers.favorites import _favorites_payload, _subscriptions_payload
+
+    async def _test():
+        text_fav, kb_fav = await _favorites_payload(99999999)
+        assert "Моё избранное" in text_fav
+        assert "Пока пусто" in text_fav
+        fav_callbacks = [btn.callback_data for row in kb_fav.inline_keyboard for btn in row]
+        assert "main" in fav_callbacks
+
+        text_sub, kb_sub = await _subscriptions_payload(99999999)
+        assert "Мои подписки" in text_sub
+        assert "нет активных подписок" in text_sub
+        sub_callbacks = [btn.callback_data for row in kb_sub.inline_keyboard for btn in row]
+        assert "main" in sub_callbacks
+
+    asyncio.run(_test())
+

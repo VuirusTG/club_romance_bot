@@ -82,9 +82,16 @@ async def main() -> None:
     register_handlers(dispatcher)
 
     logger.info("Club Romance bot started")
+    from bot.database.database import AsyncSessionFactory
+    from bot.services.content_engine.scheduler import SafeContentScheduler
+
+    scheduler = SafeContentScheduler(session_factory=AsyncSessionFactory, bot=bot, poll_interval_seconds=30)
+    scheduler.start()
+
     try:
         await dispatcher.start_polling(bot)
     finally:
+        await scheduler.stop()
         if web_runner:
             await web_runner.cleanup()
         await bot.session.close()

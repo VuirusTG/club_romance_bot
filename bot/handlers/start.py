@@ -68,8 +68,34 @@ async def _open_deep_link(message: Message, payload: str) -> bool:
 
 @router.message(Command("start"))
 async def start_command(message: Message, command: CommandObject) -> None:
-    await ensure_user_from_message(message)
+    user = await ensure_user_from_message(message)
     payload = (command.args or "").strip()
+
+    if payload and user:
+        from bot.database.repositories import social
+        from bot.services.content_engine.attribution import parse_attribution_payload
+
+        attr = parse_attribution_payload(payload)
+        if attr:
+            async with AsyncSessionFactory() as session:
+                await social.record_user_attribution(
+                    session=session,
+                    user_id=user.id,
+                    platform=str(attr["platform"]),
+                    post_id=attr["post_id"] if isinstance(attr["post_id"], int) else None,
+                    campaign=str(attr["campaign"]) if attr["campaign"] else None,
+                    raw_payload=payload,
+                )
+                if attr["post_id"]:
+                    post = await social.get_post_with_variants(session, int(attr["post_id"]))
+                    if post and post.target_story_id:
+                        story = await content.get_story(session, post.target_story_id)
+                        if story:
+                            from bot.keyboards.stories import story_card
+
+                            await message.answer(story_text(story), reply_markup=story_card(story.id))
+                            return
+
     if payload and await _open_deep_link(message, payload):
         return
     await show_main(message)

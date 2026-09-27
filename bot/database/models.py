@@ -246,3 +246,66 @@ class UserAchievement(Base, TimestampMixin):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
     achievement_id: Mapped[int] = mapped_column(ForeignKey("achievements.id", ondelete="CASCADE"), index=True)
+
+
+class SocialPost(Base, TimestampMixin):
+    __tablename__ = "social_posts"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    topic: Mapped[str] = mapped_column(String(255), index=True)
+    source_text: Mapped[str] = mapped_column(Text, default="")
+    target_story_id: Mapped[int | None] = mapped_column(ForeignKey("stories.id", ondelete="SET NULL"), index=True)
+    status: Mapped[str] = mapped_column(String(50), default="DRAFT", index=True)
+    created_by: Mapped[int] = mapped_column(Integer)
+    scheduled_at: Mapped[datetime | None] = mapped_column(DateTime, index=True)
+    published_at: Mapped[datetime | None] = mapped_column(DateTime)
+
+    variants: Mapped[list["SocialPostVariant"]] = relationship("SocialPostVariant", back_populates="post", cascade="all, delete-orphan")
+    target_story: Mapped[Story | None] = relationship("Story")
+
+
+class SocialPostVariant(Base, TimestampMixin):
+    __tablename__ = "social_post_variants"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    post_id: Mapped[int] = mapped_column(ForeignKey("social_posts.id", ondelete="CASCADE"), index=True)
+    platform: Mapped[str] = mapped_column(String(50), index=True)
+    text: Mapped[str] = mapped_column(Text, default="")
+    image_prompt: Mapped[str | None] = mapped_column(Text)
+    image_url: Mapped[str | None] = mapped_column(String(1024))
+    status: Mapped[str] = mapped_column(String(50), default="DRAFT", index=True)
+    external_post_id: Mapped[str | None] = mapped_column(String(255))
+    published_at: Mapped[datetime | None] = mapped_column(DateTime)
+    error_message: Mapped[str | None] = mapped_column(Text)
+    retry_count: Mapped[int] = mapped_column(Integer, default=0)
+
+    post: Mapped["SocialPost"] = relationship("SocialPost", back_populates="variants")
+    publications: Mapped[list["SocialPublication"]] = relationship("SocialPublication", back_populates="variant", cascade="all, delete-orphan")
+
+
+class SocialPublication(Base, TimestampMixin):
+    __tablename__ = "social_publications"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    variant_id: Mapped[int] = mapped_column(ForeignKey("social_post_variants.id", ondelete="CASCADE"), index=True)
+    platform: Mapped[str] = mapped_column(String(50))
+    attempt_number: Mapped[int] = mapped_column(Integer, default=1)
+    external_post_id: Mapped[str | None] = mapped_column(String(255))
+    status: Mapped[str] = mapped_column(String(50))
+    response_payload: Mapped[str | None] = mapped_column(Text)
+
+    variant: Mapped["SocialPostVariant"] = relationship("SocialPostVariant", back_populates="publications")
+
+
+class UserAttribution(Base, TimestampMixin):
+    __tablename__ = "user_attributions"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    platform: Mapped[str] = mapped_column(String(50), index=True)
+    post_id: Mapped[int | None] = mapped_column(Integer, index=True)
+    campaign: Mapped[str | None] = mapped_column(String(100))
+    raw_payload: Mapped[str] = mapped_column(String(255))
+
+    user: Mapped["User"] = relationship("User")
+

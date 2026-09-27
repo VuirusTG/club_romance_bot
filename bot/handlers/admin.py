@@ -96,6 +96,8 @@ def _admin_home_keyboard() -> InlineKeyboardMarkup:
         [
             [_btn("📚 Истории", "admin:stories:1"), _btn("➕ Новая история", "admin:add_story")],
             [_btn("📊 Статистика", "admin:stats"), _btn("📢 Рассылка", "admin:broadcast")],
+            [_btn("📱 Контент", "admin:content:home")],
+            [_btn("🏠 Главное меню", "main")],
         ]
     )
 

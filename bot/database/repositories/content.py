@@ -185,8 +185,96 @@ async def toggle_favorite(session: AsyncSession, user_id: int, item_type: str, i
     return True
 
 
+async def remove_favorite(session: AsyncSession, user_id: int, item_type: str, item_id: int) -> bool:
+    favorite = await session.scalar(
+        select(Favorite).where(
+            Favorite.user_id == user_id,
+            Favorite.item_type == item_type,
+            Favorite.item_id == item_id,
+        )
+    )
+    if favorite:
+        await session.delete(favorite)
+        await session.commit()
+        return True
+    return False
+
+
 async def list_favorites(session: AsyncSession, user_id: int) -> list[Favorite]:
     return list((await session.scalars(select(Favorite).where(Favorite.user_id == user_id).order_by(Favorite.created_at.desc()))).all())
+
+
+async def list_favorites_detailed(session: AsyncSession, user_id: int) -> list[dict]:
+    favorites = await list_favorites(session, user_id)
+    if not favorites:
+        return []
+
+    story_ids = [f.item_id for f in favorites if f.item_type == "story"]
+    char_ids = [f.item_id for f in favorites if f.item_type == "character"]
+    ep_ids = [f.item_id for f in favorites if f.item_type == "episode"]
+
+    stories_map: dict[int, Story] = {}
+    if story_ids:
+        stories = await session.scalars(select(Story).where(Story.id.in_(story_ids)))
+        stories_map = {s.id: s for s in stories}
+
+    chars_map: dict[int, Character] = {}
+    if char_ids:
+        chars = await session.scalars(
+            select(Character).options(selectinload(Character.story)).where(Character.id.in_(char_ids))
+        )
+        chars_map = {c.id: c for c in chars}
+
+    eps_map: dict[int, Episode] = {}
+    if ep_ids:
+        eps = await session.scalars(
+            select(Episode)
+            .options(selectinload(Episode.season).selectinload(Season.story))
+            .where(Episode.id.in_(ep_ids))
+        )
+        eps_map = {e.id: e for e in eps}
+
+    detailed = []
+    for fav in favorites:
+        if fav.item_type == "story" and fav.item_id in stories_map:
+            st = stories_map[fav.item_id]
+            detailed.append({
+                "type": "story",
+                "id": st.id,
+                "title": st.title,
+                "icon": "📖",
+                "display": f"📖 {st.title}",
+                "callback_data": f"story:{st.id}",
+                "delete_callback": f"fav_del:story:{st.id}",
+            })
+        elif fav.item_type == "character" and fav.item_id in chars_map:
+            ch = chars_map[fav.item_id]
+            st_title = ch.story.title if ch.story else ""
+            disp_title = f"{ch.name} ({st_title})" if st_title else ch.name
+            detailed.append({
+                "type": "character",
+                "id": ch.id,
+                "title": disp_title,
+                "icon": "👤",
+                "display": f"👤 {disp_title}",
+                "callback_data": f"char:{ch.id}",
+                "delete_callback": f"fav_del:character:{ch.id}",
+            })
+        elif fav.item_type == "episode" and fav.item_id in eps_map:
+            ep = eps_map[fav.item_id]
+            st_title = ep.season.story.title if (ep.season and ep.season.story) else ""
+            ep_num = f"Сезон {ep.season.number}, Серия {ep.number}" if ep.season else f"Серия {ep.number}"
+            disp_title = f"{st_title} ({ep_num})" if st_title else ep_num
+            detailed.append({
+                "type": "episode",
+                "id": ep.id,
+                "title": disp_title,
+                "icon": "🧭",
+                "display": f"🧭 {disp_title}",
+                "callback_data": f"guide:{ep.id}:1:1",
+                "delete_callback": f"fav_del:episode:{ep.id}",
+            })
+    return detailed
 
 
 async def toggle_subscription(session: AsyncSession, user_id: int, story_id: int) -> bool:
@@ -200,6 +288,29 @@ async def toggle_subscription(session: AsyncSession, user_id: int, story_id: int
     session.add(Subscription(user_id=user_id, story_id=story_id, is_enabled=True))
     await session.commit()
     return True
+
+
+async def disable_subscription(session: AsyncSession, user_id: int, story_id: int) -> bool:
+    subscription = await session.scalar(
+        select(Subscription).where(Subscription.user_id == user_id, Subscription.story_id == story_id)
+    )
+    if subscription:
+        subscription.is_enabled = False
+        await session.commit()
+        return True
+    return False
+
+
+
+async def list_user_subscriptions(session: AsyncSession, user_id: int) -> list[tuple[Subscription, Story]]:
+    statement = (
+        select(Subscription, Story)
+        .join(Story, Subscription.story_id == Story.id)
+        .where(Subscription.user_id == user_id, Subscription.is_enabled.is_(True))
+        .order_by(Story.title)
+    )
+    result = await session.execute(statement)
+    return list(result.all())
 
 
 async def list_updates(session: AsyncSession, limit: int = 5) -> list[UpdatePost]:
