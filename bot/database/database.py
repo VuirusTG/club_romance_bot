@@ -7,14 +7,28 @@ from bot.config import get_settings
 from bot.database.models import Base
 
 
+def normalize_database_url(url: str) -> str:
+    """Normalize database URL for SQLAlchemy async engine compatibility (e.g. Render/Heroku postgresql)."""
+    if not url:
+        return "sqlite+aiosqlite:///./club_romance.db"
+    if url.startswith("postgres://"):
+        return url.replace("postgres://", "postgresql+asyncpg://", 1)
+    if url.startswith("postgresql://") and not url.startswith("postgresql+asyncpg://"):
+        return url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    if url.startswith("sqlite://") and not url.startswith("sqlite+aiosqlite://"):
+        return url.replace("sqlite://", "sqlite+aiosqlite://", 1)
+    return url
+
+
 settings = get_settings()
-engine = create_async_engine(settings.database_url, echo=False, future=True)
+db_url = normalize_database_url(settings.database_url)
+engine = create_async_engine(db_url, echo=False, future=True)
 AsyncSessionFactory = async_sessionmaker(engine, expire_on_commit=False)
 
 
 @event.listens_for(engine.sync_engine, "connect")
 def _enable_sqlite_foreign_keys(dbapi_connection, _) -> None:
-    if settings.database_url.startswith("sqlite"):
+    if "sqlite" in db_url:
         cursor = dbapi_connection.cursor()
         cursor.execute("PRAGMA foreign_keys=ON")
         cursor.close()
@@ -23,7 +37,7 @@ def _enable_sqlite_foreign_keys(dbapi_connection, _) -> None:
 async def init_db() -> None:
     async with engine.begin() as connection:
         await connection.run_sync(Base.metadata.create_all)
-        if settings.database_url.startswith("sqlite"):
+        if "sqlite" in db_url:
             columns = await connection.execute(text("PRAGMA table_info(updates)"))
             existing_columns = {row[1] for row in columns.fetchall()}
             migrations = {
