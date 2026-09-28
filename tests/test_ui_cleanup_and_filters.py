@@ -291,3 +291,28 @@ def test_favorites_and_subscriptions_payloads():
 
     asyncio.run(_test())
 
+
+def test_search_results_payload_has_story_navigation_buttons():
+    import asyncio
+    from bot.database.database import AsyncSessionFactory
+    from bot.services.search_service import search_results_payload
+
+    async def _test():
+        async with AsyncSessionFactory() as session:
+            # Search for an existing story keyword, e.g. "Секрет"
+            text, kb = await search_results_payload(session, "Секрет")
+            assert "Результаты поиска" in text
+            assert "Истории" in text
+            all_buttons = [(btn.text, btn.callback_data) for row in kb.inline_keyboard for btn in row]
+            story_cbs = [cb for text, cb in all_buttons if cb.startswith("story:")]
+            assert len(story_cbs) > 0, "Expected at least one story button in search results"
+
+            # Search with empty results
+            empty_text, empty_kb = await search_results_payload(session, "абвгдежзийклмноп99999")
+            assert "ничего не нашлось" in empty_text
+            empty_cbs = [cb for text, cb in [(btn.text, btn.callback_data) for row in empty_kb.inline_keyboard for btn in row]]
+            assert "main" in empty_cbs
+
+    asyncio.run(_test())
+
+

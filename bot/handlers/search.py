@@ -5,7 +5,7 @@ from aiogram.types import CallbackQuery, Message
 from bot.database.database import AsyncSessionFactory
 from bot.handlers.common import ensure_user_from_callback, ensure_user_from_message
 from bot.keyboards.main import home_back
-from bot.services.search_service import format_search_results
+from bot.services.search_service import format_search_results, search_results_payload
 from bot.states.states import state_storage
 
 
@@ -42,7 +42,7 @@ async def text_state_handler(message: Message) -> None:
         return
     await ensure_user_from_message(message)
     async with AsyncSessionFactory() as session:
-        text = await format_search_results(session, query)
+        text, markup = await search_results_payload(session, query)
     state_storage.clear(message.from_user.id)
-    await message.answer(text, reply_markup=home_back())
+    await message.answer(text, reply_markup=markup, parse_mode="HTML")
 
