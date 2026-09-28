@@ -1,8 +1,9 @@
 services:
   - type: web
     name: club-romance-bot
-    runtime: docker
-    dockerfilePath: Dockerfile
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m bot.main
     plan: free
     healthCheckPath: /health
     envVars:
