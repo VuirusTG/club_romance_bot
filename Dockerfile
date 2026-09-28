@@ -9,7 +9,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
-    PORT=7860
+    PORT=10000
 
 # Install runtime tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -38,15 +38,15 @@ RUN mkdir -p /app/logs /app/data && \
     chown -R botuser:botuser /app && \
     chmod 664 /app/club_romance.db
 
-# Expose HTTP ports (7860 for Hugging Face Spaces, 10000 for Render)
-EXPOSE 7860 10000
+# Expose HTTP ports (10000 for Render / default, 7860 for Hugging Face Spaces)
+EXPOSE 10000 7860
 
 # Switch to non-root user
 USER botuser
 
 # Health check verifies web server is responding on dynamic PORT, 10000 or 7860
 HEALTHCHECK --interval=20s --timeout=5s --start-period=10s --retries=3 \
-    CMD sh -c 'curl -f "http://127.0.0.1:${PORT:-7860}/health" || curl -f "http://127.0.0.1:10000/health" || curl -f "http://127.0.0.1:7860/health" || exit 1'
+    CMD sh -c 'curl -f "http://127.0.0.1:${PORT:-10000}/health" || curl -f "http://127.0.0.1:10000/health" || curl -f "http://127.0.0.1:7860/health" || exit 1'
 
 # Default command to run the Telegram bot
 CMD ["python", "-m", "bot.main"]

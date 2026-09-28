@@ -4,11 +4,11 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    bot_token: str
+    bot_token: str = ""
     admin_ids: str = ""
     database_url: str = "sqlite+aiosqlite:///./club_romance.db"
     log_level: str = "INFO"
-    port: int = 7860
+    port: int = 10000
     enable_web: bool = True
 
     # Social Media Content Engine

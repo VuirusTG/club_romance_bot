@@ -5,4 +5,8 @@ services:
     dockerfilePath: Dockerfile
     plan: free
     healthCheckPath: /health
-    autoDeploy: true
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: PORT
+        value: 10000

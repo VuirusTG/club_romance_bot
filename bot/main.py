@@ -39,9 +39,11 @@ async def handle_root(request: web.Request) -> web.Response:
 
 
 async def handle_health(request: web.Request) -> web.Response:
+    settings = get_settings()
     return web.json_response({
         "status": "healthy",
         "service": "club-romance-bot",
+        "bot_configured": bool(settings.bot_token),
         "stories": 58,
         "seasons": 144,
         "episodes": 1613,
@@ -55,9 +57,22 @@ async def start_web_server(port: int) -> web.AppRunner:
     app.router.add_get("/health", handle_health)
     runner = web.AppRunner(app)
     await runner.setup()
-    site = web.TCPSite(runner, "0.0.0.0", port)
-    await site.start()
-    logging.getLogger(__name__).info(f"Health-check web server listening on 0.0.0.0:{port}")
+
+    ports_to_bind = {port, 10000, 7860}
+    bound_any = False
+    logger = logging.getLogger(__name__)
+
+    for p in ports_to_bind:
+        try:
+            site = web.TCPSite(runner, "0.0.0.0", p)
+            await site.start()
+            logger.info(f"Health-check web server listening on 0.0.0.0:{p}")
+            bound_any = True
+        except OSError as e:
+            logger.debug(f"Could not bind to port {p}: {e}")
+
+    if not bound_any:
+        logger.warning(f"Could not bind web server to any port in {ports_to_bind}")
     return runner
 
 
@@ -65,7 +80,6 @@ async def main() -> None:
     settings = get_settings()
     setup_logging(settings.log_level)
     logger = logging.getLogger(__name__)
-    await init_db()
 
     web_runner = None
     if settings.enable_web:
@@ -73,6 +87,16 @@ async def main() -> None:
             web_runner = await start_web_server(settings.port)
         except Exception as e:
             logger.warning(f"Could not start web server on port {settings.port}: {e}")
+
+    await init_db()
+
+    if not settings.bot_token:
+        logger.critical(
+            "CRITICAL: BOT_TOKEN is not configured! Please set BOT_TOKEN in your environment variables on Render. "
+            "Web server is kept running so health checks pass while you set the token."
+        )
+        while True:
+            await asyncio.sleep(3600)
 
     bot = Bot(
         token=settings.bot_token,
