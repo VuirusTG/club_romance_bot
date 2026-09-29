@@ -140,6 +140,18 @@ class ContentAIEngine:
         }
         return AIGenerationResult(variants=variants, image_prompt=img_prompt)
 
+    @staticmethod
+    def _clean_input(text: str) -> str:
+        if not text or text.strip() == "-":
+            return ""
+        # Remove literal technical prefixes if user or raw prompt included them
+        lines = []
+        for line in text.strip().splitlines():
+            cleaned_line = re.sub(r"^(факты|facts|cta|ста|тема|мысль|основная мысль)[:\s-]*", "", line.strip(), flags=re.IGNORECASE).strip()
+            if cleaned_line:
+                lines.append(cleaned_line)
+        return "\n".join(lines).strip()
+
     def _generate_template_fallback(
         self,
         topic: str,
@@ -148,42 +160,49 @@ class ContentAIEngine:
         cta: str,
         target_story: str,
     ) -> AIGenerationResult:
-        story_prefix = f" по новелле «{target_story}»" if target_story else ""
-        facts_block = f"\n\n📌 <b>Важные детали:</b>\n{facts}" if facts else ""
-        cta_text = cta or "Полный гайд доступен в нашем боте!"
+        clean_topic = self._clean_input(topic) or topic
+        clean_main = self._clean_input(main_point) or "Разбираем ключевые развилки, скрытые последствия и лучшие выборы для идеального финала."
+        clean_facts = self._clean_input(facts)
+        clean_cta = self._clean_input(cta) or "Полный интерактивный гайд доступен в нашем Telegram-боте!"
+
+        story_prefix = f" | «{target_story}»" if target_story and target_story not in clean_topic else ""
+        facts_block = f"📌 <b>Главные нюансы:</b>\n{clean_facts}\n\n" if clean_facts else ""
+        vk_facts_block = f"{clean_facts}\n\n" if clean_facts else ""
 
         tg_text = (
-            f"💎 <b>{topic}</b>{story_prefix}\n\n"
-            f"{main_point}{facts_block}\n\n"
-            f"💡 <i>{cta_text}</i>\n"
-            f"👉 <a href=\"https://t.me/bot\">Открыть интерактивный гайд</a>"
+            f"💎 <b>{clean_topic}</b>{story_prefix}\n\n"
+            f"{clean_main}\n\n"
+            f"{facts_block}"
+            f"💡 <i>{clean_cta}</i>\n"
+            f"👉 <b>Интерактивный путеводитель ждёт вас в боте!</b>"
         )
 
         vk_text = (
-            f"🔥 {topic.upper()}{story_prefix.upper()} 🔥\n\n"
-            f"{main_point}\n"
-            f"{facts}\n\n"
-            f"Качайте статы правильно и делитесь своими впечатлениями в комментариях!\n"
-            f"👉 {cta_text}"
+            f"🔥 {clean_topic.upper()}{story_prefix.upper()} 🔥\n\n"
+            f"{clean_main}\n\n"
+            f"{vk_facts_block}"
+            f"💬 Делитесь своим мнением и любимыми ветками в комментариях!\n"
+            f"👉 {clean_cta}"
         )
 
         ig_text = (
-            f"Как пройти {topic} без лишних трат? 💎👇\n\n"
-            f"{main_point}\n\n"
-            f"{cta_text}\n"
-            f"Ссылка на подробный гайд в шапке профиля!\n\n"
+            f"✨ {clean_topic} 💎👇\n\n"
+            f"{clean_main}\n\n"
+            f"{vk_facts_block}"
+            f"📌 {clean_cta}\n"
+            f"Ссылка на интерактивный гайд — в шапке профиля! ⬆️\n\n"
             f"#клубромантики #romanceclub #кргайды #новеллы #клубромантикигайды"
         )
 
         threads_text = (
-            f"Наболевший вопрос про {topic}:\n"
-            f"{main_point}\n\n"
-            f"А вы сколько алмазов слили на эту ветку? Делитесь в реплаях 👇"
+            f"Наболевший вопрос про {clean_topic}:\n\n"
+            f"{clean_main}\n\n"
+            f"А как поступили вы? Делитесь впечатлениями в реплаях 👇"
         )
 
         img_prompt = (
-            f"Romantic fantasy art inspired by Romance Club, atmospheric scene for '{topic}', "
-            f"cinematic dramatic lighting, soft color grading, high detail, 8k, digital romance painting --ar 4:5"
+            f"Romantic fantasy art inspired by Romance Club '{target_story or clean_topic}', "
+            f"atmospheric dramatic scene for '{clean_topic}', cinematic lighting, digital romance painting, 8k --ar 4:5"
         )
 
         return AIGenerationResult(

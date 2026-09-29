@@ -16,13 +16,17 @@ from bot.services.content_engine.publishers import (
     VkPublisher,
 )
 from bot.services.content_engine.scheduler import dispatch_post, get_platform_publishers
+from bot.services.content_engine.topic_generator import AutoContentSuggester, TopicIdea
 from bot.services.content_engine.types import PostStatus, SocialPlatform, VariantStatus
 from bot.states.states import state_storage
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 logger = logging.getLogger(__name__)
 router = Router(name="admin_content")
 settings = get_settings()
 ai_engine = ContentAIEngine()
+_cached_ideas: dict[str, TopicIdea] = {}
 
 
 def _is_admin(user_id: int | None) -> bool:
@@ -57,7 +61,8 @@ async def _content_home_payload() -> tuple[str, InlineKeyboardMarkup]:
         f"🔗 Переходов по UTM: <b>{overview['attributions']}</b>"
     )
     kb = _menu([
-        [_btn("➕ Создать пост", "admin:content:create"), _btn("🤖 Создать с AI", "admin:content:ai_create")],
+        [_btn("✨ Придумать пост (Автопилот)", "admin:content:auto_ideas")],
+        [_btn("💡 Создать по теме (1 шаг)", "admin:content:smart_create"), _btn("🛠 По шагам", "admin:content:create")],
         [_btn(f"📝 Черновики ({overview['drafts']})", f"admin:content:list:{PostStatus.DRAFT.value}:1"), _btn(f"📅 Запланированные ({overview['scheduled']})", f"admin:content:list:{PostStatus.SCHEDULED.value}:1")],
         [_btn(f"✅ Опубликованные ({overview['published']})", f"admin:content:list:{PostStatus.PUBLISHED.value}:1"), _btn(f"❌ Ошибки ({overview['failed']})", f"admin:content:list:{PostStatus.FAILED.value}:1")],
         [_btn("⚙️ Соцсети", "admin:content:settings")],
@@ -303,7 +308,143 @@ async def content_view_post_callback(callback: CallbackQuery) -> None:
     await callback.answer()
 
 
-# --- Post Creation (FSM) ---
+# --- Autopilot & Smart Post Creation ---
+
+async def _create_post_from_idea(session: AsyncSession, user_id: int, idea: TopicIdea) -> int:
+    story_id = None
+    if idea.target_story:
+        st_res = await session.execute(select(Story).where(Story.title == idea.target_story).limit(1))
+        st = st_res.scalar_one_or_none()
+        if st:
+            story_id = st.id
+
+    ai_res = await ai_engine.generate_variants(
+        topic=idea.topic,
+        main_point=idea.main_point,
+        facts=idea.facts,
+        cta=idea.cta,
+        target_story=idea.target_story,
+    )
+
+    clean_source = idea.main_point
+    if idea.facts:
+        clean_source += f"\n\n{idea.facts}"
+
+    post = await social.create_social_post(
+        session=session,
+        topic=idea.topic,
+        source_text=clean_source,
+        created_by=user_id,
+        target_story_id=story_id,
+    )
+
+    for plat in [SocialPlatform.TELEGRAM, SocialPlatform.VK, SocialPlatform.INSTAGRAM, SocialPlatform.THREADS]:
+        v = ai_res.variants[plat]
+        await social.create_variant(
+            session=session,
+            post_id=post.id,
+            platform=plat.value,
+            text=v.text,
+            image_prompt=v.image_prompt,
+        )
+
+    return post.id
+
+
+@router.callback_query(F.data == "admin:content:auto_ideas")
+async def content_auto_ideas_callback(callback: CallbackQuery) -> None:
+    if not _is_admin(callback.from_user.id):
+        await _deny(callback)
+        return
+    await callback.answer("Подбираю горячие темы из базы...")
+
+    async with AsyncSessionFactory() as session:
+        ideas = await AutoContentSuggester.suggest_topic_ideas(session, count=4)
+
+    for idea in ideas:
+        _cached_ideas[idea.id] = idea
+
+    rows = []
+    for idea in ideas:
+        rows.append([_btn(f"{idea.title}", f"admin:content:pick_idea:{idea.id}")])
+
+    rows.append([_btn("🎲 Случайный пост в 1 клик", "admin:content:instant_random")])
+    rows.append([_btn("🔄 Обновить темы", "admin:content:auto_ideas"), _btn("🔙 К контенту", "admin:content:home")])
+
+    text = (
+        "✨ <b>Автопилот тем из базы Клуба Романтики</b>\n\n"
+        "Я проанализировал истории, фаворитов и ключевые развилки. "
+        "Выберите тему — я сразу сформирую готовые посты для Telegram, VK, Instagram и Threads:\n"
+    )
+    if callback.message:
+        await callback.message.edit_text(text, reply_markup=_menu(rows))
+
+
+@router.callback_query(F.data.startswith("admin:content:pick_idea:"))
+async def content_pick_idea_callback(callback: CallbackQuery) -> None:
+    if not _is_admin(callback.from_user.id):
+        await _deny(callback)
+        return
+    idea_id = callback.data.split(":")[3]
+    idea = _cached_ideas.get(idea_id)
+    if not idea:
+        async with AsyncSessionFactory() as session:
+            idea = await AutoContentSuggester.get_random_topic(session)
+
+    await callback.answer("Генерирую посты...")
+    if callback.message:
+        await callback.message.edit_text("⏳ Создаю и адаптирую пост под все платформы...")
+
+    async with AsyncSessionFactory() as session:
+        post_id = await _create_post_from_idea(session, callback.from_user.id, idea)
+
+    payload = await _post_preview_payload(post_id)
+    if payload and callback.message:
+        text, kb = payload
+        await callback.message.edit_text(text, reply_markup=kb)
+
+
+@router.callback_query(F.data == "admin:content:instant_random")
+async def content_instant_random_callback(callback: CallbackQuery) -> None:
+    if not _is_admin(callback.from_user.id):
+        await _deny(callback)
+        return
+    await callback.answer("Придумываю пост в 1 клик...")
+    if callback.message:
+        await callback.message.edit_text("🎲 Выбираю интересную тему из базы и генерирую посты...")
+
+    async with AsyncSessionFactory() as session:
+        idea = await AutoContentSuggester.get_random_topic(session)
+        post_id = await _create_post_from_idea(session, callback.from_user.id, idea)
+
+    payload = await _post_preview_payload(post_id)
+    if payload and callback.message:
+        text, kb = payload
+        await callback.message.edit_text(text, reply_markup=kb)
+
+
+@router.callback_query(F.data == "admin:content:smart_create")
+async def content_smart_create_start(callback: CallbackQuery) -> None:
+    if not _is_admin(callback.from_user.id):
+        await _deny(callback)
+        return
+    state_storage.set(callback.from_user.id, "content_create_smart")
+    if callback.message:
+        await callback.message.edit_text(
+            "💡 <b>Создание поста по свободной теме (в 1 шаг)</b>\n\n"
+            "Напишите любую тему, имя фаворита или мысль следующим сообщением в чат.\n\n"
+            "<i>Примеры:</i>\n"
+            "• <code>Люцифер</code>\n"
+            "• <code>Ветка с Аменом в ПОКН</code>\n"
+            "• <code>Дорогие выборы в Кали</code>\n"
+            "• <code>Как копить алмазы перед обновой</code>\n\n"
+            "Бот сам определит историю, подберёт факты, сделает хук, вопрос для комментариев и CTA!",
+            reply_markup=_menu([[_btn("❌ Отмена", "admin:content:home")]]),
+        )
+    await callback.answer()
+
+
+# --- Classic Step-by-Step Creation (FSM) ---
 
 @router.callback_query(F.data == "admin:content:create")
 async def content_create_start(callback: CallbackQuery) -> None:
@@ -529,6 +670,20 @@ async def content_fsm_message_handler(message: Message) -> None:
         )
         return
 
+    # Smart 1-step creation
+    if state.name == "content_create_smart":
+        state_storage.clear(message.from_user.id)
+        await message.answer("⏳ Анализирую запрос, подбираю лор и генерирую посты...")
+        async with AsyncSessionFactory() as session:
+            idea = await AutoContentSuggester.expand_user_query(session, text)
+            post_id = await _create_post_from_idea(session, message.from_user.id, idea)
+
+        payload = await _post_preview_payload(post_id)
+        if payload:
+            text_p, kb_p = payload
+            await message.answer(text_p, reply_markup=kb_p)
+        return
+
     # Step 4: CTA -> Generate post & variants
     if state.name == "content_create_cta":
         mode = state.data.get("mode", "manual")
@@ -540,32 +695,21 @@ async def content_fsm_message_handler(message: Message) -> None:
 
         await message.answer("⏳ Создаю пост и адаптирую под платформы...")
 
-        ai_res = await ai_engine.generate_variants(
-            topic=topic,
-            main_point=main_point,
-            facts=facts,
-            cta=cta,
-        )
-
         async with AsyncSessionFactory() as session:
-            post = await social.create_social_post(
-                session=session,
+            idea = TopicIdea(
+                id="manual",
+                category="manual",
+                title=topic,
                 topic=topic,
-                source_text=f"{main_point}\n\nФакты: {facts}\nCTA: {cta}",
-                created_by=message.from_user.id,
+                main_point=main_point,
+                facts=facts,
+                cta=cta,
+                target_story="",
             )
-            for plat in [SocialPlatform.TELEGRAM, SocialPlatform.VK, SocialPlatform.INSTAGRAM, SocialPlatform.THREADS]:
-                v = ai_res.variants[plat]
-                await social.create_variant(
-                    session=session,
-                    post_id=post.id,
-                    platform=plat.value,
-                    text=v.text,
-                    image_prompt=v.image_prompt,
-                )
+            post_id = await _create_post_from_idea(session, message.from_user.id, idea)
 
-        await message.answer(f"✅ Пост #{post.id} успешно создан!")
-        payload = await _post_preview_payload(post.id)
+        await message.answer(f"✅ Пост #{post_id} успешно создан!")
+        payload = await _post_preview_payload(post_id)
         if payload:
             text_p, kb_p = payload
             await message.answer(text_p, reply_markup=kb_p)
