@@ -45,6 +45,11 @@ class TelegramPublisher(BaseSocialPublisher):
 
         try:
             channel_id = self.settings.telegram_channel_id
+            if channel_id and (channel_id.startswith("-") or channel_id.isdigit()):
+                try:
+                    channel_id = int(channel_id)
+                except ValueError:
+                    pass
             if variant.image_url:
                 msg = await self.bot.send_photo(
                     chat_id=channel_id,
