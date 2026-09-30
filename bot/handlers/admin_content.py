@@ -135,11 +135,12 @@ async def _post_preview_payload(post_id: int) -> tuple[str, InlineKeyboardMarkup
         if v.status == VariantStatus.FAILED.value:
             retry_buttons.append(_btn(f"🔄 Повторить {plat_title}", f"admin:content:retry:{post.id}:{v.platform}"))
 
-    # Image Prompt
+    # Image Prompt & Generated Art
     sample_prompt = next((v.image_prompt for v in post.variants if v.image_prompt), "Не сформирован")
-    image_url_info = next((f"\n🖼 Фото: {v.image_url}" for v in post.variants if v.image_url), "")
+    sample_url = next((v.image_url for v in post.variants if v.image_url), None)
+    image_url_info = f'\n🖼 <b>Арт:</b> <a href="{sample_url}">Посмотреть сгенерированное фото</a>' if sample_url else ""
     lines.append("\n──────────────────────")
-    lines.append(f"🖼 <b>IMAGE PROMPT:</b>\n<code>{sample_prompt}</code>{image_url_info}")
+    lines.append(f"🎨 <b>ПРОМПТ ДЛЯ АРТА:</b>\n<code>{sample_prompt}</code>{image_url_info}")
 
     rows: list[list[InlineKeyboardButton]] = []
     if edit_buttons:
@@ -346,6 +347,7 @@ async def _create_post_from_idea(session: AsyncSession, user_id: int, idea: Topi
             platform=plat.value,
             text=v.text,
             image_prompt=v.image_prompt,
+            image_url=v.image_url,
         )
 
     return post.id
@@ -613,7 +615,7 @@ async def content_regenerate_callback(callback: CallbackQuery) -> None:
             gen_var = ai_res.variants.get(SocialPlatform(var.platform))
             if gen_var:
                 await social.update_variant_text(session, var.id, gen_var.text)
-                await social.update_variant_image(session, var.id, var.image_url, gen_var.image_prompt)
+                await social.update_variant_image(session, var.id, gen_var.image_url or var.image_url, gen_var.image_prompt)
 
     payload = await _post_preview_payload(post_id)
     if payload and callback.message:

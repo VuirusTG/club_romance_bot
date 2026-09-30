@@ -6,6 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from bot.database.models import Story, Character, Episode, Choice
+from bot.services.content_engine.story_lore import get_story_lore
 
 
 @dataclass
@@ -217,16 +218,17 @@ class AutoContentSuggester:
 
     @classmethod
     def _build_favorite_idea(cls, story: Story, char_name: str) -> TopicIdea:
+        lore = get_story_lore(story.title, story.genre or "")
         topic = f"Секреты идеальной ветки с {char_name} в «{story.title}»"
         main_point = (
-            f"Как выйти на крепкую романтическую ветку с {char_name}, "
-            f"не пропустить скрытые улучшения и избежать обидного разрыва отношений."
+            f"Как выйти на крепкую романтическую ветку с {char_name} в новелле «{story.title}» ({lore.setting}). "
+            f"Разбираем ключевые развилки, скрытые улучшения и как не допустить обидного разрыва отношений."
         )
         facts = (
-            f"• Важно не совмещать ветку с другими персонажами в критических сериях, чтобы избежать сцен ревности.\n"
-            f"• Некоторые бесплатные выборы и реплики в диалогах влияют на симпатию сильнее дорогих сцен.\n"
-            f"• В финале сезона правильный уровень отношений открывает эксклюзивные романтические кат-сцены.\n"
-            f"• Точные цепочки выборов для {char_name} собраны в нашем интерактивном боте."
+            f"• В сеттинге ({lore.setting}) каждое решение влияет на статус героини: {lore.heroine}.\n"
+            f"• Не совмещайте ветку с другими персонажами в критических сериях, чтобы избежать ревности.\n"
+            f"• В финале сезона правильный уровень симпатии открывает эксклюзивные романтические кат-сцены.\n"
+            f"• Точные цепочки выборов и тайминги для {char_name} собраны в нашем интерактивном боте."
         )
         cta = f"Откройте нашего бота, чтобы построить идеальную ветку с {char_name} без ошибок!"
         return TopicIdea(
@@ -239,20 +241,23 @@ class AutoContentSuggester:
             cta=cta,
             target_story=story.title,
             character_name=char_name,
-            image_concept=f"Romantic couple portrait, {char_name} from Romance Club '{story.title}', intense emotional gaze, cinematic atmospheric lighting, 8k digital art --ar 4:5",
+            image_concept=f"Romantic couple portrait, {char_name} from Romance Club '{story.title}', setting: {lore.setting}, intense gaze, atmospheric lighting, 8k digital art --ar 4:5",
         )
 
     @classmethod
     def _build_diamond_idea(cls, story: Story) -> TopicIdea:
+        lore = get_story_lore(story.title, story.genre or "")
+        favs = ", ".join(lore.key_favorites[:3]) if lore.key_favorites else "фаворитами"
         topic = f"Топ самых дорогих выборов в «{story.title}»: стоят ли они того?"
         main_point = (
-            f"Разбираемся, какие платные решения в новелле «{story.title}» действительно меняют сюжет "
+            f"Разбираемся, какие платные решения в новелле «{story.title}» действительно меняют сюжет ({lore.core_conflict}) "
             f"и дают статы, а на чём можно сэкономить без ущерба для концовки."
         )
         facts = (
-            "• Ключевые платные выборы спасают второстепенных героев и укрепляют авторитет главной героини.\n"
-            "• Дорогие наряды иногда приносят дополнительные очки характеристик — проверяйте гайд перед покупкой!\n"
-            "• Интерактивная база бота подсказывает стоимость каждого выбора заранее."
+            f"• В истории «{story.title}» ({lore.setting}) ключевые платные выборы спасают союзников и авторитет героини.\n"
+            f"• Дорогие наряды и украшения приносят скрытые характеристики — проверяйте гайд перед покупкой!\n"
+            f"• Сюжетные платные сцены с фаворитами ({favs}) существенно углубляют любовную ветку.\n"
+            f"• Интерактивная база бота подсказывает стоимость и эффект каждого выбора заранее."
         )
         cta = f"Сверяйтесь с гайдами в нашем боте и тратьте алмазы с максимальной пользой!"
         return TopicIdea(
@@ -264,20 +269,22 @@ class AutoContentSuggester:
             facts=facts,
             cta=cta,
             target_story=story.title,
-            image_concept=f"Mysterious glowing crystals and diamonds, dramatic fantasy scene from Romance Club '{story.title}', luxurious aesthetic, 8k --ar 4:5",
+            image_concept=f"Mysterious glowing crystals and diamonds, dramatic fantasy scene from Romance Club '{story.title}', {lore.setting}, luxurious aesthetic, 8k --ar 4:5",
         )
 
     @classmethod
     def _build_stats_idea(cls, story: Story) -> TopicIdea:
-        stats = STAT_PATHS.get(story.title, ("Путь Разума", "Путь Чувств", "Авторитет"))
+        lore = get_story_lore(story.title, story.genre or "")
+        stats = lore.stat_paths if lore.stat_paths else STAT_PATHS.get(story.title, ("Путь Разума", "Путь Чувств", "Авторитет"))
         stats_str = " / ".join(stats[:2])
         topic = f"Путь {stats[0]} или {stats[1]}: как не завалить баланс в «{story.title}»"
         main_point = (
-            f"В истории «{story.title}» распределение характеристик решает всё. "
+            f"В новелле «{story.title}» ({lore.setting}) распределение характеристик решает судьбу героини ({lore.heroine}). "
             f"Разбираем главные ошибки игроков при прокачке статов {stats_str}."
         )
         facts = (
             f"• Проверки статов на финалах сезонов не прощают нехватки даже 1-2 баллов.\n"
+            f"• Основной конфликт истории: {lore.core_conflict}.\n"
             f"• Распыляться на оба пути рискованно, если в новелле нет системы строгого баланса.\n"
             f"• Все правильные ответы для накопления максимальных статов отмечены в нашем интерактивном боте."
         )
@@ -291,20 +298,22 @@ class AutoContentSuggester:
             facts=facts,
             cta=cta,
             target_story=story.title,
-            image_concept=f"Duality concept, balance of light and dark magic, fantasy heroine from '{story.title}', majestic composition, 8k --ar 4:5",
+            image_concept=f"Duality concept, balance of paths ({stats_str}), fantasy heroine from '{story.title}', {lore.setting}, majestic composition, 8k --ar 4:5",
         )
 
     @classmethod
     def _build_dilemma_idea(cls, story: Story) -> TopicIdea:
+        lore = get_story_lore(story.title, story.genre or "")
         topic = f"Главная дилемма в «{story.title}»: правильный ли выбор вы сделали?"
         main_point = (
-            f"Сюжетный момент в новелле «{story.title}», где эмоции зашкаливают, а цена ошибки — жизнь персонажа. "
+            f"В новелле «{story.title}» наступает момент, когда эмоции зашкаливают, а цена ошибки — жизнь персонажа: {lore.dramatic_dilemma} "
             f"Разбираем все варианты развития событий."
         )
         facts = (
-            "• Неочевидный выбор на первый взгляд кажется безопасным, но приводит к потерям в будущих сезонах.\n"
-            "• Подробный разбор скрытых последствий каждого варианта есть в ветках нашего бота.\n"
-            "• Интерактивные развилки помогут не начинать сезон сначала из-за одной оплошности."
+            f"• Сюжетный конфликт истории: {lore.core_conflict}.\n"
+            f"• Неочевидный выбор на первый взгляд кажется безопасным, но приводит к потерям в будущих сезонах.\n"
+            f"• Подробный разбор скрытых последствий каждого варианта есть в ветках нашего бота.\n"
+            f"• Интерактивные развилки помогут не начинать сезон сначала из-за одной оплошности."
         )
         cta = "А какой выбор сделали вы? Делитесь в комментариях и сверяйтесь с гайдом в боте!"
         return TopicIdea(
@@ -316,21 +325,21 @@ class AutoContentSuggester:
             facts=facts,
             cta=cta,
             target_story=story.title,
-            image_concept=f"Dramatic crossroads dilemma scene, emotional tension, cinematic lighting, Romance Club '{story.title}' aesthetic, 8k --ar 4:5",
+            image_concept=f"Dramatic crossroads dilemma scene, emotional tension, {lore.setting}, Romance Club '{story.title}' aesthetic, 8k --ar 4:5",
         )
 
     @classmethod
     def _build_overview_idea(cls, story: Story) -> TopicIdea:
-        genre_str = f" ({story.genre})" if story.genre else ""
+        lore = get_story_lore(story.title, story.genre or "")
+        genre_str = f" ({lore.genre})" if lore.genre else ""
         topic = f"Почему вам стоит пройти «{story.title}» прямо сейчас{genre_str}"
-        main_point = (
-            f"Если вы откладывали прохождение «{story.title}», самое время погрузиться в эту историю! "
-            f"Увлекательный сюжет, колоритные фавориты и непередаваемая атмосфера."
-        )
+        main_point = f"{lore.compelling_pitch} Главная героиня — {lore.heroine}."
+        favs_sample = ", ".join(lore.key_favorites[:3]) if lore.key_favorites else "яркие фавориты"
         facts = (
-            "• Необычный сеттинг и продуманная сюжетная интрига до самой последней серии.\n"
-            "• Разнообразные любовные ветки на любой вкус.\n"
-            "• С интерактивным гайдом в нашем боте прохождение станет лёгким и максимально приятным!"
+            f"• Сеттинг и атмосфера: {lore.setting}.\n"
+            f"• Главный конфликт: {lore.core_conflict}.\n"
+            f"• Романтические ветки: {favs_sample}.\n"
+            f"• С интерактивным гайдом в нашем боте прохождение станет лёгким и максимально приятным!"
         )
         cta = f"Начните играть в «{story.title}» вместе с нашим ботом-помощником!"
         return TopicIdea(
@@ -342,8 +351,9 @@ class AutoContentSuggester:
             facts=facts,
             cta=cta,
             target_story=story.title,
-            image_concept=f"Atmospheric aesthetic landscape and characters of Romance Club story '{story.title}', cinematic, breathtaking digital art --ar 4:5",
+            image_concept=f"Atmospheric cinematic scene of Romance Club '{story.title}', setting: {lore.setting}, {lore.heroine}, breathtaking digital art, 8k --ar 4:5",
         )
+
 
     @staticmethod
     def _get_static_fallback_ideas(count: int = 4) -> list[TopicIdea]:

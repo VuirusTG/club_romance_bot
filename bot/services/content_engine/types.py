@@ -40,12 +40,14 @@ class GeneratedVariant:
     platform: SocialPlatform
     text: str
     image_prompt: str = ""
+    image_url: str | None = None
 
 
 @dataclass
 class AIGenerationResult:
     variants: dict[SocialPlatform, GeneratedVariant] = field(default_factory=dict)
     image_prompt: str = ""
+    image_url: str | None = None
 
 
 @dataclass

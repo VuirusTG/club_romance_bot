@@ -19,43 +19,52 @@ class ImageGenerator(ABC):
 
 class DefaultImageGenerator(ImageGenerator):
     """
-    Default image generator that logs the prompt.
-    External image generation services (e.g. OpenAI DALL-E / FLUX / Midjourney)
-    can be plugged in here or provided via manual image URL/attachment.
+    Intelligent image generator for Romance Club social media posts.
+    Uses OpenAI DALL-E 3 if OPENAI_API_KEY is configured,
+    or falls back to high-resolution FLUX.1 generation via Pollinations AI.
     """
 
     def __init__(self, api_key: str | None = None) -> None:
         self.api_key = api_key
 
     async def generate(self, prompt: str, aspect_ratio: str = "4:5") -> str | None:
-        if not self.api_key:
-            logger.info(f"Image generation skipped (no API key). Prompt: {prompt[:80]}...")
-            return None
+        clean_prompt = prompt.replace("--ar 4:5", "").replace("--ar 1:1", "").strip()
 
-        # Example implementation via OpenAI Images API if key exists
-        url = "https://api.openai.com/v1/images/generations"
-        headers = {
-            "Authorization": f"Bearer {self.api_key}",
-            "Content-Type": "application/json",
-        }
-        payload = {
-            "model": "dall-e-3",
-            "prompt": prompt,
-            "n": 1,
-            "size": "1024x1024",
-        }
+        # 1. Try OpenAI DALL-E 3 if API key is provided
+        if self.api_key:
+            try:
+                url = "https://api.openai.com/v1/images/generations"
+                headers = {
+                    "Authorization": f"Bearer {self.api_key}",
+                    "Content-Type": "application/json",
+                }
+                payload = {
+                    "model": "dall-e-3",
+                    "prompt": clean_prompt[:950],
+                    "n": 1,
+                    "size": "1024x1024",
+                }
+                async with aiohttp.ClientSession() as session:
+                    async with session.post(url, headers=headers, json=payload, timeout=aiohttp.ClientTimeout(total=45)) as resp:
+                        if resp.status == 200:
+                            data = await resp.json()
+                            return data["data"][0]["url"]
+                        else:
+                            err_text = await resp.text()
+                            logger.warning(f"OpenAI Image API failed ({resp.status}): {err_text}. Falling back to FLUX.")
+            except Exception as e:
+                logger.warning(f"Error calling OpenAI Image API: {e}. Falling back to FLUX.")
+
+        # 2. Public FLUX.1 endpoint (Pollinations AI) - produces direct instant image URL
         try:
-            async with aiohttp.ClientSession() as session:
-                async with session.post(url, headers=headers, json=payload, timeout=aiohttp.ClientTimeout(total=45)) as resp:
-                    if resp.status == 200:
-                        data = await resp.json()
-                        return data["data"][0]["url"]
-                    else:
-                        err_text = await resp.text()
-                        logger.warning(f"Image generation failed ({resp.status}): {err_text}")
-                        return None
+            import random
+            import urllib.parse
+            encoded_prompt = urllib.parse.quote(clean_prompt[:350])
+            seed = random.randint(10000, 999999)
+            flux_url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?width=1080&height=1350&model=flux&nologo=true&seed={seed}"
+            return flux_url
         except Exception as e:
-            logger.warning(f"Error calling Image API: {e}")
+            logger.error(f"FLUX image URL creation failed: {e}")
             return None
 
 
@@ -72,13 +81,26 @@ class ContentAIEngine:
         cta: str = "Полный гайд доступен в нашем Telegram-боте!",
         target_story: str = "",
     ) -> AIGenerationResult:
+        res: AIGenerationResult
         if self.api_key:
             try:
-                return await self._generate_with_llm(topic, main_point, facts, cta, target_story)
+                res = await self._generate_with_llm(topic, main_point, facts, cta, target_story)
             except Exception as e:
                 logger.error(f"LLM generation failed: {e}. Falling back to template generation.")
+                res = self._generate_template_fallback(topic, main_point, facts, cta, target_story)
+        else:
+            res = self._generate_template_fallback(topic, main_point, facts, cta, target_story)
 
-        return self._generate_template_fallback(topic, main_point, facts, cta, target_story)
+        # Automatically generate 1 matching image for all platforms
+        try:
+            img_url = await self.image_generator.generate(res.image_prompt)
+            res.image_url = img_url
+            for var in res.variants.values():
+                var.image_url = img_url
+        except Exception as e:
+            logger.warning(f"Failed to generate auto image: {e}")
+
+        return res
 
     async def _generate_with_llm(
         self,

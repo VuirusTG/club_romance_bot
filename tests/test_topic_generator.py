@@ -91,3 +91,39 @@ def test_content_home_has_new_autopilot_buttons():
         assert "admin:content:auto_ideas" in callbacks
         assert "admin:content:smart_create" in callbacks
     asyncio.run(_test())
+
+
+def test_story_lore_richness():
+    from bot.services.content_engine.story_lore import get_story_lore
+
+    # Test exact story
+    lore_nile = get_story_lore("Песнь о Красном Ниле")
+    assert "Эва" in lore_nile.heroine
+    assert "Амен" in lore_nile.key_favorites
+    assert "шезму" in lore_nile.heroine.lower() or "шезму" in lore_nile.core_conflict.lower()
+
+    # Test underwater fairy tale
+    lore_lily = get_story_lore("Водяная Лилия")
+    assert "озер" in lore_lily.setting.lower() or "вод" in lore_lily.setting.lower()
+    assert len(lore_lily.atmosphere_tags) > 0
+
+    # Test knights dynamic archetype
+    lore_knight = get_story_lore("Королевские рыцари", genre="Рыцарский роман")
+    assert "рыцар" in lore_knight.setting.lower() or "рыцар" in lore_knight.core_conflict.lower()
+
+
+def test_auto_image_url_in_variants():
+    async def _test():
+        engine = ContentAIEngine(api_key=None)
+        res = await engine.generate_variants(
+            topic="Секреты ветки с Аменом",
+            main_point="Опасная игра с верховным эпистатом в Древнем Египте",
+            target_story="Песнь о Красном Ниле",
+        )
+        assert res.image_url is not None
+        assert res.image_url.startswith("http")
+        for plat, var in res.variants.items():
+            assert var.image_url == res.image_url
+            assert len(var.image_prompt) > 0
+    asyncio.run(_test())
+
