@@ -102,14 +102,18 @@ def test_story_lore_richness():
     assert "Амен" in lore_nile.key_favorites
     assert "шезму" in lore_nile.heroine.lower() or "шезму" in lore_nile.core_conflict.lower()
 
-    # Test underwater fairy tale
+    # Test canonical Водяная Лилия
     lore_lily = get_story_lore("Водяная Лилия")
-    assert "озер" in lore_lily.setting.lower() or "вод" in lore_lily.setting.lower()
-    assert len(lore_lily.atmosphere_tags) > 0
+    assert "Райли" in lore_lily.heroine or "Лили" in lore_lily.heroine
+    assert "Ксавье" in lore_lily.key_favorites
+    assert "Деклан" in lore_lily.key_favorites
+    assert "Уиндроуз" in lore_lily.setting or "примор" in lore_lily.setting.lower()
 
-    # Test knights dynamic archetype
-    lore_knight = get_story_lore("Королевские рыцари", genre="Рыцарский роман")
-    assert "рыцар" in lore_knight.setting.lower() or "рыцар" in lore_knight.core_conflict.lower()
+    # Test DB and Thematic lookup for Eden
+    lore_eden = get_story_lore("Эдемов сад")
+    assert "Доён" in lore_eden.heroine
+    assert "Кастиэль" in lore_eden.key_favorites
+    assert "Сонхва" in lore_eden.key_favorites
 
 
 def test_auto_image_url_in_variants():
