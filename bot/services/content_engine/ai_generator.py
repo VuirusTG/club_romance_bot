@@ -179,7 +179,26 @@ class ContentAIEngine:
         return AIGenerationResult(variants=variants, image_prompt=img_prompt)
 
     @staticmethod
-    def _clean_input(text: str) -> str:
+    def _clean_brackets(text: str) -> str:
+        """Removes robotic parenthetical expressions and unwraps names/descriptions into seamless text."""
+        if not text:
+            return ""
+        # e.g. "героини (София)" -> "героини София"
+        text = re.sub(r"героини\s*\(([^\)]+)\)", r"героини \1", text, flags=re.IGNORECASE)
+        # e.g. "фаворитом (Имя)" -> "фаворитом \1"
+        text = re.sub(r"фаворитом\s*\(([^\)]+)\)", r"фаворитом \1", text, flags=re.IGNORECASE)
+        # e.g. "персонажем (Имя)" -> "персонажем \1"
+        text = re.sub(r"персонажем\s*\(([^\)]+)\)", r"персонажем \1", text, flags=re.IGNORECASE)
+        # e.g. "ветку с (Имя)" -> "ветку с \1"
+        text = re.sub(r"ветку\s+с\s*\(([^\)]+)\)", r"ветку с \1", text, flags=re.IGNORECASE)
+        # e.g. "судьбу (Имя)" -> "судьбу \1"
+        text = re.sub(r"судьбу\s*\(([^\)]+)\)", r"судьбу \1", text, flags=re.IGNORECASE)
+        # Unwrap any capitalized name/word in brackets: "(София)" -> "София"
+        text = re.sub(r"\(([A-ZА-ЯЁ][a-zа-яё]+)\)", r"\1", text)
+        return text
+
+    @classmethod
+    def _clean_input(cls, text: str) -> str:
         if not text or text.strip() == "-":
             return ""
         # Remove literal technical prefixes if user or raw prompt included them
@@ -187,7 +206,7 @@ class ContentAIEngine:
         for line in text.strip().splitlines():
             cleaned_line = re.sub(r"^(факты|facts|cta|ста|тема|мысль|основная мысль)[:\s-]*", "", line.strip(), flags=re.IGNORECASE).strip()
             if cleaned_line:
-                lines.append(cleaned_line)
+                lines.append(cls._clean_brackets(cleaned_line))
         return "\n".join(lines).strip()
 
     def _generate_template_fallback(
@@ -201,9 +220,10 @@ class ContentAIEngine:
         raw_topic = self._clean_input(topic) or topic
         # Clean trailing genre or technical tags in parentheses
         clean_topic = re.sub(r"\s*\([^\)]*\)$", "", raw_topic).strip()
-        clean_main = self._clean_input(main_point) or "Разбираем ключевые развилки, скрытые последствия и лучшие выборы для идеального финала."
-        clean_facts = self._clean_input(facts)
-        clean_cta = self._clean_input(cta) or "Полный интерактивный гайд доступен в нашем Telegram-боте!"
+        clean_topic = self._clean_brackets(clean_topic)
+        clean_main = self._clean_brackets(self._clean_input(main_point)) or "Разбираем ключевые развилки, скрытые последствия и лучшие выборы для идеального финала."
+        clean_facts = self._clean_brackets(self._clean_input(facts))
+        clean_cta = self._clean_brackets(self._clean_input(cta)) or "Полный интерактивный гайд доступен в нашем Telegram-боте!"
 
         # Avoid redundant "| «Story»" if story is already mentioned in topic
         story_in_topic = target_story and target_story.lower() in clean_topic.lower()

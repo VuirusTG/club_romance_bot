@@ -219,13 +219,14 @@ class AutoContentSuggester:
     @classmethod
     def _build_favorite_idea(cls, story: Story, char_name: str) -> TopicIdea:
         lore = get_story_lore(story.title, story.genre or "")
-        fav_phrase = f"фаворитом ({char_name})" if (" " in char_name or char_name.startswith("Принц") or char_name.startswith("Король")) else char_name
+        fav_phrase = f"героем {char_name}" if (" " in char_name or char_name.startswith("Принц") or char_name.startswith("Король")) else char_name
         topic = f"Секреты идеальной ветки: {char_name} в «{story.title}»"
         main_point = (
             f"Как выйти на крепкую романтическую ветку с {fav_phrase} в новелле «{story.title}»? "
             f"Разбираем ключевые развилки, скрытые улучшения и как не допустить обидного разрыва отношений."
         )
-        heroine_note = f" Судьба героини ({lore.heroine}) в ваших руках." if (lore.heroine and not is_generic_heroine(lore.heroine)) else ""
+        heroine_clean = lore.heroine.split("—")[0].split("(")[0].strip() if lore.heroine else ""
+        heroine_note = f" Судьба героини {heroine_clean} в ваших руках." if (heroine_clean and not is_generic_heroine(heroine_clean)) else ""
         facts = (
             f"• В новелле «{story.title}» каждый диалог с фаворитом может стать решающим.{heroine_note}\n"
             f"• Не совмещайте параллельные ветки в критических сериях, чтобы избежать ревности и блокировки финала.\n"
@@ -236,7 +237,7 @@ class AutoContentSuggester:
         return TopicIdea(
             id=f"fav_{story.id}_{random.randint(100, 999)}",
             category="❤️ Ветка с фаворитом",
-            title=f"❤️ Ветка: {char_name} ({story.title})",
+            title=f"❤️ Ветка: {char_name} — {story.title}",
             topic=topic,
             main_point=main_point,
             facts=facts,
@@ -258,7 +259,7 @@ class AutoContentSuggester:
         facts = (
             f"• В истории «{story.title}» ключевые платные выборы спасают союзников и авторитет героини.\n"
             f"• Дорогие наряды и украшения часто приносят скрытые характеристики — проверяйте гайд перед покупкой!\n"
-            f"• Сюжетные романтические сцены с ключевыми персонажами ({favs}) существенно углубляют любовные линии.\n"
+            f"• Сюжетные романтические сцены с ключевыми персонажами — {favs} — существенно углубляют любовные линии.\n"
             f"• Интерактивная база бота подсказывает точную стоимость в алмазах и эффект каждого выбора заранее."
         )
         cta = f"Сверяйтесь с гайдами в нашем боте и тратьте алмазы с максимальной пользой!"
@@ -280,7 +281,8 @@ class AutoContentSuggester:
         stats = lore.stat_paths if lore.stat_paths else STAT_PATHS.get(story.title, ("Путь Разума", "Путь Чувств", "Авторитет"))
         stats_str = " / ".join(stats[:2])
         topic = f"Путь {stats[0]} или {stats[1]}: как не завалить баланс в «{story.title}»"
-        heroine_desc = f" ({lore.heroine})" if lore.heroine and lore.heroine != "Главная героиня" else ""
+        heroine_clean = lore.heroine.split("—")[0].split("(")[0].strip() if lore.heroine else ""
+        heroine_desc = f" {heroine_clean}" if (heroine_clean and not is_generic_heroine(heroine_clean)) else ""
         main_point = (
             f"В новелле «{story.title}» правильное распределение характеристик решает судьбу героини{heroine_desc}. "
             f"Разбираем главные ошибки игроков при накоплении статов {stats_str}."
@@ -295,7 +297,7 @@ class AutoContentSuggester:
         return TopicIdea(
             id=f"stat_{story.id}_{random.randint(100, 999)}",
             category="⚖️ Баланс и статы",
-            title=f"⚖️ Статы: {stats_str} ({story.title})",
+            title=f"⚖️ Статы: {stats_str} — {story.title}",
             topic=topic,
             main_point=main_point,
             facts=facts,
@@ -335,9 +337,10 @@ class AutoContentSuggester:
     def _build_overview_idea(cls, story: Story) -> TopicIdea:
         lore = get_story_lore(story.title, story.genre or "")
         topic = f"Почему вам стоит пройти «{story.title}» прямо сейчас"
+        heroine_clean = lore.heroine.split("—")[0].split("(")[0].strip() if lore.heroine else ""
         heroine_part = ""
-        if lore.heroine and not is_generic_heroine(lore.heroine):
-            if lore.heroine not in lore.compelling_pitch:
+        if heroine_clean and not is_generic_heroine(heroine_clean):
+            if heroine_clean.lower() not in lore.compelling_pitch.lower():
                 heroine_part = f" В центре сюжета — {lore.heroine}."
         main_point = f"{lore.compelling_pitch}{heroine_part}".strip()
         favs_sample = ", ".join(lore.key_favorites[:3]) if lore.key_favorites else "яркие фавориты"
