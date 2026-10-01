@@ -39,15 +39,15 @@ def test_total_story_counts(db_conn):
 
     cur.execute("SELECT count(*) FROM seasons;")
     total_seasons = cur.fetchone()[0]
-    assert total_seasons == 144, f"Expected 144 seasons, found {total_seasons}"
+    assert total_seasons == 155, f"Expected 155 seasons, found {total_seasons}"
 
     cur.execute("SELECT count(*) FROM episodes;")
     total_episodes = cur.fetchone()[0]
-    assert total_episodes == 1613, f"Expected 1613 episodes, found {total_episodes}"
+    assert total_episodes == 1732, f"Expected 1732 episodes, found {total_episodes}"
 
     cur.execute("SELECT count(*) FROM choices;")
     total_choices = cur.fetchone()[0]
-    assert total_choices == 53236, f"Expected 53236 choices, found {total_choices}"
+    assert total_choices == 60268, f"Expected 60268 choices, found {total_choices}"
 
 
 def test_no_duplicate_story_titles(db_conn):

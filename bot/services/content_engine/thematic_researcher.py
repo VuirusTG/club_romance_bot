@@ -116,16 +116,23 @@ class ThematicResearcher:
             if not synopsis and tagline:
                 synopsis = tagline
 
-            genre = ""
-            genre_match = re.search(r"\|\s*жанры?\s*=\s*([^\n|]+)", wikitext, re.IGNORECASE)
-            if genre_match:
-                genre = cls.clean_wikitext(genre_match.group(1))
+            # Extract characters from wikitext (Image card templates and wiki links)
+            characters: list[str] = []
+            for ch_match in re.finditer(r"Страница персонажа\s*=\s*([^|}\n]+)", wikitext):
+                raw_name = ch_match.group(1).strip()
+                clean_name = re.sub(r"\s*\([^)]*\)", "", raw_name).strip()
+                if clean_name and clean_name not in characters:
+                    characters.append(clean_name)
+
+            love_interests = characters[1:6] if len(characters) > 1 else characters[:5]
 
             lore_data = ThematicLoreData(
                 title=story_title,
                 genre=genre,
                 synopsis=synopsis,
                 tagline=tagline,
+                characters=characters[:12],
+                love_interests=love_interests,
             )
             cls._cache[key] = lore_data
             return lore_data

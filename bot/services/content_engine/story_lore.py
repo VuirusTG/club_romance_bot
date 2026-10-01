@@ -349,6 +349,19 @@ STORY_LORE_DATABASE: dict[str, StoryLore] = {
         compelling_pitch="Мрачный оккультный детектив. Агентство «Астрея» берется за дела, от которых отказалась полиция, а твои коллеги подозрительно много знают о демонах и падших ангелах.",
         dramatic_dilemma="Поверить ли в мистическую природу происходящего или искать рациональное объяснение, рискуя упустить убийцу?",
     ),
+    "Водяная Лилия": StoryLore(
+        title="Водяная Лилия",
+        genre="Психологический триллер, Детектив",
+        setting="Приморский туманный городок Уиндроуз, фамильные особняки, холодный океан и скрытые тайны элиты",
+        heroine="Лили (Райли) — девушка, пытающаяся сбежать от гнетущего прошлого и начать жизнь заново",
+        core_conflict="Тайны влиятельных семейств, преследование призраков прошлого и смертельно опасная паутина лжи",
+        atmosphere_tags=["приморский туман", "Уиндроуз", "фамильные тайны", "холодный океан", "психологическое напряжение"],
+        popular_tropes=["побег от прошлого", "загадочный незнакомец", "клубок интриг", "детективное расследование"],
+        key_favorites=["Ксавье", "Деклан", "Фабиан", "Оливер"],
+        stat_paths=["Прямота", "Осторожность"],
+        compelling_pitch="Захватывающий психологический триллер. Побег в тихий приморский городок Уиндроуз оборачивается смертельной игрой, где каждый хранит скелеты в шкафу, а прошлое неумолимо настигает главную героиню.",
+        dramatic_dilemma="Довериться ли новому окружению или продолжать скрывать свою истинную личность, рискуя остаться в полной изоляции?",
+    ),
 }
 
 
@@ -437,18 +450,20 @@ def get_story_lore(title: str, genre: str = "") -> StoryLore:
     wiki_data = ThematicResearcher.fetch_story_lore(title)
     if wiki_data and (wiki_data.synopsis or wiki_data.tagline):
         pitch = wiki_data.tagline or wiki_data.synopsis[:200]
+        heroine_name = wiki_data.characters[0] if wiki_data.characters else "Главная героиня"
+        favs = wiki_data.love_interests if wiki_data.love_interests else (wiki_data.characters[1:5] if len(wiki_data.characters) > 1 else [])
         return StoryLore(
             title=title,
             genre=wiki_data.genre or genre or "Визуальная новелла",
             setting=f"Сеттинг новеллы «{title}»: {wiki_data.synopsis[:180]}",
-            heroine=f"Главная героиня новеллы «{title}»",
+            heroine=heroine_name,
             core_conflict=wiki_data.synopsis[:200] if wiki_data.synopsis else f"Сюжетные развилки новеллы «{title}»",
             atmosphere_tags=[title, "Клуб Романтики", wiki_data.genre or "новелла"],
-            popular_tropes=["развилки сюжета", "выборы и последствия"],
-            key_favorites=[],
+            popular_tropes=["развилки сюжета", "выборы и последствия", "романтические ветки"],
+            key_favorites=favs,
             stat_paths=list(CANONICAL_STAT_PATHS.get(title, ("Путь Разума", "Путь Чувств"))),
             compelling_pitch=pitch,
-            dramatic_dilemma=f"Сложные развилки и цена каждого решения в новелле «{title}».",
+            dramatic_dilemma=f"Сможет ли {heroine_name} сделать верный выбор на решающей развилке сюжета?",
         )
 
     # 5. Last resort without inventing characters

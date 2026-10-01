@@ -221,16 +221,17 @@ class AutoContentSuggester:
         lore = get_story_lore(story.title, story.genre or "")
         topic = f"Секреты идеальной ветки с {char_name} в «{story.title}»"
         main_point = (
-            f"Как выйти на крепкую романтическую ветку с {char_name} в новелле «{story.title}» ({lore.setting}). "
+            f"Как выйти на крепкую романтическую ветку с {char_name} в новелле «{story.title}». "
             f"Разбираем ключевые развилки, скрытые улучшения и как не допустить обидного разрыва отношений."
         )
+        heroine_note = f" Судьба героини ({lore.heroine}) в ваших руках." if lore.heroine and lore.heroine != "Главная героиня" else ""
         facts = (
-            f"• В сеттинге ({lore.setting}) каждое решение влияет на статус героини: {lore.heroine}.\n"
-            f"• Не совмещайте ветку с другими персонажами в критических сериях, чтобы избежать ревности.\n"
-            f"• В финале сезона правильный уровень симпатии открывает эксклюзивные романтические кат-сцены.\n"
-            f"• Точные цепочки выборов и тайминги для {char_name} собраны в нашем интерактивном боте."
+            f"• В новелле «{story.title}» каждый диалог с фаворитом может стать решающим.{heroine_note}\n"
+            f"• Не совмещайте параллельные ветки в критических сериях, чтобы избежать ревности и блокировки финала.\n"
+            f"• В кульминациях сезонов высокий уровень симпатии открывает уникальные эксклюзивные кат-сцены.\n"
+            f"• Пошаговые цепочки выборов и тайминги для ветки с {char_name} всегда доступны в нашем интерактивном боте."
         )
-        cta = f"Откройте нашего бота, чтобы построить идеальную ветку с {char_name} без ошибок!"
+        cta = f"Откройте нашего бота, чтобы построить идеальную ветку с {char_name} без сюжетных ошибок!"
         return TopicIdea(
             id=f"fav_{story.id}_{random.randint(100, 999)}",
             category="❤️ Ветка с фаворитом",
@@ -241,7 +242,7 @@ class AutoContentSuggester:
             cta=cta,
             target_story=story.title,
             character_name=char_name,
-            image_concept=f"Romantic couple portrait, {char_name} from Romance Club '{story.title}', setting: {lore.setting}, intense gaze, atmospheric lighting, 8k digital art --ar 4:5",
+            image_concept=f"Breathtaking romantic visual novel illustration, handsome {char_name} and gorgeous heroine from Romance Club '{story.title}', vibrant colors, emotional gaze, cinematic golden lighting, 8k masterpiece",
         )
 
     @classmethod
@@ -250,14 +251,14 @@ class AutoContentSuggester:
         favs = ", ".join(lore.key_favorites[:3]) if lore.key_favorites else "фаворитами"
         topic = f"Топ самых дорогих выборов в «{story.title}»: стоят ли они того?"
         main_point = (
-            f"Разбираемся, какие платные решения в новелле «{story.title}» действительно меняют сюжет ({lore.core_conflict}) "
-            f"и дают статы, а на чём можно сэкономить без ущерба для концовки."
+            f"Разбираемся, какие платные решения в новелле «{story.title}» действительно меняют сюжет "
+            f"и дают статы, а на чём можно спокойно сэкономить без ущерба для финала."
         )
         facts = (
-            f"• В истории «{story.title}» ({lore.setting}) ключевые платные выборы спасают союзников и авторитет героини.\n"
-            f"• Дорогие наряды и украшения приносят скрытые характеристики — проверяйте гайд перед покупкой!\n"
-            f"• Сюжетные платные сцены с фаворитами ({favs}) существенно углубляют любовную ветку.\n"
-            f"• Интерактивная база бота подсказывает стоимость и эффект каждого выбора заранее."
+            f"• В истории «{story.title}» ключевые платные выборы спасают союзников и авторитет героини.\n"
+            f"• Дорогие наряды и украшения часто приносят скрытые характеристики — проверяйте гайд перед покупкой!\n"
+            f"• Сюжетные романтические сцены с ключевыми персонажами ({favs}) существенно углубляют любовные линии.\n"
+            f"• Интерактивная база бота подсказывает точную стоимость в алмазах и эффект каждого выбора заранее."
         )
         cta = f"Сверяйтесь с гайдами в нашем боте и тратьте алмазы с максимальной пользой!"
         return TopicIdea(
@@ -269,7 +270,7 @@ class AutoContentSuggester:
             facts=facts,
             cta=cta,
             target_story=story.title,
-            image_concept=f"Mysterious glowing crystals and diamonds, dramatic fantasy scene from Romance Club '{story.title}', {lore.setting}, luxurious aesthetic, 8k --ar 4:5",
+            image_concept=f"Radiant sparkling diamonds and glowing gems, elegant Romance Club '{story.title}' aesthetic, vibrant colors, royal atmosphere, 8k masterpiece",
         )
 
     @classmethod
@@ -278,15 +279,16 @@ class AutoContentSuggester:
         stats = lore.stat_paths if lore.stat_paths else STAT_PATHS.get(story.title, ("Путь Разума", "Путь Чувств", "Авторитет"))
         stats_str = " / ".join(stats[:2])
         topic = f"Путь {stats[0]} или {stats[1]}: как не завалить баланс в «{story.title}»"
+        heroine_desc = f" ({lore.heroine})" if lore.heroine and lore.heroine != "Главная героиня" else ""
         main_point = (
-            f"В новелле «{story.title}» ({lore.setting}) распределение характеристик решает судьбу героини ({lore.heroine}). "
-            f"Разбираем главные ошибки игроков при прокачке статов {stats_str}."
+            f"В новелле «{story.title}» правильное распределение характеристик решает судьбу героини{heroine_desc}. "
+            f"Разбираем главные ошибки игроков при накоплении статов {stats_str}."
         )
         facts = (
             f"• Проверки статов на финалах сезонов не прощают нехватки даже 1-2 баллов.\n"
-            f"• Основной конфликт истории: {lore.core_conflict}.\n"
-            f"• Распыляться на оба пути рискованно, если в новелле нет системы строгого баланса.\n"
-            f"• Все правильные ответы для накопления максимальных статов отмечены в нашем интерактивном боте."
+            f"• Сюжетный вызов истории: {lore.core_conflict}.\n"
+            f"• Распыляться на оба пути рискованно, если механика новеллы требует строгой специализации.\n"
+            f"• Все правильные реплики для накопления максимума характеристик отмечены в нашем интерактивном боте."
         )
         cta = f"Узнайте правильный путь для новеллы «{story.title}» в нашем Telegram-боте!"
         return TopicIdea(
@@ -298,7 +300,7 @@ class AutoContentSuggester:
             facts=facts,
             cta=cta,
             target_story=story.title,
-            image_concept=f"Duality concept, balance of paths ({stats_str}), fantasy heroine from '{story.title}', {lore.setting}, majestic composition, 8k --ar 4:5",
+            image_concept=f"Gorgeous duality composition, balance of paths {stats_str}, elegant heroine from Romance Club '{story.title}', vibrant fantasy art, cinematic lighting, 8k",
         )
 
     @classmethod
@@ -306,14 +308,14 @@ class AutoContentSuggester:
         lore = get_story_lore(story.title, story.genre or "")
         topic = f"Главная дилемма в «{story.title}»: правильный ли выбор вы сделали?"
         main_point = (
-            f"В новелле «{story.title}» наступает момент, когда эмоции зашкаливают, а цена ошибки — жизнь персонажа: {lore.dramatic_dilemma} "
-            f"Разбираем все варианты развития событий."
+            f"В новелле «{story.title}» наступает момент, когда эмоции зашкаливают, а цена ошибки смертельно высока: {lore.dramatic_dilemma} "
+            f"Разбираем последствия каждого решения."
         )
         facts = (
-            f"• Сюжетный конфликт истории: {lore.core_conflict}.\n"
-            f"• Неочевидный выбор на первый взгляд кажется безопасным, но приводит к потерям в будущих сезонах.\n"
-            f"• Подробный разбор скрытых последствий каждого варианта есть в ветках нашего бота.\n"
-            f"• Интерактивные развилки помогут не начинать сезон сначала из-за одной оплошности."
+            f"• Ключевой конфликт новеллы: {lore.core_conflict}.\n"
+            f"• Неочевидный выбор на первый взгляд кажется безопасным, но способен привести к тяжёлым потерям в будущих сериях.\n"
+            f"• Подробный разбор скрытых последствий каждого варианта есть в схемах нашего бота.\n"
+            f"• Интерактивные развилки спасут от необходимости перепроходить сезон заново из-за одной оплошности."
         )
         cta = "А какой выбор сделали вы? Делитесь в комментариях и сверяйтесь с гайдом в боте!"
         return TopicIdea(
@@ -325,21 +327,21 @@ class AutoContentSuggester:
             facts=facts,
             cta=cta,
             target_story=story.title,
-            image_concept=f"Dramatic crossroads dilemma scene, emotional tension, {lore.setting}, Romance Club '{story.title}' aesthetic, 8k --ar 4:5",
+            image_concept=f"Intense dramatic crossroads scene, emotional visual novel CG, Romance Club '{story.title}', vibrant colors, gorgeous aesthetic, 8k masterpiece",
         )
 
     @classmethod
     def _build_overview_idea(cls, story: Story) -> TopicIdea:
         lore = get_story_lore(story.title, story.genre or "")
-        genre_str = f" ({lore.genre})" if lore.genre else ""
-        topic = f"Почему вам стоит пройти «{story.title}» прямо сейчас{genre_str}"
-        main_point = f"{lore.compelling_pitch} Главная героиня — {lore.heroine}."
+        topic = f"Почему вам стоит пройти «{story.title}» прямо сейчас"
+        heroine_part = f" Главная героиня — {lore.heroine}." if lore.heroine and lore.heroine != "Главная героиня" else ""
+        main_point = f"{lore.compelling_pitch}{heroine_part}"
         favs_sample = ", ".join(lore.key_favorites[:3]) if lore.key_favorites else "яркие фавориты"
         facts = (
             f"• Сеттинг и атмосфера: {lore.setting}.\n"
             f"• Главный конфликт: {lore.core_conflict}.\n"
             f"• Романтические ветки: {favs_sample}.\n"
-            f"• С интерактивным гайдом в нашем боте прохождение станет лёгким и максимально приятным!"
+            f"• С интерактивным гайдом в нашем боте прохождение станет лёгким, понятным и максимально приятным!"
         )
         cta = f"Начните играть в «{story.title}» вместе с нашим ботом-помощником!"
         return TopicIdea(
@@ -351,7 +353,7 @@ class AutoContentSuggester:
             facts=facts,
             cta=cta,
             target_story=story.title,
-            image_concept=f"Atmospheric cinematic scene of Romance Club '{story.title}', setting: {lore.setting}, {lore.heroine}, breathtaking digital art, 8k --ar 4:5",
+            image_concept=f"Breathtaking romantic visual novel key art, Romance Club '{story.title}', gorgeous heroine, vibrant cinematic atmosphere, fantasy illustration, 8k masterpiece",
         )
 
 

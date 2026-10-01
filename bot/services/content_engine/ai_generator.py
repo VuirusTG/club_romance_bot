@@ -21,8 +21,15 @@ class DefaultImageGenerator(ImageGenerator):
     """
     Intelligent image generator for Romance Club social media posts.
     Uses OpenAI DALL-E 3 if OPENAI_API_KEY is configured,
-    or falls back to high-resolution FLUX.1 generation via Pollinations AI.
+    or falls back to high-resolution visual novel generation via Pollinations AI.
     """
+
+    FALLBACK_IMAGES = [
+        "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200&auto=format&fit=crop",
+    ]
 
     def __init__(self, api_key: str | None = None) -> None:
         self.api_key = api_key
@@ -51,21 +58,30 @@ class DefaultImageGenerator(ImageGenerator):
                             return data["data"][0]["url"]
                         else:
                             err_text = await resp.text()
-                            logger.warning(f"OpenAI Image API failed ({resp.status}): {err_text}. Falling back to FLUX.")
+                            logger.warning(f"OpenAI Image API failed ({resp.status}): {err_text}. Falling back.")
             except Exception as e:
-                logger.warning(f"Error calling OpenAI Image API: {e}. Falling back to FLUX.")
+                logger.warning(f"Error calling OpenAI Image API: {e}. Falling back.")
 
-        # 2. Public FLUX.1 endpoint (Pollinations AI) - produces direct instant image URL
+        # 2. Enhanced visual novel prompt (remove decay / horror keywords, enforce bright romantic aesthetic)
+        filtered_prompt = re.sub(
+            r"\b(гниёт|гниль|гной|смерть|труп|гниение|rotting|decay|rotten|corpse|horror|ugly|gloomy|darkness|gore)\b",
+            "mystery",
+            clean_prompt,
+            flags=re.IGNORECASE,
+        )
+        style_suffix = "breathtaking visual novel CG illustration, Romance Club aesthetic, vibrant colors, gorgeous characters, cinematic romantic lighting, ArtStation trending, 8k masterpiece"
+        full_prompt = f"{filtered_prompt}, {style_suffix}".strip()
+
+        # 3. Clean Pollinations AI URL (avoid width/height/seed/nologo parameters that trigger 402 Payment Required)
         try:
-            import random
             import urllib.parse
-            encoded_prompt = urllib.parse.quote(clean_prompt[:350])
-            seed = random.randint(10000, 999999)
-            flux_url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?width=1080&height=1350&model=flux&nologo=true&seed={seed}"
-            return flux_url
+            encoded = urllib.parse.quote(full_prompt[:250])
+            pollinations_url = f"https://image.pollinations.ai/prompt/{encoded}"
+            return pollinations_url
         except Exception as e:
-            logger.error(f"FLUX image URL creation failed: {e}")
-            return None
+            logger.error(f"Image URL creation failed: {e}")
+            import random
+            return random.choice(self.FALLBACK_IMAGES)
 
 
 class ContentAIEngine:
@@ -182,49 +198,89 @@ class ContentAIEngine:
         cta: str,
         target_story: str,
     ) -> AIGenerationResult:
-        clean_topic = self._clean_input(topic) or topic
+        raw_topic = self._clean_input(topic) or topic
+        # Clean trailing genre or technical tags in parentheses
+        clean_topic = re.sub(r"\s*\([^\)]*\)$", "", raw_topic).strip()
         clean_main = self._clean_input(main_point) or "Разбираем ключевые развилки, скрытые последствия и лучшие выборы для идеального финала."
         clean_facts = self._clean_input(facts)
         clean_cta = self._clean_input(cta) or "Полный интерактивный гайд доступен в нашем Telegram-боте!"
 
-        story_prefix = f" | «{target_story}»" if target_story and target_story not in clean_topic else ""
-        facts_block = f"📌 <b>Главные нюансы:</b>\n{clean_facts}\n\n" if clean_facts else ""
+        # Avoid redundant "| «Story»" if story is already mentioned in topic
+        story_in_topic = target_story and target_story.lower() in clean_topic.lower()
+        story_badge = f" | «{target_story}»" if (target_story and not story_in_topic) else ""
+        story_name = target_story or clean_topic
+
+        # Structured blocks
+        facts_block = f"📌 <b>Главные нюансы и развилки:</b>\n{clean_facts}\n\n" if clean_facts else ""
         vk_facts_block = f"{clean_facts}\n\n" if clean_facts else ""
 
+        # 1. Telegram: engaging, aesthetic, informative with formatted bold/emojis
         tg_text = (
-            f"💎 <b>{clean_topic}</b>{story_prefix}\n\n"
+            f"✨ <b>{clean_topic}</b>{story_badge}\n\n"
             f"{clean_main}\n\n"
             f"{facts_block}"
-            f"💡 <i>{clean_cta}</i>\n"
-            f"👉 <b>Интерактивный путеводитель ждёт вас в боте!</b>"
+            f"💡 <b>Совет редакции:</b> {clean_cta}\n\n"
+            f"📱 <i>Все скрытые пути, проверки статов и цены в алмазах доступны в нашем Telegram-боте!</i>"
         )
 
+        # 2. VK: friendly community tone, clear storytelling, active discussion CTA
         vk_text = (
-            f"🔥 {clean_topic.upper()}{story_prefix.upper()} 🔥\n\n"
+            f"✨ {clean_topic}{story_badge}\n\n"
             f"{clean_main}\n\n"
             f"{vk_facts_block}"
             f"💬 Делитесь своим мнением и любимыми ветками в комментариях!\n"
-            f"👉 {clean_cta}"
+            f"👉 {clean_cta}\n\n"
+            f"#клубромантики #romanceclub #кргайды #новеллы"
         )
 
+        # 3. Instagram: aesthetic hook, concise, mobile-friendly spacing
         ig_text = (
             f"✨ {clean_topic} 💎👇\n\n"
             f"{clean_main}\n\n"
             f"{vk_facts_block}"
-            f"📌 {clean_cta}\n"
-            f"Ссылка на интерактивный гайд — в шапке профиля! ⬆️\n\n"
-            f"#клубромантики #romanceclub #кргайды #новеллы #клубромантикигайды"
+            f"📌 Сохраняйте в закладки, чтобы не потерять статы!\n"
+            f"👉 Ссылка на интерактивный гайд — в шапке профиля! ⬆️\n\n"
+            f"#клубромантики #romanceclub #кргайды #визуальныеновеллы #кр"
         )
 
-        threads_text = (
-            f"Наболевший вопрос про {clean_topic}:\n\n"
-            f"{clean_main}\n\n"
-            f"А как поступили вы? Делитесь впечатлениями в реплаях 👇"
-        )
+        # 4. Threads: natural human discussion starter without robotic boilerplate
+        lower_topic = clean_topic.lower()
+        if "почему" in lower_topic or "стоит пройти" in lower_topic:
+            threads_hook = (
+                f"Честно, если вы до сих пор откладывали «{story_name}» — самое время начать.\n\n"
+                f"{clean_main}\n\n"
+                f"А кто уже проходит: как вам сюжет и кого выбрали своей веткой? Делитесь в комментариях 👇"
+            )
+        elif "ветк" in lower_topic or "фаворит" in lower_topic or "секрет" in lower_topic:
+            threads_hook = (
+                f"Разбираем ветки в «{story_name}» 💔\n\n"
+                f"{clean_main}\n\n"
+                f"Признавайтесь: кто ваш главный фаворит в этой истории и были ли у вас ошибки с выборами? 👇"
+            )
+        elif "алмаз" in lower_topic or "дорог" in lower_topic or "трат" in lower_topic:
+            threads_hook = (
+                f"Вечная боль игроков в «{story_name}» — это дорогие выборы за алмазы 💎\n\n"
+                f"{clean_main}\n\n"
+                f"А как проходите вы: скупаете все платные сцены или копите до Алмазной Лихорадки? 👇"
+            )
+        elif "стат" in lower_topic or "баланс" in lower_topic or "путь" in lower_topic:
+            threads_hook = (
+                f"Самое обидное в «{story_name}» — не добрать 1-2 стата в финале сезона ⚖️\n\n"
+                f"{clean_main}\n\n"
+                f"По какому пути идёте вы и удаётся ли держать баланс? Рассказывайте в реплаях 👇"
+            )
+        else:
+            threads_hook = (
+                f"Горячая тема по «{story_name}»:\n\n"
+                f"{clean_topic}\n\n"
+                f"{clean_main}\n\n"
+                f"А как поступили вы на этих развилках? Делитесь впечатлениями в реплаях 👇"
+            )
 
+        # Clean image prompt for visual novel illustration
         img_prompt = (
-            f"Romantic fantasy art inspired by Romance Club '{target_story or clean_topic}', "
-            f"atmospheric dramatic scene for '{clean_topic}', cinematic lighting, digital romance painting, 8k --ar 4:5"
+            f"Breathtaking romantic visual novel illustration for Romance Club '{story_name}', "
+            f"gorgeous characters, vibrant colors, cinematic golden hour lighting, ArtStation trending, 8k masterpiece --ar 4:5"
         )
 
         return AIGenerationResult(
@@ -232,7 +288,7 @@ class ContentAIEngine:
                 SocialPlatform.TELEGRAM: GeneratedVariant(SocialPlatform.TELEGRAM, tg_text, img_prompt),
                 SocialPlatform.VK: GeneratedVariant(SocialPlatform.VK, vk_text, img_prompt),
                 SocialPlatform.INSTAGRAM: GeneratedVariant(SocialPlatform.INSTAGRAM, ig_text, img_prompt),
-                SocialPlatform.THREADS: GeneratedVariant(SocialPlatform.THREADS, threads_text, img_prompt),
+                SocialPlatform.THREADS: GeneratedVariant(SocialPlatform.THREADS, threads_hook, img_prompt),
             },
             image_prompt=img_prompt,
         )
