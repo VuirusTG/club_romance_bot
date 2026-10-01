@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from bot.database.models import Story, Character, Episode, Choice
-from bot.services.content_engine.story_lore import get_story_lore
+from bot.services.content_engine.story_lore import get_story_lore, is_generic_heroine
 
 
 @dataclass
@@ -219,12 +219,13 @@ class AutoContentSuggester:
     @classmethod
     def _build_favorite_idea(cls, story: Story, char_name: str) -> TopicIdea:
         lore = get_story_lore(story.title, story.genre or "")
-        topic = f"Секреты идеальной ветки с {char_name} в «{story.title}»"
+        fav_phrase = f"фаворитом ({char_name})" if (" " in char_name or char_name.startswith("Принц") or char_name.startswith("Король")) else char_name
+        topic = f"Секреты идеальной ветки: {char_name} в «{story.title}»"
         main_point = (
-            f"Как выйти на крепкую романтическую ветку с {char_name} в новелле «{story.title}». "
+            f"Как выйти на крепкую романтическую ветку с {fav_phrase} в новелле «{story.title}»? "
             f"Разбираем ключевые развилки, скрытые улучшения и как не допустить обидного разрыва отношений."
         )
-        heroine_note = f" Судьба героини ({lore.heroine}) в ваших руках." if lore.heroine and lore.heroine != "Главная героиня" else ""
+        heroine_note = f" Судьба героини ({lore.heroine}) в ваших руках." if (lore.heroine and not is_generic_heroine(lore.heroine)) else ""
         facts = (
             f"• В новелле «{story.title}» каждый диалог с фаворитом может стать решающим.{heroine_note}\n"
             f"• Не совмещайте параллельные ветки в критических сериях, чтобы избежать ревности и блокировки финала.\n"
@@ -334,8 +335,11 @@ class AutoContentSuggester:
     def _build_overview_idea(cls, story: Story) -> TopicIdea:
         lore = get_story_lore(story.title, story.genre or "")
         topic = f"Почему вам стоит пройти «{story.title}» прямо сейчас"
-        heroine_part = f" Главная героиня — {lore.heroine}." if lore.heroine and lore.heroine != "Главная героиня" else ""
-        main_point = f"{lore.compelling_pitch}{heroine_part}"
+        heroine_part = ""
+        if lore.heroine and not is_generic_heroine(lore.heroine):
+            if lore.heroine not in lore.compelling_pitch:
+                heroine_part = f" В центре сюжета — {lore.heroine}."
+        main_point = f"{lore.compelling_pitch}{heroine_part}".strip()
         favs_sample = ", ".join(lore.key_favorites[:3]) if lore.key_favorites else "яркие фавориты"
         facts = (
             f"• Сеттинг и атмосфера: {lore.setting}.\n"

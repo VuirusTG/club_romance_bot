@@ -243,37 +243,61 @@ class ContentAIEngine:
             f"#клубромантики #romanceclub #кргайды #визуальныеновеллы #кр"
         )
 
-        # 4. Threads: natural human discussion starter without robotic boilerplate
+        # 4. Threads: natural human discussion starter that REVEALS the facts and answers the topic
+        threads_facts_bullets = ""
+        if clean_facts:
+            lines = [l.strip() for l in clean_facts.splitlines() if l.strip()]
+            if lines:
+                threads_facts_bullets = "\n".join(lines[:4])
+
         lower_topic = clean_topic.lower()
         if "почему" in lower_topic or "стоит пройти" in lower_topic:
+            facts_block = f"\n\nЧем цепляет эта новелла:\n{threads_facts_bullets}" if threads_facts_bullets else ""
             threads_hook = (
                 f"Честно, если вы до сих пор откладывали «{story_name}» — самое время начать.\n\n"
-                f"{clean_main}\n\n"
+                f"{clean_main}"
+                f"{facts_block}\n\n"
                 f"А кто уже проходит: как вам сюжет и кого выбрали своей веткой? Делитесь в комментариях 👇"
             )
         elif "ветк" in lower_topic or "фаворит" in lower_topic or "секрет" in lower_topic:
+            facts_block = f"\n\nГлавные нюансы, чтобы не запороть ветку:\n{threads_facts_bullets}" if threads_facts_bullets else ""
             threads_hook = (
-                f"Разбираем ветки в «{story_name}» 💔\n\n"
-                f"{clean_main}\n\n"
+                f"Разбираем романтические ветки в «{story_name}» 💔\n\n"
+                f"{clean_main}"
+                f"{facts_block}\n\n"
                 f"Признавайтесь: кто ваш главный фаворит в этой истории и были ли у вас ошибки с выборами? 👇"
             )
         elif "алмаз" in lower_topic or "дорог" in lower_topic or "трат" in lower_topic:
+            facts_block = f"\n\nНа что обратить внимание перед покупкой:\n{threads_facts_bullets}" if threads_facts_bullets else ""
             threads_hook = (
                 f"Вечная боль игроков в «{story_name}» — это дорогие выборы за алмазы 💎\n\n"
-                f"{clean_main}\n\n"
+                f"{clean_main}"
+                f"{facts_block}\n\n"
                 f"А как проходите вы: скупаете все платные сцены или копите до Алмазной Лихорадки? 👇"
             )
         elif "стат" in lower_topic or "баланс" in lower_topic or "путь" in lower_topic:
+            facts_block = f"\n\nПравила успешного баланса:\n{threads_facts_bullets}" if threads_facts_bullets else ""
             threads_hook = (
                 f"Самое обидное в «{story_name}» — не добрать 1-2 стата в финале сезона ⚖️\n\n"
-                f"{clean_main}\n\n"
+                f"{clean_main}"
+                f"{facts_block}\n\n"
                 f"По какому пути идёте вы и удаётся ли держать баланс? Рассказывайте в реплаях 👇"
             )
+        elif "дилемм" in lower_topic or "выбор" in lower_topic or "развилк" in lower_topic:
+            facts_block = f"\n\nРазбор развилок:\n{threads_facts_bullets}" if threads_facts_bullets else ""
+            threads_hook = (
+                f"Главная дилемма в «{story_name}», где ошибаются многие 🎭\n\n"
+                f"{clean_main}"
+                f"{facts_block}\n\n"
+                f"А как поступили вы на этой развилке? Делитесь впечатлениями в реплаях 👇"
+            )
         else:
+            facts_block = f"\n\n{threads_facts_bullets}" if threads_facts_bullets else ""
             threads_hook = (
                 f"Горячая тема по «{story_name}»:\n\n"
                 f"{clean_topic}\n\n"
-                f"{clean_main}\n\n"
+                f"{clean_main}"
+                f"{facts_block}\n\n"
                 f"А как поступили вы на этих развилках? Делитесь впечатлениями в реплаях 👇"
             )
 

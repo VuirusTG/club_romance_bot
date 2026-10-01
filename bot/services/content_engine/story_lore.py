@@ -62,6 +62,65 @@ CANONICAL_STAT_PATHS: dict[str, tuple[str, ...]] = {
 }
 
 
+def is_generic_heroine(name: str | None) -> bool:
+    if not name:
+        return True
+    clean = name.lower().strip()
+    return clean in ["героиня", "главная героиня", "гг", "main character", "heroine", "девушка"]
+
+
+CANONICAL_HEROINES: dict[str, str] = {
+    "Секрет Небес": "Вики Уокер",
+    "Секрет Небес 2": "Вики Уокер",
+    "Секрет Небес: Реквием": "Лэйн",
+    "Песнь о Красном Ниле": "Эва",
+    "Кали: Зов Тьмы": "Амала Кхан",
+    "Кали: Пламя Сансары": "Деви (Девия Шарма)",
+    "Легенда Ивы": "Мэй",
+    "Тени Сентфора": "Сара О’Нил",
+    "Рождённая Луной": "Мия",
+    "Рождённая Солнцем": "София",
+    "Рождённый Тенью": "Селена",
+    "Я Охочусь на Тебя": "Агата Харрис",
+    "Я Охочусь на Тебя 2": "Агата Харрис",
+    "Пси": "Лу Рид",
+    "Сердце Треспии": "Эллаира",
+    "Арканум": "Селена (Лилит)",
+    "Дракула. История Любви": "Лайя (Лале)",
+    "И поглотит нас морок": "Лада",
+    "W: Ловчая времени": "Нова",
+    "Эдемов сад": "Доён",
+    "Бездушная": "Виксария",
+    "Цветок из Огня Тиамат": "Никкаль",
+    "7 братьев": "Джейн",
+    "Покоряя Версаль": "Рене де Л’Опиталь",
+    "Разбитое сердце Астреи": "Одри",
+    "Сага о грозах": "Тисс",
+    "Водяная Лилия": "Лили (Райли)",
+    "Роза пустыни": "Ясмин",
+    "Теодора": "Теодора",
+    "Грешный Лондон": "Ирен",
+    "Паруса в тумане": "Аделаида",
+    "Королева за 30 дней": "Джессика",
+    "Высокий прибой": "Ким Ли",
+    "В ритме страсти": "Мишель",
+    "Любовь со звёзд": "Эмбер",
+    "По тонкому льду": "Кэтрин Хилл",
+    "Хроники Гладиаторов": "Рикс",
+    "Сквозь бурю и пламя": "Чандри",
+    "Идеал": "Хлоя",
+    "Идеал. Том 2": "Шарлотта",
+    "Любовь, Грех и Зло": "Мина",
+    "Шифр Шекспира": "Джульетта",
+    "Пришествие Номер Три": "Алиса",
+    "Код синий": "Джеки",
+    "Te Amo": "Эстелла",
+    "Te Amo. Том 1: Залив надежды": "Эстелла",
+    "Te Amo. Том 2: Хрустальная мечта": "Эстелла",
+    "Аверрис: Дитя Разлома": "Моргана",
+}
+
+
 STORY_LORE_DATABASE: dict[str, StoryLore] = {
     "Секрет Небес": StoryLore(
         title="Секрет Небес",
@@ -390,23 +449,59 @@ def _fetch_lore_from_database(title: str, genre: str = "") -> StoryLore | None:
         if not chars:
             return None
 
-        heroine_rows = [ch for ch in chars if not ch[2]]
-        heroine_name = heroine_rows[0][0] if heroine_rows else "Главная героиня"
-        heroine_desc = heroine_rows[0][1] if heroine_rows else ""
-        heroine_str = f"{heroine_name} ({heroine_desc})" if heroine_desc else heroine_name
+        # Check canonical heroine mapping first
+        canonical_name = CANONICAL_HEROINES.get(db_title) or CANONICAL_HEROINES.get(title)
 
-        love_interests = [ch[0] for ch in chars if ch[2]]
+        heroine_rows = [ch for ch in chars if not ch[2]]
+        db_char_name = heroine_rows[0][0] if heroine_rows else ""
+        heroine_desc = (heroine_rows[0][1] or "").strip() if heroine_rows else ""
+
+        if canonical_name:
+            heroine_name = canonical_name
+        elif not is_generic_heroine(db_char_name):
+            heroine_name = db_char_name
+        else:
+            heroine_name = ""
 
         # Query thematic wiki for authentic tagline and synopsis (without citing sources)
         wiki = ThematicResearcher.fetch_story_lore(db_title)
         synopsis = wiki.synopsis if wiki and wiki.synopsis else ""
         tagline = wiki.tagline if wiki and wiki.tagline else ""
 
-        setting = synopsis[:200] if synopsis else f"Сеттинг новеллы «{db_title}» ({db_genre})"
-        pitch = tagline if tagline else (f"Увлекательная история «{db_title}» ({db_genre}). Пройдите путь героини {heroine_name} без сюжетных ошибок!")
-        conflict = heroine_desc if heroine_desc else f"Судьбоносные решения и сложные развилки в новелле «{db_title}»"
+        if not heroine_name and wiki and wiki.characters:
+            cand = wiki.characters[0]
+            if not is_generic_heroine(cand):
+                heroine_name = cand
 
+        if heroine_name and heroine_desc:
+            heroine_str = f"{heroine_name} ({heroine_desc})"
+        elif heroine_name:
+            heroine_str = heroine_name
+        else:
+            heroine_str = heroine_desc
+
+        love_interests = [ch[0] for ch in chars if ch[2] and not is_generic_heroine(ch[0])]
+        if not love_interests and wiki and wiki.love_interests:
+            love_interests = [li for li in wiki.love_interests if not is_generic_heroine(li)]
+
+        setting = synopsis[:200] if synopsis else f"Сеттинг новеллы «{db_title}»"
+
+        if tagline:
+            pitch = tagline
+        elif heroine_name:
+            pitch = f"Увлекательная история «{db_title}». Пройдите путь героини ({heroine_name}) без сюжетных ошибок!"
+        elif heroine_desc:
+            pitch = f"Увлекательная история «{db_title}». В центре сюжета — {heroine_desc}"
+        else:
+            pitch = f"Увлекательная история «{db_title}». Пройдите захватывающий путь без сюжетных ошибок!"
+
+        conflict = heroine_desc if heroine_desc else f"Судьбоносные решения и сложные развилки в новелле «{db_title}»"
         stats = list(CANONICAL_STAT_PATHS.get(db_title, ("Путь Разума", "Путь Чувств")))
+        dilemma = (
+            f"Сможет ли {heroine_name} сделать верный выбор на решающей развилке сюжета?"
+            if heroine_name
+            else f"Сможете ли вы сделать верный выбор на решающей развилке сюжета в «{db_title}»?"
+        )
 
         return StoryLore(
             title=db_title,
@@ -419,7 +514,7 @@ def _fetch_lore_from_database(title: str, genre: str = "") -> StoryLore | None:
             key_favorites=love_interests,
             stat_paths=stats,
             compelling_pitch=pitch,
-            dramatic_dilemma=f"Сможет ли {heroine_name} сделать верный выбор на решающей развилке сюжета?",
+            dramatic_dilemma=dilemma,
         )
     except Exception as e:
         logger.debug(f"DB lore extraction failed: {e}")
