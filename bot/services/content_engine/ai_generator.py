@@ -5,6 +5,7 @@ import re
 import aiohttp
 
 from bot.config import get_settings
+from bot.services.content_engine.art_prompt_generator import ArtPromptGenerator
 from bot.services.content_engine.brand_voice import BRAND_VOICE_SYSTEM_PROMPT, build_user_prompt
 from bot.services.content_engine.types import AIGenerationResult, GeneratedVariant, SocialPlatform
 
@@ -153,7 +154,12 @@ class ContentAIEngine:
                 return self._parse_json_result(parsed, topic, target_story)
 
     def _parse_json_result(self, parsed: dict, topic: str, target_story: str) -> AIGenerationResult:
-        img_prompt = parsed.get("image_prompt") or f"Romantic scene, Romance Club story '{target_story or topic}', cinematic lighting, digital art, 8k --ar 4:5"
+        img_prompt = parsed.get("image_prompt")
+        if not img_prompt or len(img_prompt.strip()) < 30:
+            img_prompt = ArtPromptGenerator.build_art_prompt(
+                story_title=target_story,
+                topic=topic,
+            )
         variants = {
             SocialPlatform.TELEGRAM: GeneratedVariant(
                 platform=SocialPlatform.TELEGRAM,
@@ -321,10 +327,11 @@ class ContentAIEngine:
                 f"А как поступили вы на этих развилках? Делитесь впечатлениями в реплаях 👇"
             )
 
-        # Clean image prompt for visual novel illustration
-        img_prompt = (
-            f"Breathtaking romantic visual novel illustration for Romance Club '{story_name}', "
-            f"gorgeous characters, vibrant colors, cinematic golden hour lighting, ArtStation trending, 8k masterpiece --ar 4:5"
+        # Rich, cinematic 4:5 illustration prompt adapted specifically for the post
+        img_prompt = ArtPromptGenerator.build_art_prompt(
+            story_title=target_story,
+            topic=clean_topic,
+            main_point=clean_main,
         )
 
         return AIGenerationResult(

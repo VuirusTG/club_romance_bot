@@ -6,6 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from bot.database.models import Story, Character, Episode, Choice
+from bot.services.content_engine.art_prompt_generator import ArtPromptGenerator
 from bot.services.content_engine.story_lore import get_story_lore, is_generic_heroine
 
 
@@ -178,7 +179,7 @@ class AutoContentSuggester:
             facts="• Своевременный выбор правильных вариантов гарантирует высокий результат.\n• Прокачка отношений и баланс статов открывают эксклюзивные сцены.\n• Пошаговые интерактивные развилки по всем сериям доступны в нашем Telegram-боте.",
             cta="Полный интерактивный гайд доступен в нашем Telegram-боте!",
             target_story="",
-            image_concept=f"Cinematic romantic illustration for Romance Club, theme: {clean_query}, atmospheric lighting, 8k, digital art --ar 4:5",
+            image_concept=ArtPromptGenerator.build_art_prompt("", clean_query, category="general", main_point=clean_query),
         )
 
     @classmethod
@@ -244,7 +245,13 @@ class AutoContentSuggester:
             cta=cta,
             target_story=story.title,
             character_name=char_name,
-            image_concept=f"Breathtaking romantic visual novel illustration, handsome {char_name} and gorgeous heroine from Romance Club '{story.title}', vibrant colors, emotional gaze, cinematic golden lighting, 8k masterpiece",
+            image_concept=ArtPromptGenerator.build_art_prompt(
+                story_title=story.title,
+                topic=topic,
+                category="favorite",
+                character_name=char_name,
+                main_point=main_point,
+            ),
         )
 
     @classmethod
@@ -272,7 +279,12 @@ class AutoContentSuggester:
             facts=facts,
             cta=cta,
             target_story=story.title,
-            image_concept=f"Radiant sparkling diamonds and glowing gems, elegant Romance Club '{story.title}' aesthetic, vibrant colors, royal atmosphere, 8k masterpiece",
+            image_concept=ArtPromptGenerator.build_art_prompt(
+                story_title=story.title,
+                topic=topic,
+                category="diamonds",
+                main_point=main_point,
+            ),
         )
 
     @classmethod
@@ -303,7 +315,12 @@ class AutoContentSuggester:
             facts=facts,
             cta=cta,
             target_story=story.title,
-            image_concept=f"Gorgeous duality composition, balance of paths {stats_str}, elegant heroine from Romance Club '{story.title}', vibrant fantasy art, cinematic lighting, 8k",
+            image_concept=ArtPromptGenerator.build_art_prompt(
+                story_title=story.title,
+                topic=topic,
+                category="stats",
+                main_point=main_point,
+            ),
         )
 
     @classmethod
@@ -330,7 +347,12 @@ class AutoContentSuggester:
             facts=facts,
             cta=cta,
             target_story=story.title,
-            image_concept=f"Intense dramatic crossroads scene, emotional visual novel CG, Romance Club '{story.title}', vibrant colors, gorgeous aesthetic, 8k masterpiece",
+            image_concept=ArtPromptGenerator.build_art_prompt(
+                story_title=story.title,
+                topic=topic,
+                category="dilemma",
+                main_point=main_point,
+            ),
         )
 
     @classmethod
@@ -360,7 +382,12 @@ class AutoContentSuggester:
             facts=facts,
             cta=cta,
             target_story=story.title,
-            image_concept=f"Breathtaking romantic visual novel key art, Romance Club '{story.title}', gorgeous heroine, vibrant cinematic atmosphere, fantasy illustration, 8k masterpiece",
+            image_concept=ArtPromptGenerator.build_art_prompt(
+                story_title=story.title,
+                topic=topic,
+                category="overview",
+                main_point=main_point,
+            ),
         )
 
 
