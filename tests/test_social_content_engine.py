@@ -319,3 +319,45 @@ def test_utm_deep_link_generation_and_attribution_parsing():
     assert parsed_plain["post_id"] is None
 
     assert parse_attribution_payload("unknown_link") is None
+
+
+def test_post_preview_payload_character_limit():
+    from bot.handlers.admin_content import _post_preview_payload
+
+    async def _run():
+        async with AsyncSessionFactory() as session:
+            # Create a post with very long texts (1500+ chars each)
+            post = await social.create_social_post(
+                session=session,
+                topic="Очень длинная тема для тестирования лимитов",
+                source_text="Длинный исходный текст " * 50,
+                created_by=1,
+            )
+            # Add variants with 1500 characters each and a 1000 char prompt
+            for plat in ["telegram", "vk", "instagram", "threads"]:
+                await social.create_variant(
+                    session=session,
+                    post_id=post.id,
+                    platform=plat,
+                    text=("Анализ новеллы и гайд с подробностями " * 40),
+                    image_prompt=("Промпт для Midjourney со всеми деталями стиля, персонажами и атмосферой " * 15),
+                )
+
+            payload = await _post_preview_payload(post.id)
+            assert payload is not None
+            text, kb = payload
+            # Must strictly not exceed Telegram limit (4096)
+            assert len(text) <= 3900
+            assert "💡 Нажмите кнопку с названием платформы ниже" in text
+            # Ensure keyboard has buttons
+            button_texts = [btn.text for row in kb.inline_keyboard for btn in row]
+            assert "✏️ TELEGRAM" in button_texts
+            assert "✏️ VK" in button_texts
+            assert "✏️ INSTAGRAM" in button_texts
+            assert "✏️ THREADS" in button_texts
+
+            # Cleanup
+            await social.delete_social_post(session, post.id)
+
+    asyncio.run(_run())
+

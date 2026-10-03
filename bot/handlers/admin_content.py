@@ -125,8 +125,11 @@ async def _post_preview_payload(post_id: int) -> tuple[str, InlineKeyboardMarkup
     for v in post.variants:
         status_icon = "✅" if v.status == VariantStatus.PUBLISHED.value else ("❌" if v.status == VariantStatus.FAILED.value else "📝")
         plat_title = v.platform.upper()
-        lines.append(f"\n{status_icon} <b>{plat_title}</b> ({v.status}):")
-        lines.append(v.text)
+        # Preview snippet so that all 4 platform texts fit comfortably within Telegram limit (4096)
+        text_preview = v.text.strip()
+        if len(text_preview) > 280:
+            text_preview = text_preview[:277] + "..."
+        lines.append(f"\n{status_icon} <b>{plat_title}</b> ({v.status}):\n{text_preview}")
         if v.error_message:
             lines.append(f"⚠️ <i>Ошибка: {v.error_message}</i>")
 
@@ -139,8 +142,11 @@ async def _post_preview_payload(post_id: int) -> tuple[str, InlineKeyboardMarkup
     sample_prompt = next((v.image_prompt for v in post.variants if v.image_prompt), "Не сформирован")
     sample_url = next((v.image_url for v in post.variants if v.image_url), None)
     image_url_info = f'\n🖼 <b>Арт:</b> <a href="{sample_url}">Посмотреть сгенерированное фото</a>' if sample_url else ""
+    prompt_snippet = sample_prompt[:300] + "..." if len(sample_prompt) > 300 else sample_prompt
+
     lines.append("\n──────────────────────")
-    lines.append(f"🎨 <b>ПРОМПТ ДЛЯ АРТА:</b>\n<code>{sample_prompt}</code>{image_url_info}")
+    lines.append(f"🎨 <b>ПРОМПТ ДЛЯ АРТА:</b>\n<code>{prompt_snippet}</code>{image_url_info}")
+    lines.append("\n<i>💡 Нажмите кнопку с названием платформы ниже, чтобы просмотреть или отредактировать полный текст.</i>")
 
     rows: list[list[InlineKeyboardButton]] = []
     if edit_buttons:
@@ -170,7 +176,11 @@ async def _post_preview_payload(post_id: int) -> tuple[str, InlineKeyboardMarkup
     ])
     rows.append([_btn("📱 Главное меню контента", "admin:content:home")])
 
-    return "\n".join(lines), _menu(rows)
+    full_text = "\n".join(lines)
+    if len(full_text) > 3900:
+        full_text = full_text[:3890] + "\n..."
+
+    return full_text, _menu(rows)
 
 
 # --- Handlers ---
@@ -397,13 +407,21 @@ async def content_pick_idea_callback(callback: CallbackQuery) -> None:
     if callback.message:
         await callback.message.edit_text("⏳ Создаю и адаптирую пост под все платформы...")
 
-    async with AsyncSessionFactory() as session:
-        post_id = await _create_post_from_idea(session, callback.from_user.id, idea)
+    try:
+        async with AsyncSessionFactory() as session:
+            post_id = await _create_post_from_idea(session, callback.from_user.id, idea)
 
-    payload = await _post_preview_payload(post_id)
-    if payload and callback.message:
-        text, kb = payload
-        await callback.message.edit_text(text, reply_markup=kb)
+        payload = await _post_preview_payload(post_id)
+        if payload and callback.message:
+            text, kb = payload
+            await callback.message.edit_text(text, reply_markup=kb)
+    except Exception as e:
+        logger.exception("Failed to generate post from idea: %s", e)
+        if callback.message:
+            await callback.message.edit_text(
+                f"❌ <b>Ошибка при создании поста:</b>\n<code>{str(e)[:300]}</code>",
+                reply_markup=_menu([[_btn("🔙 К контенту", "admin:content:home")]]),
+            )
 
 
 @router.callback_query(F.data == "admin:content:instant_random")
@@ -415,14 +433,22 @@ async def content_instant_random_callback(callback: CallbackQuery) -> None:
     if callback.message:
         await callback.message.edit_text("🎲 Выбираю интересную тему из базы и генерирую посты...")
 
-    async with AsyncSessionFactory() as session:
-        idea = await AutoContentSuggester.get_random_topic(session)
-        post_id = await _create_post_from_idea(session, callback.from_user.id, idea)
+    try:
+        async with AsyncSessionFactory() as session:
+            idea = await AutoContentSuggester.get_random_topic(session)
+            post_id = await _create_post_from_idea(session, callback.from_user.id, idea)
 
-    payload = await _post_preview_payload(post_id)
-    if payload and callback.message:
-        text, kb = payload
-        await callback.message.edit_text(text, reply_markup=kb)
+        payload = await _post_preview_payload(post_id)
+        if payload and callback.message:
+            text, kb = payload
+            await callback.message.edit_text(text, reply_markup=kb)
+    except Exception as e:
+        logger.exception("Failed in instant random post: %s", e)
+        if callback.message:
+            await callback.message.edit_text(
+                f"❌ <b>Ошибка при создании поста:</b>\n<code>{str(e)[:300]}</code>",
+                reply_markup=_menu([[_btn("🔙 К контенту", "admin:content:home")]]),
+            )
 
 
 @router.callback_query(F.data == "admin:content:smart_create")
@@ -601,26 +627,34 @@ async def content_regenerate_callback(callback: CallbackQuery) -> None:
     post_id = int(callback.data.split(":")[3])
     await callback.answer("Перегенерирую контент...")
 
-    async with AsyncSessionFactory() as session:
-        post = await social.get_post_with_variants(session, post_id)
-        if not post:
-            return
-        story_title = post.target_story.title if post.target_story else ""
-        ai_res = await ai_engine.generate_variants(
-            topic=post.topic,
-            main_point=post.source_text,
-            target_story=story_title,
-        )
-        for var in post.variants:
-            gen_var = ai_res.variants.get(SocialPlatform(var.platform))
-            if gen_var:
-                await social.update_variant_text(session, var.id, gen_var.text)
-                await social.update_variant_image(session, var.id, gen_var.image_url or var.image_url, gen_var.image_prompt)
+    try:
+        async with AsyncSessionFactory() as session:
+            post = await social.get_post_with_variants(session, post_id)
+            if not post:
+                return
+            story_title = post.target_story.title if post.target_story else ""
+            ai_res = await ai_engine.generate_variants(
+                topic=post.topic,
+                main_point=post.source_text,
+                target_story=story_title,
+            )
+            for var in post.variants:
+                gen_var = ai_res.variants.get(SocialPlatform(var.platform))
+                if gen_var:
+                    await social.update_variant_text(session, var.id, gen_var.text)
+                    await social.update_variant_image(session, var.id, gen_var.image_url or var.image_url, gen_var.image_prompt)
 
-    payload = await _post_preview_payload(post_id)
-    if payload and callback.message:
-        text, kb = payload
-        await callback.message.edit_text(text, reply_markup=kb)
+        payload = await _post_preview_payload(post_id)
+        if payload and callback.message:
+            text, kb = payload
+            await callback.message.edit_text(text, reply_markup=kb)
+    except Exception as e:
+        logger.exception("Failed to regenerate post %s: %s", post_id, e)
+        if callback.message:
+            await callback.message.edit_text(
+                f"❌ <b>Ошибка при регенерации поста:</b>\n<code>{str(e)[:300]}</code>",
+                reply_markup=_menu([[_btn("🔙 К посту", f"admin:content:post:{post_id}")]])
+            )
 
 
 # --- FSM Message Handler ---
@@ -675,15 +709,22 @@ async def content_fsm_message_handler(message: Message) -> None:
     # Smart 1-step creation
     if state.name == "content_create_smart":
         state_storage.clear(message.from_user.id)
-        await message.answer("⏳ Анализирую запрос, подбираю лор и генерирую посты...")
-        async with AsyncSessionFactory() as session:
-            idea = await AutoContentSuggester.expand_user_query(session, text)
-            post_id = await _create_post_from_idea(session, message.from_user.id, idea)
+        wait_msg = await message.answer("⏳ Анализирую запрос, подбираю лор и генерирую посты...")
+        try:
+            async with AsyncSessionFactory() as session:
+                idea = await AutoContentSuggester.expand_user_query(session, text)
+                post_id = await _create_post_from_idea(session, message.from_user.id, idea)
 
-        payload = await _post_preview_payload(post_id)
-        if payload:
-            text_p, kb_p = payload
-            await message.answer(text_p, reply_markup=kb_p)
+            payload = await _post_preview_payload(post_id)
+            if payload:
+                text_p, kb_p = payload
+                await wait_msg.edit_text(text_p, reply_markup=kb_p)
+        except Exception as e:
+            logger.exception("Failed in content_create_smart: %s", e)
+            await wait_msg.edit_text(
+                f"❌ <b>Ошибка при создании поста:</b>\n<code>{str(e)[:300]}</code>",
+                reply_markup=_menu([[_btn("🔙 К контенту", "admin:content:home")]])
+            )
         return
 
     # Step 4: CTA -> Generate post & variants
@@ -695,26 +736,31 @@ async def content_fsm_message_handler(message: Message) -> None:
         cta = "Полный гайд доступен в нашем Telegram-боте!" if text == "-" else text
         state_storage.clear(message.from_user.id)
 
-        await message.answer("⏳ Создаю пост и адаптирую под платформы...")
+        wait_msg = await message.answer("⏳ Создаю пост и адаптирую под платформы...")
+        try:
+            async with AsyncSessionFactory() as session:
+                idea = TopicIdea(
+                    id="manual",
+                    category="manual",
+                    title=topic,
+                    topic=topic,
+                    main_point=main_point,
+                    facts=facts,
+                    cta=cta,
+                    target_story="",
+                )
+                post_id = await _create_post_from_idea(session, message.from_user.id, idea)
 
-        async with AsyncSessionFactory() as session:
-            idea = TopicIdea(
-                id="manual",
-                category="manual",
-                title=topic,
-                topic=topic,
-                main_point=main_point,
-                facts=facts,
-                cta=cta,
-                target_story="",
+            payload = await _post_preview_payload(post_id)
+            if payload:
+                text_p, kb_p = payload
+                await wait_msg.edit_text(text_p, reply_markup=kb_p)
+        except Exception as e:
+            logger.exception("Failed in content_create_cta: %s", e)
+            await wait_msg.edit_text(
+                f"❌ <b>Ошибка при создании поста:</b>\n<code>{str(e)[:300]}</code>",
+                reply_markup=_menu([[_btn("🔙 К контенту", "admin:content:home")]])
             )
-            post_id = await _create_post_from_idea(session, message.from_user.id, idea)
-
-        await message.answer(f"✅ Пост #{post_id} успешно создан!")
-        payload = await _post_preview_payload(post_id)
-        if payload:
-            text_p, kb_p = payload
-            await message.answer(text_p, reply_markup=kb_p)
         return
 
     # Edit single variant text
