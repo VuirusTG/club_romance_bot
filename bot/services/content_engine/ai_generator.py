@@ -85,10 +85,123 @@ class DefaultImageGenerator(ImageGenerator):
             return random.choice(self.FALLBACK_IMAGES)
 
 
+class HuggingFaceFluxImageGenerator(ImageGenerator):
+    """
+    State-of-the-art image generator using FLUX.1-schnell via Hugging Face Inference API.
+    Converts prompts to detailed visual novel instructions and uploads the resulting
+    image to a high-speed CDN (freeimage.host) for instant public preview and multi-platform publishing.
+    """
+    HF_ROUTER_URL = "https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell"
+    HF_FALLBACK_URL = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell"
+    FREEIMAGE_API_KEY = "6d207e02198a847aa98d0a2a901485a5"
+
+    def __init__(self, hf_token: str | None = None) -> None:
+        self.hf_token = (hf_token or "").strip()
+
+    @staticmethod
+    def _build_flux_prompt(prompt: str) -> str:
+        clean = re.sub(r"--ar\s+\d+:\d+", "", prompt).strip()
+        style_keywords = (
+            "vertical 4:5 visual novel digital art illustration, Romance Club aesthetic, "
+            "vibrant romantic colors, gorgeous heroine, intricate details, cinematic romantic fantasy lighting, "
+            "ArtStation trending, 8k masterpiece"
+        )
+        return f"{clean}, {style_keywords}"
+
+    async def generate(self, prompt: str, aspect_ratio: str = "4:5") -> str | None:
+        if not self.hf_token:
+            return None
+
+        flux_prompt = self._build_flux_prompt(prompt)
+        headers = {
+            "Authorization": f"Bearer {self.hf_token}",
+            "Content-Type": "application/json",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+        }
+        payload = {
+            "inputs": flux_prompt[:1000],
+            "parameters": {
+                "num_inference_steps": 4,
+                "width": 768,
+                "height": 1024,
+            },
+        }
+
+        endpoints = [self.HF_ROUTER_URL, self.HF_FALLBACK_URL]
+        img_bytes: bytes | None = None
+
+        async with aiohttp.ClientSession(headers={"User-Agent": "Mozilla/5.0"}) as session:
+            for url in endpoints:
+                try:
+                    async with session.post(
+                        url,
+                        headers=headers,
+                        json=payload,
+                        timeout=aiohttp.ClientTimeout(total=50),
+                    ) as resp:
+                        if resp.status == 200:
+                            content_type = resp.headers.get("Content-Type", "")
+                            if "image" in content_type:
+                                img_bytes = await resp.read()
+                                break
+                            data = await resp.json()
+                            if isinstance(data, list) and len(data) > 0 and "image" in data[0]:
+                                import base64
+                                img_bytes = base64.b64decode(data[0]["image"])
+                                break
+                        else:
+                            err_text = await resp.text()
+                            logger.warning(f"HF FLUX inference returned {resp.status} at {url}: {err_text[:200]}")
+                except Exception as e:
+                    logger.warning(f"HF inference error at {url}: {e}")
+
+            if not img_bytes:
+                return None
+
+            # Upload to high-speed CDN
+            try:
+                import base64
+                b64_source = base64.b64encode(img_bytes).decode("utf-8")
+                upload_data = {
+                    "key": self.FREEIMAGE_API_KEY,
+                    "action": "upload",
+                    "source": b64_source,
+                    "format": "json",
+                }
+                async with session.post(
+                    "https://freeimage.host/api/1/upload",
+                    data=upload_data,
+                    timeout=aiohttp.ClientTimeout(total=25),
+                ) as up_resp:
+                    if up_resp.status == 200:
+                        up_json = await up_resp.json()
+                        cdn_url = up_json.get("image", {}).get("url")
+                        if cdn_url:
+                            logger.info(f"FLUX.1 image generated and uploaded to CDN: {cdn_url}")
+                            return cdn_url
+            except Exception as e:
+                logger.warning(f"Failed to upload FLUX image to CDN: {e}")
+
+        return None
+
+
 class ContentAIEngine:
-    def __init__(self, api_key: str | None = None) -> None:
-        self.api_key = api_key or get_settings().openai_api_key
-        self.image_generator = DefaultImageGenerator(self.api_key)
+    def __init__(self, api_key: str | None = None, hf_token: str | None = None) -> None:
+        settings = get_settings()
+        self.api_key = api_key or settings.openai_api_key
+        self.hf_token = hf_token or settings.hf_token
+        self.default_generator = DefaultImageGenerator(self.api_key)
+        self.hf_generator = HuggingFaceFluxImageGenerator(self.hf_token) if self.hf_token else None
+
+    async def generate_image(self, prompt: str) -> str | None:
+        if self.hf_generator:
+            try:
+                url = await self.hf_generator.generate(prompt)
+                if url:
+                    return url
+            except Exception as e:
+                logger.warning(f"HuggingFace FLUX image generation failed: {e}. Falling back to default.")
+        return await self.default_generator.generate(prompt)
 
     async def generate_variants(
         self,
@@ -110,7 +223,7 @@ class ContentAIEngine:
 
         # Automatically generate 1 matching image for all platforms
         try:
-            img_url = await self.image_generator.generate(res.image_prompt)
+            img_url = await self.generate_image(res.image_prompt)
             res.image_url = img_url
             for var in res.variants.values():
                 var.image_url = img_url

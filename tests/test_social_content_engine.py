@@ -361,3 +361,18 @@ def test_post_preview_payload_character_limit():
 
     asyncio.run(_run())
 
+
+def test_hugging_face_flux_image_generator():
+    from bot.services.content_engine.ai_generator import HuggingFaceFluxImageGenerator, ContentAIEngine
+
+    gen = HuggingFaceFluxImageGenerator("hf_mock_token")
+    built = gen._build_flux_prompt("Молодая девушка у замка --ar 4:5")
+    assert "--ar 4:5" not in built
+    assert "Romance Club aesthetic" in built
+    assert "vertical 4:5" in built
+
+    # Test ContentAIEngine initialization with HF token
+    engine = ContentAIEngine(api_key=None, hf_token="hf_mock_token")
+    assert engine.hf_generator is not None
+    assert engine.hf_generator.hf_token == "hf_mock_token"
+
