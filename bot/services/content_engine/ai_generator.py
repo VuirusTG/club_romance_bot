@@ -35,6 +35,61 @@ class DefaultImageGenerator(ImageGenerator):
     def __init__(self, api_key: str | None = None) -> None:
         self.api_key = api_key
 
+    @classmethod
+    def _to_visual_english_prompt(cls, prompt: str) -> str:
+        """
+        Translates and enriches Romance Club prompts into structured, highly aesthetic English
+        for diffusion models to prevent dark/blurry outputs.
+        """
+        p_low = prompt.lower()
+
+        # 1. Heroine archetype & styling
+        heroine_style = "breathtaking gorgeous young heroine with long wavy hair and captivating eyes"
+        if any(w in p_low for w in ["дворянк", "версаль", "корсет", "платье"]):
+            heroine_style = "breathtaking noble young lady in elegant embroidered Victorian corset dress and pearls"
+        elif any(w in p_low for w in ["чернокниж", "нил", "египет"]):
+            heroine_style = "enchanting mysterious dark-haired sorceress in ornate Egyptian silk robes and gold jewelry"
+        elif any(w in p_low for w in ["воительниц", "меч", "доспех", "солнцем"]):
+            heroine_style = "brave beautiful warrior heroine in fantasy adventurer attire"
+        elif any(w in p_low for w in ["кимоно", "ивы", "япони"]):
+            heroine_style = "exquisite geisha heroine in luxurious silk kimono with ornate floral hair ornaments"
+        elif any(w in p_low for w in ["инди", "сари", "кали"]):
+            heroine_style = "stunning noble Indian beauty in royal embroidered silk saree and glowing gold jewelry"
+        elif any(w in p_low for w in ["киберпанк", "пси", "куртк"]):
+            heroine_style = "stylish cyberpunk heroine in sleek futuristic jacket with glowing neon accents"
+
+        # 2. Scenery & backdrop
+        setting = "fairy tale twilight castle courtyard"
+        if "нил" in p_low or "египет" in p_low:
+            setting = "ancient Egyptian temple with golden columns and torchlight"
+        elif "версаль" in p_low:
+            setting = "opulent Versailles palace hall with chandeliers and grand mirrors"
+        elif "ивы" in p_low:
+            setting = "tranquil Japanese pagoda garden with blooming pink cherry blossoms"
+        elif "кали" in p_low:
+            setting = "majestic ancient Indian temple with incense smoke and lotus pond"
+        elif "пси" in p_low:
+            setting = "rain-slicked futuristic neon cityscape with holographic billboards"
+        elif "лес" in p_low or "морок" in p_low:
+            setting = "mystical twilight birch forest with soft ethereal fog"
+
+        # 3. Main action / Composition
+        action = "gazing at magical glowing crossroads, luminous sparkling crystals floating in air"
+        if any(w in p_low for w in ["ветк", "фаворит", "любов", "романтик"]):
+            action = "intimate romantic scene standing close with handsome charismatic male suitor, tender passionate eye contact, glowing fairy lights"
+        elif "алмаз" in p_low:
+            action = "holding sparkling luminous diamond crystals, glittering magical gemstones floating around"
+        elif any(w in p_low for w in ["стат", "баланс"]):
+            action = "holding two swirling spheres of magical light in opposing colors, balance of elemental powers"
+
+        full_en = (
+            f"vertical visual novel digital art illustration, Romance Club aesthetic, "
+            f"{heroine_style}, {action}, {setting} in background, "
+            f"vibrant romantic colors, intricate details, cinematic volumetric lighting, "
+            f"ArtStation trending, breathtaking romantic CG masterpiece, 8k resolution"
+        )
+        return full_en
+
     async def generate(self, prompt: str, aspect_ratio: str = "4:5") -> str | None:
         clean_prompt = prompt.replace("--ar 4:5", "").replace("--ar 1:1", "").strip()
 
@@ -63,20 +118,13 @@ class DefaultImageGenerator(ImageGenerator):
             except Exception as e:
                 logger.warning(f"Error calling OpenAI Image API: {e}. Falling back.")
 
-        # 2. Enhanced visual novel prompt (remove decay / horror keywords, enforce bright romantic aesthetic)
-        filtered_prompt = re.sub(
-            r"\b(гниёт|гниль|гной|смерть|труп|гниение|rotting|decay|rotten|corpse|horror|ugly|gloomy|darkness|gore)\b",
-            "mystery",
-            clean_prompt,
-            flags=re.IGNORECASE,
-        )
-        style_suffix = "breathtaking visual novel CG illustration, Romance Club aesthetic, vibrant colors, gorgeous characters, cinematic romantic lighting, ArtStation trending, 8k masterpiece"
-        full_prompt = f"{filtered_prompt}, {style_suffix}".strip()
+        # 2. Convert to high-aesthetic Romance Club English prompt
+        visual_prompt = self._to_visual_english_prompt(clean_prompt)
 
-        # 3. Clean Pollinations AI URL (avoid width/height/seed/nologo parameters that trigger 402 Payment Required)
+        # 3. Clean Pollinations AI URL (full prompt without truncation, no payment parameters)
         try:
             import urllib.parse
-            encoded = urllib.parse.quote(full_prompt[:250])
+            encoded = urllib.parse.quote(visual_prompt)
             pollinations_url = f"https://image.pollinations.ai/prompt/{encoded}"
             return pollinations_url
         except Exception as e:
