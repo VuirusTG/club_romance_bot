@@ -376,3 +376,18 @@ def test_hugging_face_flux_image_generator():
     assert engine.hf_generator is not None
     assert engine.hf_generator.hf_token == "hf_mock_token"
 
+
+def test_together_flux_image_generator():
+    from bot.services.content_engine.ai_generator import TogetherFluxImageGenerator, ContentAIEngine
+
+    gen = TogetherFluxImageGenerator("together_mock_key")
+    built = gen._build_flux_prompt("Прекрасная героиня в саду --ar 4:5")
+    assert "--ar 4:5" not in built
+    assert "Romance Club aesthetic" in built
+    assert "vertical 4:5" in built
+
+    # Test ContentAIEngine initialization with Together key
+    engine = ContentAIEngine(api_key=None, together_api_key="together_mock_key")
+    assert engine.together_generator is not None
+    assert engine.together_generator.api_key == "together_mock_key"
+

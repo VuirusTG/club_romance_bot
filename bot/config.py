@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     threads_access_token: str | None = None
     openai_api_key: str | None = None
     hf_token: str | None = None
+    together_api_key: str | None = None
     social_publish_dry_run: bool = True
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
