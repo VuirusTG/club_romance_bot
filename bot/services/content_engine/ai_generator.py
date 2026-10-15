@@ -133,87 +133,137 @@ class DefaultImageGenerator(ImageGenerator):
             return random.choice(self.FALLBACK_IMAGES)
 
 
-class HuggingFaceFluxImageGenerator(ImageGenerator):
+class KandinskyImageGenerator(ImageGenerator):
     """
-    State-of-the-art image generator using FLUX.1-schnell via Hugging Face Inference API.
-    Converts prompts to detailed visual novel instructions and uploads the resulting
-    image to a high-speed CDN (freeimage.host) for instant public preview and multi-platform publishing.
+    High-quality image generator using Kandinsky 3.1 via FusionBrain API (fusionbrain.ai).
+    Free tier: up to 100 images/day. Requires API key + Secret key from fusionbrain.ai.
+
+    Flow: POST /key/api/v1/text2image/run → poll /key/api/v1/text2image/status/{uuid}
+    → upload result to freeimage.host CDN for a permanent public URL.
     """
-    HF_ROUTER_URL = "https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell"
-    HF_FALLBACK_URL = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell"
+    BASE_URL = "https://api.fusionbrain.ai"
     FREEIMAGE_API_KEY = "6d207e02198a847aa98d0a2a901485a5"
 
-    def __init__(self, hf_token: str | None = None) -> None:
-        self.hf_token = (hf_token or "").strip()
+    def __init__(self, api_key: str | None = None, secret_key: str | None = None) -> None:
+        self.api_key = (api_key or "").strip()
+        self.secret_key = (secret_key or "").strip()
 
     @staticmethod
-    def _build_flux_prompt(prompt: str) -> str:
+    def _build_kandinsky_prompt(prompt: str) -> str:
         clean = re.sub(r"--ar\s+\d+:\d+", "", prompt).strip()
-        style_keywords = (
-            "vertical 4:5 visual novel digital art illustration, Romance Club aesthetic, "
-            "vibrant romantic colors, gorgeous heroine, intricate details, cinematic romantic fantasy lighting, "
-            "ArtStation trending, 8k masterpiece"
+        style_suffix = (
+            "вертикальная иллюстрация в стиле визуальной новеллы Romance Club, "
+            "яркие романтические цвета, красивая героиня, кинематографическое освещение, "
+            "детализированный арт, высокое качество, 8k"
         )
-        return f"{clean}, {style_keywords}"
+        return f"{clean}, {style_suffix}"
 
     async def generate(self, prompt: str, aspect_ratio: str = "4:5") -> str | None:
-        if not self.hf_token:
+        if not self.api_key or not self.secret_key:
             return None
 
-        flux_prompt = self._build_flux_prompt(prompt)
+        import asyncio
+        import base64
+
+        kandinsky_prompt = self._build_kandinsky_prompt(prompt)
         headers = {
-            "Authorization": f"Bearer {self.hf_token}",
-            "Content-Type": "application/json",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-        }
-        payload = {
-            "inputs": flux_prompt[:1000],
-            "parameters": {
-                "num_inference_steps": 4,
-                "width": 768,
-                "height": 1024,
-            },
+            "X-Key": f"Key {self.api_key}",
+            "X-Secret": f"Secret {self.secret_key}",
         }
 
-        endpoints = [self.HF_ROUTER_URL, self.HF_FALLBACK_URL]
-        img_bytes: bytes | None = None
-
-        async with aiohttp.ClientSession(headers={"User-Agent": "Mozilla/5.0"}) as session:
-            for url in endpoints:
-                try:
-                    async with session.post(
-                        url,
-                        headers=headers,
-                        json=payload,
-                        timeout=aiohttp.ClientTimeout(total=50),
-                    ) as resp:
-                        if resp.status == 200:
-                            content_type = resp.headers.get("Content-Type", "")
-                            if "image" in content_type:
-                                img_bytes = await resp.read()
-                                break
-                            data = await resp.json()
-                            if isinstance(data, list) and len(data) > 0 and "image" in data[0]:
-                                import base64
-                                img_bytes = base64.b64decode(data[0]["image"])
-                                break
-                        else:
-                            err_text = await resp.text()
-                            logger.warning(f"HF FLUX inference returned {resp.status} at {url}: {err_text[:200]}")
-                except Exception as e:
-                    logger.warning(f"HF inference error at {url}: {e}")
-
-            if not img_bytes:
+        async with aiohttp.ClientSession() as session:
+            # Step 1: Get available model ID
+            try:
+                async with session.get(
+                    f"{self.BASE_URL}/key/api/v1/models",
+                    headers=headers,
+                    timeout=aiohttp.ClientTimeout(total=15),
+                ) as resp:
+                    if resp.status != 200:
+                        err = await resp.text()
+                        logger.warning(f"Kandinsky models fetch failed ({resp.status}): {err[:200]}")
+                        return None
+                    models = await resp.json()
+                    model_id = models[0]["id"] if models else None
+                    if not model_id:
+                        logger.warning("Kandinsky: no models available")
+                        return None
+            except Exception as e:
+                logger.warning(f"Kandinsky models error: {e}")
                 return None
 
-            # Upload to high-speed CDN
+            # Step 2: Submit generation request (multipart/form-data)
+            params_json = json.dumps({
+                "type": "GENERATE",
+                "numImages": 1,
+                "width": 768,
+                "height": 1024,
+                "generateParams": {"query": kandinsky_prompt[:1000]},
+            })
+            form = aiohttp.FormData()
+            form.add_field("model_id", str(model_id))
+            form.add_field(
+                "params",
+                params_json,
+                content_type="application/json",
+            )
+
             try:
-                import base64
-                b64_source = base64.b64encode(img_bytes).decode("utf-8")
+                async with session.post(
+                    f"{self.BASE_URL}/key/api/v1/text2image/run",
+                    headers=headers,
+                    data=form,
+                    timeout=aiohttp.ClientTimeout(total=30),
+                ) as resp:
+                    if resp.status != 201:
+                        err = await resp.text()
+                        logger.warning(f"Kandinsky run failed ({resp.status}): {err[:200]}")
+                        return None
+                    run_data = await resp.json()
+                    uuid = run_data.get("uuid")
+                    if not uuid:
+                        logger.warning("Kandinsky: no uuid in run response")
+                        return None
+            except Exception as e:
+                logger.warning(f"Kandinsky run error: {e}")
+                return None
+
+            # Step 3: Poll for result (up to ~60 seconds)
+            img_b64: str | None = None
+            for attempt in range(20):
+                await asyncio.sleep(3)
+                try:
+                    async with session.get(
+                        f"{self.BASE_URL}/key/api/v1/text2image/status/{uuid}",
+                        headers=headers,
+                        timeout=aiohttp.ClientTimeout(total=15),
+                    ) as resp:
+                        if resp.status != 200:
+                            continue
+                        status_data = await resp.json()
+                        status = status_data.get("status")
+                        if status == "DONE":
+                            images = status_data.get("images", [])
+                            if images:
+                                img_b64 = images[0]
+                            break
+                        elif status == "FAIL":
+                            logger.warning(f"Kandinsky generation FAIL: {status_data}")
+                            return None
+                        # status == "INITIAL" or "PROCESSING" — continue polling
+                except Exception as e:
+                    logger.warning(f"Kandinsky poll error (attempt {attempt}): {e}")
+
+            if not img_b64:
+                logger.warning("Kandinsky: timed out waiting for image")
+                return None
+
+            # Step 4: Upload base64 image to CDN
+            try:
                 upload_data = {
                     "key": self.FREEIMAGE_API_KEY,
                     "action": "upload",
-                    "source": b64_source,
+                    "source": img_b64,
                     "format": "json",
                 }
                 async with session.post(
@@ -225,96 +275,10 @@ class HuggingFaceFluxImageGenerator(ImageGenerator):
                         up_json = await up_resp.json()
                         cdn_url = up_json.get("image", {}).get("url")
                         if cdn_url:
-                            logger.info(f"FLUX.1 image generated and uploaded to CDN: {cdn_url}")
+                            logger.info(f"Kandinsky image uploaded to CDN: {cdn_url}")
                             return cdn_url
             except Exception as e:
-                logger.warning(f"Failed to upload FLUX image to CDN: {e}")
-
-        return None
-
-
-class TogetherFluxImageGenerator(ImageGenerator):
-    """
-    High-speed, high-quality image generator using FLUX.1-schnell on Together AI.
-    Converts prompts to Romance Club visual aesthetic and uploads the result to CDN
-    (or uses direct Together URL) for public multi-platform publishing.
-    """
-    TOGETHER_API_URL = "https://api.together.xyz/v1/images/generations"
-    FREEIMAGE_API_KEY = "6d207e02198a847aa98d0a2a901485a5"
-
-    def __init__(self, api_key: str | None = None) -> None:
-        self.api_key = (api_key or "").strip()
-
-    @staticmethod
-    def _build_flux_prompt(prompt: str) -> str:
-        clean = re.sub(r"--ar\s+\d+:\d+", "", prompt).strip()
-        style_keywords = (
-            "vertical 4:5 visual novel digital art illustration, Romance Club aesthetic, "
-            "vibrant romantic colors, gorgeous heroine, intricate details, cinematic romantic fantasy lighting, "
-            "ArtStation trending, 8k masterpiece"
-        )
-        return f"{clean}, {style_keywords}"
-
-    async def generate(self, prompt: str, aspect_ratio: str = "4:5") -> str | None:
-        if not self.api_key:
-            return None
-
-        flux_prompt = self._build_flux_prompt(prompt)
-        headers = {
-            "Authorization": f"Bearer {self.api_key}",
-            "Content-Type": "application/json",
-            "User-Agent": "Mozilla/5.0",
-        }
-        payload = {
-            "model": "black-forest-labs/FLUX.1-schnell",
-            "prompt": flux_prompt[:1000],
-            "width": 768,
-            "height": 1024,
-            "steps": 4,
-            "n": 1,
-            "response_format": "b64_json",
-        }
-
-        async with aiohttp.ClientSession() as session:
-            try:
-                async with session.post(
-                    self.TOGETHER_API_URL,
-                    headers=headers,
-                    json=payload,
-                    timeout=aiohttp.ClientTimeout(total=40),
-                ) as resp:
-                    if resp.status == 200:
-                        data = await resp.json()
-                        item = data.get("data", [{}])[0]
-                        b64_str = item.get("b64_json")
-                        direct_url = item.get("url")
-
-                        if direct_url and direct_url.startswith("http"):
-                            return direct_url
-
-                        if b64_str:
-                            upload_data = {
-                                "key": self.FREEIMAGE_API_KEY,
-                                "action": "upload",
-                                "source": b64_str,
-                                "format": "json",
-                            }
-                            async with session.post(
-                                "https://freeimage.host/api/1/upload",
-                                data=upload_data,
-                                timeout=aiohttp.ClientTimeout(total=25),
-                            ) as up_resp:
-                                if up_resp.status == 200:
-                                    up_json = await up_resp.json()
-                                    cdn_url = up_json.get("image", {}).get("url")
-                                    if cdn_url:
-                                        logger.info(f"Together FLUX.1 image uploaded to CDN: {cdn_url}")
-                                        return cdn_url
-                    else:
-                        err_text = await resp.text()
-                        logger.warning(f"Together AI image generation failed ({resp.status}): {err_text[:250]}")
-            except Exception as e:
-                logger.warning(f"Error calling Together AI image API: {e}")
+                logger.warning(f"Kandinsky CDN upload error: {e}")
 
         return None
 
@@ -323,33 +287,30 @@ class ContentAIEngine:
     def __init__(
         self,
         api_key: str | None = None,
-        hf_token: str | None = None,
-        together_api_key: str | None = None,
+        kandinsky_api_key: str | None = None,
+        kandinsky_secret_key: str | None = None,
     ) -> None:
         settings = get_settings()
         self.api_key = api_key or settings.openai_api_key
-        self.hf_token = hf_token or settings.hf_token
-        self.together_api_key = together_api_key or settings.together_api_key
+        self.kandinsky_api_key = kandinsky_api_key or settings.kandinsky_api_key
+        self.kandinsky_secret_key = kandinsky_secret_key or settings.kandinsky_secret_key
 
         self.default_generator = DefaultImageGenerator(self.api_key)
-        self.together_generator = TogetherFluxImageGenerator(self.together_api_key) if self.together_api_key else None
-        self.hf_generator = HuggingFaceFluxImageGenerator(self.hf_token) if self.hf_token else None
+        self.kandinsky_generator = (
+            KandinskyImageGenerator(self.kandinsky_api_key, self.kandinsky_secret_key)
+            if (self.kandinsky_api_key and self.kandinsky_secret_key)
+            else None
+        )
 
     async def generate_image(self, prompt: str) -> str | None:
-        if self.together_generator:
+        # Priority: Kandinsky → Pollinations (DefaultImageGenerator)
+        if self.kandinsky_generator:
             try:
-                url = await self.together_generator.generate(prompt)
+                url = await self.kandinsky_generator.generate(prompt)
                 if url:
                     return url
             except Exception as e:
-                logger.warning(f"Together AI FLUX generation failed: {e}. Falling back.")
-        if self.hf_generator:
-            try:
-                url = await self.hf_generator.generate(prompt)
-                if url:
-                    return url
-            except Exception as e:
-                logger.warning(f"HuggingFace FLUX image generation failed: {e}. Falling back to default.")
+                logger.warning(f"Kandinsky generation failed: {e}. Falling back to Pollinations.")
         return await self.default_generator.generate(prompt)
 
     async def generate_variants(

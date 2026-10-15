@@ -362,32 +362,22 @@ def test_post_preview_payload_character_limit():
     asyncio.run(_run())
 
 
-def test_hugging_face_flux_image_generator():
-    from bot.services.content_engine.ai_generator import HuggingFaceFluxImageGenerator, ContentAIEngine
+def test_kandinsky_image_generator():
+    from bot.services.content_engine.ai_generator import KandinskyImageGenerator, ContentAIEngine
 
-    gen = HuggingFaceFluxImageGenerator("hf_mock_token")
-    built = gen._build_flux_prompt("Молодая девушка у замка --ar 4:5")
+    gen = KandinskyImageGenerator("mock_api_key", "mock_secret_key")
+    built = gen._build_kandinsky_prompt("Молодая девушка у замка --ar 4:5")
     assert "--ar 4:5" not in built
-    assert "Romance Club aesthetic" in built
-    assert "vertical 4:5" in built
+    assert "Romance Club" in built
+    assert "иллюстрация" in built
 
-    # Test ContentAIEngine initialization with HF token
-    engine = ContentAIEngine(api_key=None, hf_token="hf_mock_token")
-    assert engine.hf_generator is not None
-    assert engine.hf_generator.hf_token == "hf_mock_token"
+    # Without keys — generator is not created
+    engine_no_keys = ContentAIEngine(api_key=None)
+    assert engine_no_keys.kandinsky_generator is None
 
-
-def test_together_flux_image_generator():
-    from bot.services.content_engine.ai_generator import TogetherFluxImageGenerator, ContentAIEngine
-
-    gen = TogetherFluxImageGenerator("together_mock_key")
-    built = gen._build_flux_prompt("Прекрасная героиня в саду --ar 4:5")
-    assert "--ar 4:5" not in built
-    assert "Romance Club aesthetic" in built
-    assert "vertical 4:5" in built
-
-    # Test ContentAIEngine initialization with Together key
-    engine = ContentAIEngine(api_key=None, together_api_key="together_mock_key")
-    assert engine.together_generator is not None
-    assert engine.together_generator.api_key == "together_mock_key"
+    # With both keys — generator is created
+    engine = ContentAIEngine(api_key=None, kandinsky_api_key="mock_api_key", kandinsky_secret_key="mock_secret")
+    assert engine.kandinsky_generator is not None
+    assert engine.kandinsky_generator.api_key == "mock_api_key"
+    assert engine.kandinsky_generator.secret_key == "mock_secret"
 
