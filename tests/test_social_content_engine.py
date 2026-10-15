@@ -381,3 +381,23 @@ def test_kandinsky_image_generator():
     assert engine.kandinsky_generator.api_key == "mock_api_key"
     assert engine.kandinsky_generator.secret_key == "mock_secret"
 
+
+def test_default_image_generator_archetypes_and_key():
+    from bot.services.content_engine.ai_generator import DefaultImageGenerator, ContentAIEngine
+
+    # Test archetype prompt translations
+    sn_prompt = DefaultImageGenerator._to_visual_english_prompt("Секрет Небес ветка с Люцифером")
+    assert "wings" in sn_prompt or "celestial" in sn_prompt or "divine" in sn_prompt
+    assert "Romance Club" in sn_prompt
+
+    nil_prompt = DefaultImageGenerator._to_visual_english_prompt("Песнь о Красном Ниле Амен")
+    assert "Egyptian" in nil_prompt
+
+    dil_prompt = DefaultImageGenerator._to_visual_english_prompt("Дракула История Любви замок")
+    assert "gothic" in dil_prompt or "castle" in dil_prompt
+
+    # Test ContentAIEngine initialization with pollinations_api_key
+    engine = ContentAIEngine(api_key=None, pollinations_api_key="pk_mock_key")
+    assert engine.default_generator.pollinations_api_key == "pk_mock_key"
+
+

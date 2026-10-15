@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     openai_api_key: str | None = None
     kandinsky_api_key: str | None = None
     kandinsky_secret_key: str | None = None
+    pollinations_api_key: str | None = None
     social_publish_dry_run: bool = True
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")

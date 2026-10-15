@@ -32,8 +32,15 @@ class DefaultImageGenerator(ImageGenerator):
         "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200&auto=format&fit=crop",
     ]
 
-    def __init__(self, api_key: str | None = None) -> None:
+    FREEIMAGE_API_KEY = "6d207e02198a847aa98d0a2a901485a5"
+
+    def __init__(
+        self,
+        api_key: str | None = None,
+        pollinations_api_key: str | None = None,
+    ) -> None:
         self.api_key = api_key
+        self.pollinations_api_key = (pollinations_api_key or "").strip()
 
     @classmethod
     def _to_visual_english_prompt(cls, prompt: str) -> str:
@@ -45,33 +52,53 @@ class DefaultImageGenerator(ImageGenerator):
 
         # 1. Heroine archetype & styling
         heroine_style = "breathtaking gorgeous young heroine with long wavy hair and captivating eyes"
-        if any(w in p_low for w in ["дворянк", "версаль", "корсет", "платье"]):
+        if any(w in p_low for w in ["дворянк", "версаль", "корсет", "платье", "пв"]):
             heroine_style = "breathtaking noble young lady in elegant embroidered Victorian corset dress and pearls"
-        elif any(w in p_low for w in ["чернокниж", "нил", "египет"]):
+        elif any(w in p_low for w in ["чернокниж", "нил", "египет", "покн"]):
             heroine_style = "enchanting mysterious dark-haired sorceress in ornate Egyptian silk robes and gold jewelry"
-        elif any(w in p_low for w in ["воительниц", "меч", "доспех", "солнцем"]):
+        elif any(w in p_low for w in ["ангел", "демон", "небес", "сн", "сн2", "реквием"]):
+            heroine_style = "ethereal gorgeous heroine with luminous glowing feathered wings in majestic fantasy attire"
+        elif any(w in p_low for w in ["влад", "дракул", "дил", "вампир"]):
+            heroine_style = "stunning dark gothic beauty in royal embroidered velvet dress and silver ornaments"
+        elif any(w in p_low for w in ["арканум", "таро", "сентфор", "мистик"]):
+            heroine_style = "mysterious captivating heroine holding glowing tarot cards with mystical aura"
+        elif any(w in p_low for w in ["астре", "рса"]):
+            heroine_style = "elegant detective heroine in Victorian coat and delicate gothic jewelry"
+        elif any(w in p_low for w in ["воительниц", "меч", "доспех", "солнцем", "хг"]):
             heroine_style = "brave beautiful warrior heroine in fantasy adventurer attire"
-        elif any(w in p_low for w in ["кимоно", "ивы", "япони"]):
+        elif any(w in p_low for w in ["кимоно", "ивы", "япони", "ли"]):
             heroine_style = "exquisite geisha heroine in luxurious silk kimono with ornate floral hair ornaments"
-        elif any(w in p_low for w in ["инди", "сари", "кали"]):
+        elif any(w in p_low for w in ["инди", "сари", "кали", "кзт", "кпс"]):
             heroine_style = "stunning noble Indian beauty in royal embroidered silk saree and glowing gold jewelry"
         elif any(w in p_low for w in ["киберпанк", "пси", "куртк"]):
             heroine_style = "stylish cyberpunk heroine in sleek futuristic jacket with glowing neon accents"
+        elif any(w in p_low for w in ["эдем", "кпоп", "айдол", "эс"]):
+            heroine_style = "glamorous fashionable heroine in stylish modern Korean stage outfit with chic jewelry"
+        elif any(w in p_low for w in ["пустын", "роза", "рп"]):
+            heroine_style = "radiant Arabian princess in flowing silk veil and shimmering golden bracelets"
 
         # 2. Scenery & backdrop
         setting = "fairy tale twilight castle courtyard"
-        if "нил" in p_low or "египет" in p_low:
-            setting = "ancient Egyptian temple with golden columns and torchlight"
-        elif "версаль" in p_low:
-            setting = "opulent Versailles palace hall with chandeliers and grand mirrors"
-        elif "ивы" in p_low:
-            setting = "tranquil Japanese pagoda garden with blooming pink cherry blossoms"
-        elif "кали" in p_low:
-            setting = "majestic ancient Indian temple with incense smoke and lotus pond"
+        if "нил" in p_low or "египет" in p_low or "покн" in p_low:
+            setting = "ancient Egyptian temple with golden columns, lotus pond and torchlight"
+        elif "версаль" in p_low or "пв" in p_low:
+            setting = "opulent Versailles palace hall with chandeliers, gilded arches and grand mirrors"
+        elif any(w in p_low for w in ["небес", "сн", "ангел", "демон", "реквием"]):
+            setting = "floating celestial citadel with glowing marble pillars, clouds and divine twilight sky"
+        elif any(w in p_low for w in ["дракул", "дил", "вампир"]):
+            setting = "gothic Romanian castle balcony overlooking moonlit mist-shrouded mountains"
+        elif "ивы" in p_low or "ли" in p_low:
+            setting = "tranquil Japanese pagoda garden with blooming pink cherry blossoms and stone lanterns"
+        elif "кали" in p_low or "кзт" in p_low or "кпс" in p_low:
+            setting = "majestic ancient Indian temple with sacred flame, marigold flowers and lotus pond"
         elif "пси" in p_low:
             setting = "rain-slicked futuristic neon cityscape with holographic billboards"
         elif "лес" in p_low or "морок" in p_low:
-            setting = "mystical twilight birch forest with soft ethereal fog"
+            setting = "mystical twilight birch forest with soft ethereal fog and glowing fireflies"
+        elif "астре" in p_low or "рса" in p_low:
+            setting = "antique Victorian occult library with leather grimoires and candle chandelier"
+        elif "пустын" in p_low or "рп" in p_low:
+            setting = "sunset Moroccan palace oasis with terracotta arches and desert dunes in background"
 
         # 3. Main action / Composition
         action = "gazing at magical glowing crossroads, luminous sparkling crystals floating in air"
@@ -81,9 +108,11 @@ class DefaultImageGenerator(ImageGenerator):
             action = "holding sparkling luminous diamond crystals, glittering magical gemstones floating around"
         elif any(w in p_low for w in ["стат", "баланс"]):
             action = "holding two swirling spheres of magical light in opposing colors, balance of elemental powers"
+        elif any(w in p_low for w in ["тайн", "секрет", "разгад"]):
+            action = "unraveling ancient glowing scroll inscribed with mysterious luminous runes"
 
         full_en = (
-            f"vertical visual novel digital art illustration, Romance Club aesthetic, "
+            f"vertical 4:5 visual novel digital art illustration, Romance Club aesthetic, "
             f"{heroine_style}, {action}, {setting} in background, "
             f"vibrant romantic colors, intricate details, cinematic volumetric lighting, "
             f"ArtStation trending, breathtaking romantic CG masterpiece, 8k resolution"
@@ -121,11 +150,50 @@ class DefaultImageGenerator(ImageGenerator):
         # 2. Convert to high-aesthetic Romance Club English prompt
         visual_prompt = self._to_visual_english_prompt(clean_prompt)
 
-        # 3. Clean Pollinations AI URL (full prompt without truncation, no payment parameters)
-        try:
-            import urllib.parse
-            encoded = urllib.parse.quote(visual_prompt)
+        # 3. Build Pollinations URL
+        import urllib.parse
+        encoded = urllib.parse.quote(visual_prompt)
+
+        headers = {"User-Agent": "Mozilla/5.0"}
+        if self.pollinations_api_key:
+            headers["Authorization"] = f"Bearer {self.pollinations_api_key}"
+            pollinations_url = f"https://image.pollinations.ai/prompt/{encoded}?model=flux-realism&width=768&height=960&nologo=true"
+        else:
             pollinations_url = f"https://image.pollinations.ai/prompt/{encoded}"
+
+        # 4. Attempt to fetch & upload to CDN for instant loading in Telegram/VK
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(pollinations_url, headers=headers, timeout=aiohttp.ClientTimeout(total=40)) as resp:
+                    if resp.status == 200:
+                        img_bytes = await resp.read()
+                        if img_bytes and len(img_bytes) > 2000:
+                            import base64
+                            b64_str = base64.b64encode(img_bytes).decode("utf-8")
+                            upload_data = {
+                                "key": self.FREEIMAGE_API_KEY,
+                                "action": "upload",
+                                "source": b64_str,
+                                "format": "json",
+                            }
+                            async with session.post(
+                                "https://freeimage.host/api/1/upload",
+                                data=upload_data,
+                                timeout=aiohttp.ClientTimeout(total=25),
+                            ) as up_resp:
+                                if up_resp.status == 200:
+                                    up_json = await up_resp.json()
+                                    cdn_url = up_json.get("image", {}).get("url")
+                                    if cdn_url:
+                                        logger.info(f"Pollinations image cached to CDN: {cdn_url}")
+                                        return cdn_url
+                    elif resp.status == 402:
+                        logger.warning("Pollinations rate limit (402), returning direct URL or fallback.")
+        except Exception as e:
+            logger.warning(f"Failed to pre-cache Pollinations image to CDN: {e}")
+
+        # If CDN caching failed, return direct pollinations URL
+        try:
             return pollinations_url
         except Exception as e:
             logger.error(f"Image URL creation failed: {e}")
@@ -289,13 +357,15 @@ class ContentAIEngine:
         api_key: str | None = None,
         kandinsky_api_key: str | None = None,
         kandinsky_secret_key: str | None = None,
+        pollinations_api_key: str | None = None,
     ) -> None:
         settings = get_settings()
         self.api_key = api_key or settings.openai_api_key
         self.kandinsky_api_key = kandinsky_api_key or settings.kandinsky_api_key
         self.kandinsky_secret_key = kandinsky_secret_key or settings.kandinsky_secret_key
+        self.pollinations_api_key = pollinations_api_key or settings.pollinations_api_key
 
-        self.default_generator = DefaultImageGenerator(self.api_key)
+        self.default_generator = DefaultImageGenerator(self.api_key, self.pollinations_api_key)
         self.kandinsky_generator = (
             KandinskyImageGenerator(self.kandinsky_api_key, self.kandinsky_secret_key)
             if (self.kandinsky_api_key and self.kandinsky_secret_key)
