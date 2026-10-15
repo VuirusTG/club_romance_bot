@@ -351,6 +351,93 @@ class KandinskyImageGenerator(ImageGenerator):
         return None
 
 
+class CloudflareFluxImageGenerator(ImageGenerator):
+    """
+    Ultra fast, serverless image generation using FLUX.1-schnell on Cloudflare Workers AI.
+    Uses 10,000 free Neurons/day provided on Cloudflare's free tier.
+    Requires CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.
+    """
+    MODEL = "@cf/black-forest-labs/flux-1-schnell"
+    FREEIMAGE_API_KEY = "6d207e02198a847aa98d0a2a901485a5"
+
+    def __init__(self, api_token: str | None = None, account_id: str | None = None) -> None:
+        self.api_token = (api_token or "").strip()
+        self.account_id = (account_id or "").strip()
+
+    @staticmethod
+    def _build_cf_prompt(prompt: str) -> str:
+        clean = re.sub(r"--ar\s+\d+:\d+", "", prompt).strip()
+        style_keywords = (
+            "vertical 4:5 visual novel digital art illustration, Romance Club aesthetic, "
+            "vibrant romantic colors, gorgeous heroine, intricate details, cinematic romantic fantasy lighting, "
+            "ArtStation trending, 8k masterpiece"
+        )
+        return f"{clean}, {style_keywords}"
+
+    async def generate(self, prompt: str, aspect_ratio: str = "4:5") -> str | None:
+        if not self.api_token or not self.account_id:
+            return None
+
+        import base64
+
+        cf_prompt = self._build_cf_prompt(prompt)
+        url = f"https://api.cloudflare.com/client/v4/accounts/{self.account_id}/ai/run/{self.MODEL}"
+        headers = {
+            "Authorization": f"Bearer {self.api_token}",
+            "Content-Type": "application/json",
+        }
+        payload = {
+            "prompt": cf_prompt[:1000],
+            "num_steps": 4,
+        }
+
+        async with aiohttp.ClientSession() as session:
+            try:
+                async with session.post(
+                    url,
+                    headers=headers,
+                    json=payload,
+                    timeout=aiohttp.ClientTimeout(total=45),
+                ) as resp:
+                    if resp.status == 200:
+                        content_type = resp.headers.get("Content-Type", "")
+                        b64_str: str | None = None
+
+                        if "image" in content_type:
+                            img_bytes = await resp.read()
+                            b64_str = base64.b64encode(img_bytes).decode("utf-8")
+                        else:
+                            data = await resp.json()
+                            result = data.get("result", {})
+                            b64_str = result.get("image")
+
+                        if b64_str:
+                            upload_data = {
+                                "key": self.FREEIMAGE_API_KEY,
+                                "action": "upload",
+                                "source": b64_str,
+                                "format": "json",
+                            }
+                            async with session.post(
+                                "https://freeimage.host/api/1/upload",
+                                data=upload_data,
+                                timeout=aiohttp.ClientTimeout(total=25),
+                            ) as up_resp:
+                                if up_resp.status == 200:
+                                    up_json = await up_resp.json()
+                                    cdn_url = up_json.get("image", {}).get("url")
+                                    if cdn_url:
+                                        logger.info(f"Cloudflare FLUX image cached to CDN: {cdn_url}")
+                                        return cdn_url
+                    else:
+                        err_text = await resp.text()
+                        logger.warning(f"Cloudflare AI generation failed ({resp.status}): {err_text[:200]}")
+            except Exception as e:
+                logger.warning(f"Cloudflare AI error: {e}")
+
+        return None
+
+
 class ContentAIEngine:
     def __init__(
         self,
@@ -358,14 +445,23 @@ class ContentAIEngine:
         kandinsky_api_key: str | None = None,
         kandinsky_secret_key: str | None = None,
         pollinations_api_key: str | None = None,
+        cloudflare_api_token: str | None = None,
+        cloudflare_account_id: str | None = None,
     ) -> None:
         settings = get_settings()
         self.api_key = api_key or settings.openai_api_key
         self.kandinsky_api_key = kandinsky_api_key or settings.kandinsky_api_key
         self.kandinsky_secret_key = kandinsky_secret_key or settings.kandinsky_secret_key
         self.pollinations_api_key = pollinations_api_key or settings.pollinations_api_key
+        self.cloudflare_api_token = cloudflare_api_token or settings.cloudflare_api_token
+        self.cloudflare_account_id = cloudflare_account_id or settings.cloudflare_account_id
 
         self.default_generator = DefaultImageGenerator(self.api_key, self.pollinations_api_key)
+        self.cloudflare_generator = (
+            CloudflareFluxImageGenerator(self.cloudflare_api_token, self.cloudflare_account_id)
+            if (self.cloudflare_api_token and self.cloudflare_account_id)
+            else None
+        )
         self.kandinsky_generator = (
             KandinskyImageGenerator(self.kandinsky_api_key, self.kandinsky_secret_key)
             if (self.kandinsky_api_key and self.kandinsky_secret_key)
@@ -373,7 +469,14 @@ class ContentAIEngine:
         )
 
     async def generate_image(self, prompt: str) -> str | None:
-        # Priority: Kandinsky → Pollinations (DefaultImageGenerator)
+        # Priority: Cloudflare FLUX → Kandinsky → Pollinations (DefaultImageGenerator)
+        if self.cloudflare_generator:
+            try:
+                url = await self.cloudflare_generator.generate(prompt)
+                if url:
+                    return url
+            except Exception as e:
+                logger.warning(f"Cloudflare FLUX generation failed: {e}. Falling back.")
         if self.kandinsky_generator:
             try:
                 url = await self.kandinsky_generator.generate(prompt)

@@ -401,3 +401,20 @@ def test_default_image_generator_archetypes_and_key():
     assert engine.default_generator.pollinations_api_key == "pk_mock_key"
 
 
+def test_cloudflare_flux_image_generator():
+    from bot.services.content_engine.ai_generator import CloudflareFluxImageGenerator, ContentAIEngine
+
+    gen = CloudflareFluxImageGenerator("cf_mock_token", "cf_mock_acc")
+    prompt = gen._build_cf_prompt("Героиня в саду --ar 4:5")
+    assert "--ar 4:5" not in prompt
+    assert "Romance Club aesthetic" in prompt
+    assert "vertical 4:5" in prompt
+
+    # ContentAIEngine initialization
+    engine = ContentAIEngine(api_key=None, cloudflare_api_token="cf_tok", cloudflare_account_id="cf_acc")
+    assert engine.cloudflare_generator is not None
+    assert engine.cloudflare_generator.api_token == "cf_tok"
+    assert engine.cloudflare_generator.account_id == "cf_acc"
+
+
+
